@@ -43,6 +43,7 @@
 
 * SVD
 * optymalizacja
+	* NMF
 
 > baza ocen filmów
 
