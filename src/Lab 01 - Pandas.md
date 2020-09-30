@@ -325,7 +325,7 @@ trig_from_hdf = pd.DataFrame(pd.read_hdf("trig.hdf5"))
 
 ---
 
-## Zadanie końcowe
+## 🔥 Zadanie końcowe 🔥
 
 1. Wczytaj dostarczony plik [population_by_country_2019_2020.csv](_resources/lab_01/population_by_country_2019_2020.csv) do `DataFrame`. (źródło: https://www.kaggle.com/tanuprabhu/population-by-country-2020).
 
@@ -343,9 +343,7 @@ trig_from_hdf = pd.DataFrame(pd.read_hdf("trig.hdf5"))
 
 8. Wybierz co drugi kraj i zapisz do nowego pliku **population_output.csv**.
 
-
 ---
-
 
 ---
 Autorzy: *Jakub Tomczyński*
