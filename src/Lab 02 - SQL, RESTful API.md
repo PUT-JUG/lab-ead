@@ -79,7 +79,7 @@ SELECT ArtistId, Name FROM Artist WHERE ArtistID BETWEEN 20 and 40 ORDER BY Name
 
 ---
 
-#### 🔥 Zadanie 🔥
+#### 🔥 Zadanie 1 🔥
 
 Pobierz z tabeli `Invoice` listę transakcji (zawierającą **InvoiceId**, **CustomerId**, **BillingCity** oraz **Total** z kraju `USA`, sortując wpisy po nazwie miasta, w kolejności odwrotnej do alfabetycznej.
 
@@ -176,22 +176,110 @@ Wynik:
 
 ---
 
-#### 🔥 Zadanie 🔥 TODO
+#### 🔥 Zadanie 2 🔥 
 
-Pobierz z tabeli `Invoice` listę transakcji (zawierającą **InvoiceId**, **CustomerId**, **BillingCity** oraz **Total** z kraju `USA`, sortując wpisy po nazwie miasta, w kolejności odwrotnej do alfabetycznej.
+Stwórz zapytanie SQL do bazy, dzięki któremu uzyskasz listę piosenek wraz z wykonawcami oraz gatunkiem muzycznym.
 
-Wyświetl wpisy w konsoli w postaci:
-
-```
-invoice: 14, customer: 17, city: Redmond, total: 1.98
-invoice: 13, customer: 16, city: Mountain View, total: 0.99
-invoice: 5, customer: 23, city: Boston, total: 13.86
-```
+TODO Track index ???
 
 ---
 
-## REST API
+## REST API, usługi RESTful
 
+*REST* to koncepcja architektury oprogramowania usług internetowych. Głównym założeniem jest to, że usługi takie są bezstanowe, tzn. każdy pakiet transmisji stanowi samodzielną całość, która może być zrozumiana bez informacji z poprzednich pakietów - pakiety nie układają się w "rozmowę".
+
+Koncepcja nie definiuje standardu protokołu, ale najczęściej wykorzystywany protokół do komunikacji to HTTP (z metodami GET, POST, PUT itd.), a sama zawartość wiadomości sformatowana jest jako najczęściej jako JSON, XML lub HTML.
+
+Do obsługi zapytań HTTP w Python wykorzystamy bibliotekę `requests`.
+
+W ramach pierwszego przykładu sprawdźmy aktualne kursy Bitcoin korzystając z API opisanego na stronie https://www.blockchain.com/api/exchange_rates_api
+
+```python
+req = requests.get("https://blockchain.info/ticker")  # wysłanie zapytania GET pod odpowiedni adres, zapisanie odpowiedzi
+print(req.text)  # zawartość odpowiedzi znajduje się w polu text
+```
+
+Odpowiedź zwracana jest w formacie JSON (JavaScript Object Notation). Format wywodzi się z JavaScript i bardzo często wykorzystywany w zastosowaniach webowych czy IoT, niekoniecznie w powiązaniu z JS. JSON pozwala na przesłanie danych w formie par klucz-wartość jako ciągłego tekstu, która jednocześnie jest czytelna dla człowieka i może być sparsowana przez program. W Python format ten bardzo dobrze tłumaczy się z/na natywne słowniki przez moduł `json`:
+
+```python
+bitcoin_dict = json.loads(req.text)
+```
+
+Z tak skonwertowanego słownika możemy już korzystać w standardowy sposób:
+
+```python
+print(bitcoin_dict['USD']['last'])
+```
+
+Wykorzystanie modułu `json` sprowadza się do znajomości czterech metod:
+
+* `load`: plik JSON → słownik Python
+* `loads`: string JSON → słownik Python
+* `dump`: słownik Python → plik JSON
+* `dumps`: słownik Python → string JSON
+
+---
+
+#### 🔥 Zadanie 3 🔥 
+
+Stwórz na podstawie powyższego zapytania DataFrame, w którym umieścisz wszystkie odebrane dane. Indeksem powinny być trzyznakowe symbole waluty, a kolumnami wartości kursów oraz symbol waluty (`15m`, `last`, `buy`, `sell`, `symbol`).
+
+---
+
+### OpenWeather API
+
+Świadczenie usług webowych wymaga oczywiście utrzymania infrastruktury serwerowej, w związku z czym wiele serwisów prowadzonych jest jako działalność komercyjna, gdzie część lub całość dostępu wymaga wykupienia dostępu lub przynajmniej utworzenia konta. Autoryzacja odbywa się często z wykorzystaniem *tokenu*, indywidualnego dla użytkownika.
+
+Jako przykładowe API wymagające autoryzacji wykorzystamy serwis z pogodą https://openweathermap.org/api
+
+1. Stwórz darmowe konto w serwisie (*Sign In* → *Create an Account*)
+
+2. Przejdź do sekcji *API Keys* w koncie użytkownika. Stwórz nowy klucz o wybranej nazwie do wykorzystania podczas zajęć. Tworzenie odrębnych kluczy dla różnych aplikacji daje elastyczną kontrolę nad nimi (można usunąć dostęp dla jednej aplikacji przez wycofanie konkretnego klucza). Skopiuj klucz w bezpieczne miejsce.
+
+Przetestuj działanie swojego klucza wykonując zapytanie do Open Weather One Call API (dokumentacja: https://openweathermap.org/api/one-call-api). Zapytanie konstruowane jest w formie Query string, z argumentami przekazywanymi w formie `arg1=wartosc1&arg2=wartosc2` itd:
+
+```python
+url = "https://api.openweathermap.org/data/2.5/onecall"
+api_key = "TWOJ_API_KEY"
+latitude = 33.441792  # Londyn
+longtitude = -94.037689
+req = requests.get(f"{url}?lat={latitude}&lon={longtitude}&exclude=minutely&appid={api_key}")
+print(req.text)
+```
+
+**Uwaga!** w darmowej wersji konta liczba zapytań do One Call API jest ograniczona do 1000 dziennie i 60 na minutę. O ile program ogranicza się do pojedynczego zapytania, nie powinno stanowić to problemu, jednak kiedy odpytujemy np. wiele lokalizacji w pętli lub prowadzimy testy programu możemy szybko osiągnąć ten limit.
+
+Zapisz uzyskaną odpowiedź do pliku tekstowego `london_weather_forecast.json`.
+
+💡**Podpowiedź**💡
+
+Bardzo wygodną przeglądarką plików JSON jest Firefox - spróbuj otworzyć w nim zapisany plik i przeanalizuj strukturę odpowiedzi.
+
+---
+
+#### 🔥 Zadanie 4 🔥 
+
+1. Sprawdź lokalizację (długość i szerokość geograficzną) swojego ulubionego miasta i odpytaj API o prognozę pogody dla niego.
+
+2. Zwróć uwagę na odczytane temperatury. Sprawdź w dokumentacji jak przełączyć jednostki na metryczne i popraw zapytanie.
+
+3. Przepisz informacje z prognozy godzinnej (pole `hourly`) odczytanego JSON-a do DataFrame. Umieść w DataFrame minimum kolumny takie jak `temp`, `feels_like`, `humidity`, `wind_speed`. Zwróć uwagę na pola `dt` w uzyskanej odpowiedzi - są to znaczniki czasu w formacie UNIX (sekundy liczone od 00:00:00 UTC on 1 January 1970). Skonwertuj znaczniki na format `Datetime` pandasa, wykorzystując funkcję `pd.to_datetime`: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.to_datetime.html
+
+4. Wykreśl prognozę pogody na wykresie liniowym.
+
+---
+
+
+# 🔥 Zadanie końcowe - Pokédex 🔥
+
+Budujesz urządzenie, które będzie zawierało informacje o znalezionych przez Ciebie Pokemonach. Informacje o spotkanych stworzeniach zapisujesz w DataFrame wraz z datą i miejscem pierwszego spotkania.
+
+Dotychczasowe dane zapisałeś w pliku `pokedex_history.hdf5`
+
+Udało Ci się znaleźć dwa dodatkowe źródła danych, którymi możesz uzupełnić posiadane informacje:
+
+- bazę danych MySQL zawierającą ...
+- API, które możesz odpytywać o ...
 
 
 
