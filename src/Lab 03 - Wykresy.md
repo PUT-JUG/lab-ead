@@ -122,12 +122,63 @@ axs[1][1].plot(x, np.random.random(len(x)), '*-.')
 
 Pełną listę modyfikatorów można znaleźć w dokumentacji metody `plot`: <https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html>
 
+---
+
+#### 🔥 Zadanie 1 🔥
+
+Funkcja gęstości prawdopodobieństwa rozkładu normalnego ze średnią  μ i odchyleniem standardowym σ dana jest wzorem:
+
+![03_gauss_equation](_images/lab_03/03_gauss_equation.svg),
+
+co możemy zapisać w Python jako:
+
+```python
+f = (1/(std_dev*np.sqrt(np.pi)))*np.exp((-(x-mean)**2)/(2*std_dev))
+```
+
+Korzystając z `matplotlib`, wygeneruj poniższy wykres:
+
+![04_gauss_plot](_images/lab_03/04_gauss_plot.svg),
+
+---
+
 ## Opis wykresu
+
+Każdy wykres aby być czytelny musi zostać dobrze opisany. Poniżej przedstawiono część metod dla *axes*, które pozwalają na łatwą modyfikację i opis zawartości wykresu.
 
 ### Tytuł
 
+Do ustawienia tytułu pojedynczego wykresy (*axes*) korzystamy z metody `Axes.set_title`, np.:
+
+```python
+ax.set_title('Rozkład Gaussa', fontsize=16)
+```
+
+<https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_title.html>
+
+W przypadku umieszczenia wielu *axes*, w jednym *figure*, może istnieć konieczność ustawienia głównego tytułu, za pomocą metody wykonywanej dla *figure* `suptitle`, np.:
+
+```python
+fig.suptitle('TYTUŁ')
+```
+
+<https://matplotlib.org/api/_as_gen/matplotlib.pyplot.suptitle.html>
+
+uzyskując następujący efekt:
+
+![05_suptitle](_images/lab_03/05_suptitle.svg)
+
 ### Opisy osi
+
+Opisy osi ustawiamy korzystając z:
+
+- `Axes.set_xlabel` - <https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_xlabel.html>
+
+- `Axes.set_ylabel` - 
 
 ### Legenda
 
-## Ticks ?
+### Ticks ?
+
+---
+Autorzy: *Tomasz Mańkowski*
