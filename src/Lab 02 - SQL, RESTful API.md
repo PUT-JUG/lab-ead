@@ -41,7 +41,7 @@ conn.close()
 
 #### `SELECT`, `WHERE`, `ORDER BY`
 
-Połączenie do bazy - pliku oraz pobranie *kursora* do połączenia wykonujemy raz przed operacjami na bazie danych. Właściwe operacje przekazywane są jako tekst do metody `execute` kursora. Powyższy przykład uruchamia najczęściej wykorzystywaną w SQL komendę `SELECT`, służącą do pobierania danych i odczytuje wszystkie kolumny (`*`) z tabeli `Album`. W tym przypadku `execute` zwraca iterowalny obiekt, w którym każdy z elementów jest krotką - wierszem z tabeli.
+Połączenie do bazy - pliku oraz pobranie *kursora* do połączenia wykonujemy raz przed operacjami na bazie danych. Właściwe operacje przekazywane są jako tekst do metody `execute` kursora, mamy w związku z tym do czynienia z "zagnieżdżeniem" języków programowania. Powyższy przykład uruchamia najczęściej wykorzystywaną w SQL komendę `SELECT`, służącą do pobierania danych i odczytuje wszystkie kolumny (`*`) z tabeli `Album`. W tym przypadku `execute` zwraca iterowalny obiekt, w którym każdy z elementów jest krotką - wierszem z tabeli.
 
 Ponieważ zmiana układu tabeli w bazie danych spowodowałaby, że dane zostaną zwrócone w innym układzie. W związku z tym w kodzie innym niż testowy nigdy nie powinno pojawić się tego typu zapytanie. Zamiast tego możemy podać jawnie nazwy kolumn:
 
@@ -81,7 +81,7 @@ SELECT ArtistId, Name FROM Artist WHERE ArtistID BETWEEN 20 and 40 ORDER BY Name
 
 #### 🔥 Zadanie 1 🔥
 
-Pobierz z tabeli `Invoice` listę transakcji (zawierającą **InvoiceId**, **CustomerId**, **BillingCity** oraz **Total** z kraju `USA`, sortując wpisy po nazwie miasta, w kolejności odwrotnej do alfabetycznej.
+Pobierz z tabeli **Invoice** listę transakcji (zawierającą **InvoiceId**, **CustomerId**, **BillingCity** oraz **Total** z kraju **USA**, sortując wpisy po nazwie miasta, w kolejności odwrotnej do alfabetycznej.
 
 Wyświetl wpisy w konsoli w postaci:
 
@@ -135,10 +135,10 @@ Wynik:
 Przykładowo, aby uzyskać nazwy wykonawców przyporządkowane do tytułów albumów:
 
 ```sql
-SELECT Album.Title, Artist.Name FROM Album INNER JOIN Artist ON Artist.ArtistId = Album.ArtistId;
+SELECT Track.Name, Album.Title FROM Track INNER JOIN Album ON Track.AlbumId = Album.AlbumId
 ```
 
-Zwrócona tabela będzie zawierała tytuł albumu pobrany z tabeli `Album`, nazwę artysty z tabeli `Artist`, a wpisy zostaną dopasowane na podstawie kolumny `ArtistId` - kryterium `Artist.ArtistId = Album.ArtistId`. Zwrócone zostaną tylko te wpisy, które istnieją w obu tabelach. 
+Zwrócona tabela będzie zawierała tytuły piosenek pobrane z tabeli **Track**, tytuły albumów z tabeli **Album**, a wpisy zostaną dopasowane na podstawie kolumny **AlbumId** - kryterium `Track.AlbumId = Album.AlbumId`. Zwrócone zostaną tylko te wpisy, które istnieją w obu tabelach.
 
 Po bardziej rozbudowane przykłady zajrzyj do https://www.sqlitetutorial.net/sqlite-inner-join/
 
@@ -178,9 +178,9 @@ Wynik:
 
 #### 🔥 Zadanie 2 🔥 
 
-Stwórz zapytanie SQL do bazy, dzięki któremu uzyskasz listę piosenek wraz z wykonawcami oraz gatunkiem muzycznym.
+Stwórz zapytanie SQL do bazy, dzięki któremu uzyskasz listę albumów wraz z ich wykonawcą.
 
-TODO Track index ???
+Przetestuj różne formy `JOIN` (`INNER` oraz `LEFT`), dla wariantu `LEFT` sprawdź wynik w sytuacjach kiedy pierwszym argumentem jest tablica z albumami oraz tablica z wykonawcami. Zatanów się z czego wynikają różnice.
 
 ---
 
@@ -274,14 +274,19 @@ Bardzo wygodną przeglądarką plików JSON jest Firefox - spróbuj otworzyć w 
 
 Budujesz urządzenie, które będzie zawierało informacje o znalezionych przez Ciebie Pokemonach. Informacje o spotkanych stworzeniach zapisujesz w DataFrame wraz z datą i miejscem pierwszego spotkania.
 
-Dotychczasowe dane zapisałeś w pliku `pokedex_history.hdf5`
+Dotychczasowe dane zapisane są w pliku `pokedex_history.hdf5`
 
-Udało Ci się znaleźć dwa dodatkowe źródła danych, którymi możesz uzupełnić posiadane informacje:
+Udało Ci się znaleźć dwa źródła danych, którymi możesz uzupełnić posiadane informacje:
 
-- bazę danych MySQL zawierającą ...
-- API, które możesz odpytywać o ...
+- Usługę PokéAPI, które możesz odpytywać o umiejętności i podstawowe statystyki: https://pokeapi.co
+- bazę danych `pokemon_against.sqlite` zawierającą informacje o skuteczności w walce z Pokemonami innych typów
 
+Dla wszystkich spotkanych Pokemonów
+1. Pobierz z PokéAPI informację o statystykach dla danego Pokemona: **hp**, **attack**, **defense**, **special-attack**, **special-defense**, **speed** i umieść w DataFrame. Odczytaj też informacje o typach danego Pokemona i umieść je w kolumnach **type_1** i **type_2**. Jeśli dany Pokemon ma tylko jeden typ, wpisz wartość `None`.
 
+2. Z bazy danych odczytaj informację z kolumn **against_\*** mówiącą o skuteczności ataku
+
+3. Napisz funkcję `attack_against(attacker: str, attacked: str, database: pd.DataFrame)` zwracającą skuteczność ataku Pokemona o nazwie `attacker` na Pokemona o nazwie `attacked`. Jeśli w bazie nie będzie wystarczających informacji zwracaj wartość `None`.
 
 ---
 Autorzy: *Jakub Tomczyński*
