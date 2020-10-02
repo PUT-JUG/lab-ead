@@ -241,15 +241,15 @@ Przetestuj działanie swojego klucza wykonując zapytanie do Open Weather One Ca
 ```python
 url = "https://api.openweathermap.org/data/2.5/onecall"
 api_key = "TWOJ_API_KEY"
-latitude = 33.441792  # Londyn
-longtitude = -94.037689
-req = requests.get(f"{url}?lat={latitude}&lon={longtitude}&exclude=minutely&appid={api_key}")
+latitude = 37.2431
+longitude = -115.7930
+req = requests.get(f"{url}?lat={latitude}&lon={longitude}&exclude=minutely&appid={api_key}")
 print(req.text)
 ```
 
 **Uwaga!** w darmowej wersji konta liczba zapytań do One Call API jest ograniczona do 1000 dziennie i 60 na minutę. O ile program ogranicza się do pojedynczego zapytania, nie powinno stanowić to problemu, jednak kiedy odpytujemy np. wiele lokalizacji w pętli lub prowadzimy testy programu możemy szybko osiągnąć ten limit.
 
-Zapisz uzyskaną odpowiedź do pliku tekstowego `london_weather_forecast.json`.
+Zapisz uzyskaną odpowiedź do pliku tekstowego `weather_forecast.json`.
 
 💡**Podpowiedź**💡
 
@@ -263,9 +263,9 @@ Bardzo wygodną przeglądarką plików JSON jest Firefox - spróbuj otworzyć w 
 
 2. Zwróć uwagę na odczytane temperatury. Sprawdź w dokumentacji jak przełączyć jednostki na metryczne i popraw zapytanie.
 
-3. Przepisz informacje z prognozy godzinnej (pole `hourly`) odczytanego JSON-a do DataFrame. Umieść w DataFrame minimum kolumny takie jak `temp`, `feels_like`, `humidity`, `wind_speed`. Zwróć uwagę na pola `dt` w uzyskanej odpowiedzi - są to znaczniki czasu w formacie UNIX (sekundy liczone od 00:00:00 UTC on 1 January 1970). Skonwertuj znaczniki na format `Datetime` pandasa, wykorzystując funkcję `pd.to_datetime`: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.to_datetime.html
+3. Przepisz informacje z prognozy godzinnej (pole `hourly`) odczytanego JSON-a do DataFrame. Umieść w DataFrame kolumny takie jak `temp`, `feels_like`, `humidity`, `wind_speed`. Zwróć uwagę na pola `dt` w uzyskanej odpowiedzi - są to znaczniki czasu w formacie UNIX (sekundy liczone od 00:00:00 UTC on 1 January 1970). Skonwertuj znaczniki na format `Datetime` pandasa, wykorzystując funkcję `pd.to_datetime`: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.to_datetime.html
 
-4. Wykreśl prognozę pogody na wykresie liniowym.
+4. Wykreśl prognozę pogody na wykresie liniowym korzystając z metody `pd.DataFrame.plot`
 
 ---
 
