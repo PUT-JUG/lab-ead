@@ -243,17 +243,86 @@ Wygląd etykiet możemy modyfikować korzystając z metody `Axes.tick_params` - 
 
 ---
 
-#### 🔥 Zadanie 1 🔥
+#### 🔥 Zadanie 2 🔥
 
 Korzystając z powyższych instrukcji zmodyfikuj wykres z poprzedniego zadania, tak aby nadać mu następujący wygląd:
 
-![07_gauss_plot_formated](_images/lab_03/07_gauss_plot_formated.svg),
+![07_gauss_plot_formated](_images/lab_03/07_gauss_plot_formated.svg)
 
 ---
 
 <!-- ## `Scatter`
 
 `Scatter` (<https://matplotlib.org/api/_as_gen/matplotlib.pyplot.scatter.html>) jest rodzajem wykresu, zbliżonym do `plot`, z tą różnicą że w jego przypadku mamy możliwość zdefiniowania rozmiaru i koloru każdego z punktu. Otrzymujemy w ten sposób 3ci wymiar informacji prezentowany na 2-wymiarowym wykresie. -->
+
+## `Bar`
+
+`Bar` (<https://matplotlib.org/api/_as_gen/matplotlib.pyplot.bar.html>) pozwala utworzyć wykres słupkowy. Każdy słupek umieszczany jest w punkcie określony listą/macierzą `x`, posiada wysokość i szerokość określoną przez `height` i `width`. Np.:
+
+```python
+fig, ax = plt.subplots()
+
+values = [30, 12, 40, 50, 13, 14, 45, 2]
+x = np.arange(len(values))
+width = 0.8
+
+ax.bar(x, values, width)
+```
+
+![08_bar_single](_images/lab_03/08_bar_single.svg)
+
+### Grupowanie wykresów słupkowych
+
+W bardzo prosty sposób możemy na jednym wykresie umieścić wiele wykresów słupkowych, które reprezentować będą dodatkowy, 3ci wymiar informacji na naszym wykresie. Przygotowując taki wykres należy zwrócić uwagę, na rozmieszczenie słupków w osi `x`, musimy wziąć pod uwagę szerokość rysowanego słupka i odpowiednio przesunąć punkt jego rysowania, np.:
+
+```python
+fig, ax = plt.subplots()
+
+values1 = [30, 12, 40, 50, 13, 14, 45, 2]
+values2 = [14, 10, 30, 12, 80, 2, 33, 2]
+x = np.arange(len(values1))
+width = 0.3
+
+ax.bar(x-width/2, values1, width, label='Value 1')
+ax.bar(x+width/2, values2, width, label='Value 2')
+
+ax.legend()
+```
+
+![09_bar_grouped](_images/lab_03/09_bar_grouped.svg)
+
+## Tekstowe etykiety osi
+
+`matplotlib` daje możliwość nadpisania liczbowych etykiet za pomocą ciągów znaków, tak aby wprowadzić bardziej czytelny opis. Szczególnie sprawdza się to w połączeniu z wykresami słupkowymi. Do utworzenia opisów tekstowych służy metoda `Axes.set_xticklabels` (<https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_xticklabels.html>) i `Axes.set_yticklabels` (<https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_yticklabels.html>).
+
+**UWAGA:** `Axes.set_xticklabels` powinna zostać zawsze poprzedzona wywołaniem metody `Axes.set_xticks`, która ustali rozmieszczenie etykiet, w przeciwnym wypadku opisy mogą trafić w nieokreślone miejsce na osi `x`. Podobnie w przypadku `Axes.set_yticklabels`.
+
+Przykładowa modyfikacja wykresu z przedstawionego wyżej:
+
+```python
+labels = ['Group: ' + str(i) for i in range(len(values1))]
+
+ax.set_xticks(x)
+ax.set_xticklabels(labels)
+
+ax.tick_params(axis='x', labelrotation=20)
+```
+
+![10_bar_textlabels](_images/lab_03/10_bar_textlabels.svg)
+
+---
+
+#### 🔥 Zadanie 3 🔥
+
+Dany jest plik w formacie JSON, zamierający informacje o procencie osób, które przeżyły raka w populacji USA (324 mln) według płci i wieku w 2016 roku: [cancer_survival_in_us.json](_resources/lab_03/cancer_survival_in_us.json) (źródło: <https://cebp.aacrjournals.org/content/25/7/1029>).
+
+Korzystając z wczytanych danych wygeneruj poniższy wykres:
+
+![11_assignment_bars](_images/lab_03/11_assignment_bars.svg)
+
+**PODPOWIEDŹ:** w przypadku problemu z siatką rysowaną na wykresie, użyj polecenia: `ax.set_axisbelow(True)`.
+
+---
 
 ---
 Autorzy: *Tomasz Mańkowski*

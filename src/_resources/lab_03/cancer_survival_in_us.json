@@ -1,0 +1,59 @@
+{
+  "age_groups" : [
+    {
+      "age": "40-44",
+      "male_survivors": 1,
+      "female_survivors": 2
+    },
+    {
+      "age": "45-49",
+      "male_survivors": 2,
+      "female_survivors": 4
+    },
+    {
+      "age": "50-54",
+      "male_survivors": 3,
+      "female_survivors": 5
+    },
+    {
+      "age": "55-59",
+      "male_survivors": 6,
+      "female_survivors": 7
+    },
+    {
+      "age": "60-64",
+      "male_survivors": 9,
+      "female_survivors": 10
+    },
+    {
+      "age": "65-69",
+      "male_survivors": 14,
+      "female_survivors": 12
+    },
+    {
+      "age": "70-74",
+      "male_survivors": 21,
+      "female_survivors": 16
+    },
+    {
+      "age": "75-79",
+      "male_survivors": 27,
+      "female_survivors": 19
+    },
+    {
+      "age": "80-84",
+      "male_survivors": 32,
+      "female_survivors": 21
+    },
+    {
+      "age": "85-89",
+      "male_survivors": 35,
+      "female_survivors": 24
+    },
+    {
+      "age": "90+",
+      "male_survivors": 37,
+      "female_survivors": 25
+    }
+  ]
+}
