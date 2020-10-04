@@ -255,9 +255,9 @@ Korzystając z powyższych instrukcji zmodyfikuj wykres z poprzedniego zadania, 
 
 `Scatter` (<https://matplotlib.org/api/_as_gen/matplotlib.pyplot.scatter.html>) jest rodzajem wykresu, zbliżonym do `plot`, z tą różnicą że w jego przypadku mamy możliwość zdefiniowania rozmiaru i koloru każdego z punktu. Otrzymujemy w ten sposób 3ci wymiar informacji prezentowany na 2-wymiarowym wykresie. -->
 
-## `Bar`
+## `bar`
 
-`Bar` (<https://matplotlib.org/api/_as_gen/matplotlib.pyplot.bar.html>) pozwala utworzyć wykres słupkowy. Każdy słupek umieszczany jest w punkcie określony listą/macierzą `x`, posiada wysokość i szerokość określoną przez `height` i `width`. Np.:
+`bar` (<https://matplotlib.org/api/_as_gen/matplotlib.pyplot.bar.html>) pozwala utworzyć wykres słupkowy. Każdy słupek umieszczany jest w punkcie określony listą/macierzą `x`, posiada wysokość i szerokość określoną przez `height` i `width`. Np.:
 
 ```python
 fig, ax = plt.subplots()
@@ -323,6 +323,66 @@ Korzystając z wczytanych danych wygeneruj poniższy wykres:
 **PODPOWIEDŹ:** w przypadku problemu z siatką rysowaną na wykresie, użyj polecenia: `ax.set_axisbelow(True)`.
 
 ---
+
+## `errorbar`
+
+`errorbar` (<https://matplotlib.org/api/_as_gen/matplotlib.pyplot.errorbar.html>) pozwala w bardzo prosty sposób wygenerować paski błędów, które często wykorzystywane są do prezentacji niepewności pomiarowej, odchylenia/wariancji przedstawionych na wykresie danych. `errorbar` jest niezależnym wykresem i można go stosować z każdym innym wykresem, w tym z `plot` i `bar`.
+
+Jako parametry `errorbar` przyjmuje wektory położeń `x` i `y` znaczników, oraz ich rozmiar w kierunku osi x i y: `xerr` oraz `yerr`. Pominięcie jedno z parametrów rozmiaru znacznika spowoduje wykreślenie pasków błędów tylko w jednej osi. Zależnie od formatu przekazanych parametrów `xerr` i `yerr` paski błędów będą przyjmować następujące konfiguracje:
+
+- skalar - symetryczne wartości +/- takie same dla wszystkich punktów,
+- wektor długości N - symetryczne wartości +/-,
+- macierz 2xN - oddzielne wartości + i - dla wszystkich punktów,
+- brak - brak paska błędu.
+
+Do formatowania wyglądu `errorbar` wykorzystywany jest parametr `fmt`, przyjmuje on taki sam string formatujący jak funkcja `plot`. Warto zwrócić uwagę na parametr `capsize`, którego ustawienie spowoduje wygenerowanie charakterystycznych dla pasków błędów "daszków". Np.:
+
+```python
+x = np.linspace(0, 10, 20)
+y_sin = np.sin(x)
+y_cos = np.cos(x)
+
+fig, axs = plt.subplots(2, 1)
+
+axs[0].plot(x, y_sin)
+axs[0].errorbar(x, y_sin, yerr=0.5, fmt='.k', capsize=2)
+
+axs[1].plot(x, y_cos)
+axs[1].errorbar(x, y_cos, xerr=0.2, yerr=np.random.random(len(x)), fmt='.r', capsize=2)
+```
+
+![12_errorbar](_images/lab_03/12_errorbar.svg)
+
+---
+
+#### 🔥 Zadanie 4 🔥
+
+Do wykresu słupkowego z poprzedniego zadania dodaj paski błędów, zarówno dla wykresu reprezentującego mężczyzn, jak i kobiety. Pamiętaj, że w przypadku tego wykresu błąd może występować tylko w osi y. Wartości błędów wylosuj. Przykład formatowania:
+
+![13_assignment_errorbar](_images/lab_03/13_assignment_errorbar.svg)
+
+---
+
+## `hist`
+
+Funkcja `hist` (<https://matplotlib.org/api/_as_gen/matplotlib.pyplot.hist.html>) automatycznie, bez pisania dodatkowego kodu, oblicza histogram danych wejściowych i go wykreśla. Jako parametr podajemy dane wejściowe `x`, oraz określamy liczebność zakresów `bins`. `bins` może być także wektorem, jeżeli chcemy ręcznie określić zakresy. Ustawienie parametru `density` na `True` powoduje wykreślenie histogramu gęstości prawdopodobieństwa. Przykładowo:
+
+```python
+x1 = np.random.randn(10000)
+x2 = np.random.rand(10000)
+
+fig, axs = plt.subplots(1, 2)
+axs[0].hist(x1, 20, density=True, facecolor='g')
+axs[1].hist(x2, 20, density=True, facecolor='r')
+```
+
+![14_hist](_images/lab_03/14_hist.svg)
+
+---
+
+## 🔥 Zadanie końcowe 🔥
+
+1. Bla
 
 ---
 Autorzy: *Tomasz Mańkowski*
