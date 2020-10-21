@@ -274,12 +274,12 @@ Bardzo wygodną przeglądarką plików JSON jest Firefox - spróbuj otworzyć w 
 
 Budujesz urządzenie, które będzie zawierało informacje o znalezionych przez Ciebie Pokemonach. Informacje o spotkanych stworzeniach zapisujesz w DataFrame wraz z datą i miejscem pierwszego spotkania.
 
-Dotychczasowe dane zapisane są w pliku `pokedex_history.hdf5`
+Dotychczasowe dane zapisane są w pliku [pokedex_history.hdf5](_resources/lab_02/pokedex_history.hdf5)
 
 Udało Ci się znaleźć dwa źródła danych, którymi możesz uzupełnić posiadane informacje:
 
 - Usługę PokéAPI, które możesz odpytywać o umiejętności i podstawowe statystyki: https://pokeapi.co
-- bazę danych `pokemon_against.sqlite` zawierającą informacje o skuteczności w walce z Pokemonami innych typów
+- bazę danych [pokemon_against.sqlite](_resources/lab_02/pokemon_against.sqlite) zawierającą informacje o skuteczności w walce z Pokemonami innych typów
 
 Dla wszystkich spotkanych Pokemonów
 1. Pobierz z PokéAPI informację o statystykach dla danego Pokemona: **hp**, **attack**, **defense**, **special-attack**, **special-defense**, **speed** i umieść w DataFrame. Odczytaj też informacje o typach danego Pokemona i umieść je w kolumnach **type_1** i **type_2**. Jeśli dany Pokemon ma tylko jeden typ, wpisz wartość `None`.
