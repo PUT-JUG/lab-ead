@@ -253,12 +253,16 @@ Lub zbioru nowych wartości, na przykład w postaci macierzy NumPy, przy czym na
 trig.loc[trig["cosinus"] >= 0, "random"] = np.array([1, 3, 5])
 ```
 
-##### Dodawanie kolumn
+##### Dodawanie kolumn/wierszy
 
-Najprostszym sposobem na dodanie kolumny do struktury `DataFrame` jest przypisanie wartości do nieistniejącej kolumny, przykładowo:
+Najprostszym sposobem na dodanie kolumny/wiersza do struktury `DataFrame` jest przypisanie wartości do nieistniejącej kolumny/wiersza, przykładowo:
 
 ```python
 trig["New column"] = -1
+```
+
+```python
+trig.loc[1337, :] = -1
 ```
 
 ##### Zmiana indeksu
