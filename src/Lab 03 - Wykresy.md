@@ -18,7 +18,7 @@ Pamiętaj, że żądany wykres nie wyświetli się dopóki nie wywołasz komendy
 plt.show()
 ```
 
-, wszystkie instrukcje `matplotlib` wywołane przed rysują wykres w tle. Wywołanie `show()` zatrzyma wykonywanie skryptu, aż do momentu zamknięcia okna z wykresem.
+wszystkie instrukcje `matplotlib` wywołane przed rysują wykres w tle. Wywołanie `show()` zatrzyma wykonywanie skryptu, aż do momentu zamknięcia okna z wykresem.
 
 ## *Figure* oraz *Axes*
 
@@ -34,7 +34,7 @@ Aby utworzyć pusty *figure*, bez *axes* należy wywołać:
 fig = plt.figure()
 ```
 
-, gdzie zmienna `fig` będzie reprezentować obiekt całego okna wykresu.
+gdzie zmienna `fig` będzie reprezentować obiekt całego okna wykresu.
 
 ### *Subplot*
 
@@ -44,13 +44,13 @@ W `matplotlib` przez pojęcie *subplot* rozumiany jest automatycznie utworzone *
 fig, ax = plt.subplots()
 ```
 
-, gdzie `fig` jest oknem wykresu, a `ax` reprezentuje osie rysowania wykresu (*axes*). Możliwe jest także szybkie utworzenie nowego *figure* z zdefiniowaną siatką wielu obszarów rysowania (*axes*), np.:
+gdzie `fig` jest oknem wykresu, a `ax` reprezentuje osie rysowania wykresu (*axes*). Możliwe jest także szybkie utworzenie nowego *figure* z zdefiniowaną siatką wielu obszarów rysowania (*axes*), np.:
 
 ```python
 fig, axs = plt.subplots(2, 2)
 ```
 
-, gdzie `axs` jest macierzą obszarów rysowania (*axes*) w ramach zwróconego `fig`.
+gdzie `axs` jest macierzą obszarów rysowania (*axes*) w ramach zwróconego `fig`.
 
 Pamiętaj, że wszystkie wykresy rysowane są w ramach *axes*, a nie w ramach *figure*. Wszystkie metody rysujące (np. `plot`, `scatter`) i większość metod modyfikujących wykres wywołujemy w ramach obiektu reprezentującego osie (obszar rysowania).
 
@@ -378,11 +378,6 @@ axs[1].hist(x2, 20, density=True, facecolor='r')
 
 ![14_hist](_images/lab_03/14_hist.svg)
 
----
-
-## 🔥 Zadanie końcowe 🔥
-
-1. Bla
 
 ---
 Autorzy: *Tomasz Mańkowski*
