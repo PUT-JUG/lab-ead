@@ -1,7 +1,9 @@
 # Lab 03 - Projekt podsumowujący
 
 ## Cel projektu
-Celem projektu jest utrwalenie wiedzy dotyczącej narzędzi ora biblioteki Pandas
+Celem projektu jest utrwalenie wiedzy dotyczącej pobierania i wczytywania danych oraz biblioteki Pandas.
+W celu realizacji części zadań zapoznaj się z przykłądami i informacjami dotyczącymi przetwarzania danych tabelarycznych w tym mechanizmu wieloindeksowania. W zadaniach wystarczające jest wykorzystanie metody tabeli przestawnej (pivot_table) lub/i metody grupowania (groupby). Przydatnymi metodami wykorzystywanymi w dalszej części zajęć będą też metoda dyskretyzacji `cut`, faktoryzacji (`factorize`), oraz wyznaczanie częstości wystąpień i normalizacji (`crosstab`)
+Informacje na ten temat możesz znaleźć [tutaj](https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html)
 
 ## Opis zadania
 Na stronie Social Security Administration umieszczono dane zawierającą listę imion oraz częstotliwość ich występowania w latach 1880-2019. Pliki z danymi w formacie csv dostępne są [tutaj](https://www.ssa.gov/oact/babynames/names.zip).
