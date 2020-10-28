@@ -1,4 +1,4 @@
-# Lab 01 - Wykresy w Python (`matplotlib`)
+# Lab 03 - Wykresy w Python (`matplotlib`)
 
 `Matplotlib` jest najpopularniejszą na dzień dzisiejszy biblioteką do tworzenia wykresów dla języka programowania `Python`. Składnię poleceń `matplotlib` zaprojektowano tak, aby przypominała tę znaną z `MATLAB`. `Matplotlib` jest w pełni kompatybilny z biblioteką numeryczną `NumPy` oraz `Pandas`.
 
@@ -71,7 +71,7 @@ ax.plot(x, x**3)
 
 Jako pierwszy parametr podajemy wartości osi odciętych (*x*), jako drugi parametr osi rzędnych (*y*).
 
-Często wykorzystywanym 3cim, nieobowiązkowym, parametrem jest ciąg formatujący wygląd wykresu, określa rodzaj markera, rodzaj linii oraz kolor. Format ciągu jest następujący `'[marker][linia][kolor]'`, pola nie są obowiązkowe, można wyspecyfikować tylko wybrane. Wybrane ciągi formatujące:
+Często wykorzystywanym trzecim, nieobowiązkowym, parametrem jest ciąg formatujący wygląd wykresu, określa rodzaj markera, rodzaj linii oraz kolor. Format ciągu jest następujący `'[marker][linia][kolor]'`, pola nie są obowiązkowe, można wyspecyfikować tylko wybrane. Wybrane ciągi formatujące:
 
 - marker:
 
@@ -253,7 +253,7 @@ Korzystając z powyższych instrukcji zmodyfikuj wykres z poprzedniego zadania, 
 
 <!-- ## `Scatter`
 
-`Scatter` (<https://matplotlib.org/api/_as_gen/matplotlib.pyplot.scatter.html>) jest rodzajem wykresu, zbliżonym do `plot`, z tą różnicą że w jego przypadku mamy możliwość zdefiniowania rozmiaru i koloru każdego z punktu. Otrzymujemy w ten sposób 3ci wymiar informacji prezentowany na 2-wymiarowym wykresie. -->
+`Scatter` (<https://matplotlib.org/api/_as_gen/matplotlib.pyplot.scatter.html>) jest rodzajem wykresu, zbliżonym do `plot`, z tą różnicą że w jego przypadku mamy możliwość zdefiniowania rozmiaru i koloru każdego z punktu. Otrzymujemy w ten sposób trzeci wymiar informacji prezentowany na 2-wymiarowym wykresie. -->
 
 ## `bar`
 
@@ -273,7 +273,7 @@ ax.bar(x, values, width)
 
 ### Grupowanie wykresów słupkowych
 
-W bardzo prosty sposób możemy na jednym wykresie umieścić wiele wykresów słupkowych, które reprezentować będą dodatkowy, 3ci wymiar informacji na naszym wykresie. Przygotowując taki wykres należy zwrócić uwagę, na rozmieszczenie słupków w osi `x`, musimy wziąć pod uwagę szerokość rysowanego słupka i odpowiednio przesunąć punkt jego rysowania, np.:
+W bardzo prosty sposób możemy na jednym wykresie umieścić wiele wykresów słupkowych, które reprezentować będą dodatkowy, trzeci wymiar informacji na naszym wykresie. Przygotowując taki wykres należy zwrócić uwagę, na rozmieszczenie słupków w osi `x`, musimy wziąć pod uwagę szerokość rysowanego słupka i odpowiednio przesunąć punkt jego rysowania, np.:
 
 ```python
 fig, ax = plt.subplots()
