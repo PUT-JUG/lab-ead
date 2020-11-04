@@ -32,7 +32,7 @@ W którym roku zanotowano najmniejszą, a w którym największą różnicę w li
     - możesz spróbować wyliczyć dla każdego imienia stosunek w którym nadawane było chłopcom i dziewczynkom
     - następnie oblicz zagregowaną wartość tego współczynnika w latach 1880-1920 oraz w okresie 2000-2020 i na tej podstawie wybrać imiona dla których zaobserwowana zmiana jest największa (zanotuj dwa najpopularniejsze imiona)
     - wkreśl przebieg trendu dla tych imion
-11. Wczytaj dane z bazy opisującej śmiertelność w okresie od 1959-2018r w poszczególnych grupach wiekowych. Spróbuj zagregować dane już na etapie zapytania SQL
+11. Wczytaj dane z bazy opisującej śmiertelność w okresie od 1959-2018r w poszczególnych grupach wiekowych: [USA_ltper_1x1.sqlite](_resources/lab_04/USA_ltper_1x1.sqlite) . Spróbuj zagregować dane już na etapie zapytania SQL.
 12. Wyznacz przyrost naturalny w analizowanym okresie
 13. Wyznacz i wyświetl współczynnik przeżywalności dzieci w pierwszym roku życia
 14. Na wykresie z pkt 14 wyznacz współczynnik przeżywalności dzieci w pierwszych 5 latach życia (pamiętaj, że dla roku urodzenia x należy uwzględnić śmiertelność w grupie wiekowej 0 lat w roku x, 1rok w roku x+1 itd).
