@@ -131,30 +131,29 @@ def replace_matches_in_column(df, column, string_to_match, min_ratio = 90):
     # replace all rows with close matches with the input matches 
     df.loc[rows_with_matches, column] = string_to_match
 ```
-- spróbuj zastosować funkcję `replace_matches_in_column` do scalenia elementów w kolumnie `Suburb`, pamiętaj, że trzeba ją wywołać osobno dla każdego unikalnego elementu. Ile unikalnych elementóœ zostanie, jeśli minimalny próg podobieństwa ustalisz na wartość 90?
+- spróbuj zastosować funkcję `replace_matches_in_column` do scalenia elementów w kolumnie `Suburb`, pamiętaj, że trzeba ją wywołać osobno dla każdego unikalnego elementu. Ile unikalnych elementów zostanie, jeśli minimalny próg podobieństwa ustalisz na wartość 90?
+  
 #### zmienna porządkowa -> konwersja na liczbę
 
 ``` Python
 from sklearn.preprocessing import LabelEncoder
 
 # Make copy to avoid changing original data 
-label_X_train = X_train.copy()
-label_X_valid = X_valid.copy()
+label_train = train_df.copy()
+label_test = test_df.copy()
 
 # Apply label encoder to each column with categorical data
 label_encoder = LabelEncoder()
-for col in object_cols:
-    label_X_train[col] = label_encoder.fit_transform(X_train[col])
-    label_X_valid[col] = label_encoder.transform(X_valid[col])
+col='CouncilArea'
+label_train[col] = label_encoder.fit_transform(label_train[col])
+label_test[col] = label_encoder.transform(label_test[col])
 
-print("MAE from Approach 2 (Label Encoding):") 
-print(score_dataset(label_X_train, label_X_valid, y_train, y_valid))
 ```
 #### zmienna nominalna -> zastosowanie encodera
 ``` Python
 from sklearn.preprocessing import LabelBinarizer
 
-lb = LabelBinarizer()
+label_binarizer = LabelBinarizer()
 lb_results = lb.fit_transform(cat_df_flights_onehot_sklearn['carrier'])
 lb_results_df = pd.DataFrame(lb_results, columns=lb.classes_)
 ```
