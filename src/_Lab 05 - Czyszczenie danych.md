@@ -95,9 +95,70 @@ df_test_numeric[:]  = imp_mean.transform(df_test_numeric) #zastosowanie modelu d
 
 ### zmienne nominalne
 - konwersja na zmienną nominalną
-- Łączenie zmiennych nominalnych (usuwanie literówek)
-- zmienna porządkowa -> konwersja na liczbę
-- zmienna nominalna -> zastosowanie encodera
+#### Łączenie zmiennych nominalnych (usuwanie literówek) przy pomocy fuzzywuzzy
+Często dane wprowadzane w importowane dane zawierające teskty (słowa) traktowane jako zmienne nominalne, zawierają literówki, różnią się wielkością liter lub np. w przypadku nazw miejsc: posiadają lub nie dodatkowe człony (np. Ostrów i Ostrów Wlkp i Ostrow Wielkoposlki, jak również ostrow wlkp).
+W przypadku zmiany różnicy w wielkości liter możliwe jest konwersja wszystkich elementów w kolumnie na np. małe litery oraz usunięcie znaków spacji. Sprawdź (używając `np.unique(...)`)ile różnych unikalnych elementów w kolumnie `Suburb`? Porównaj ten wynika z wynikiem otrzymanym po znormalizowaniu wielkości liter oraz usunięciu końcowych znaków spacji
+```python
+# zmiana na małe litery
+df['Suburb']=df['Suburb'].str.lower()
+# usunięcie końcowych spacji
+df['Suburb'] = df['Suburb'].str.strip()
+```
+W danych mogą się jednak znajdować takie same elementy różniące się literą (literówka) lub posiadające dodatkowe człony w nazwie. Do porównania dwóch napisów, lub napisu z listą innych napisów można użyć moduł `fuzzywuzz`
+```python
+import fuzzywuzzy
+fuzzywuzzy.process.extract('Ostrów',['ostrow', 'Ostrów Wlkp', 'ostrów wlkp', 'Ostrzeszów'])
+```
+Funkcja zwróci listę krotek, gdzie drugi element określa podobieństwo.
+Do scalenia pewnego ciągu znaków z elementami kolumny pandas, może służyć funkcja:
+
+```python
+import fuzzywuzzy
+def replace_matches_in_column(df, column, string_to_match, min_ratio = 90):
+    # get a list of unique strings
+    strings = df[column].unique()
+    
+    # get the top 10 closest matches to our input string
+    matches = fuzzywuzzy.process.extract(string_to_match, strings, 
+                                         limit=10, scorer=fuzzywuzzy.fuzz.token_sort_ratio)
+
+    # only get matches with a ratio > 90
+    close_matches = [matches[0] for matches in matches if matches[1] >= min_ratio]
+
+    # get the rows of all the close matches in our dataframe
+    rows_with_matches = df[column].isin(close_matches)
+
+    # replace all rows with close matches with the input matches 
+    df.loc[rows_with_matches, column] = string_to_match
+```
+- spróbuj zastosować funkcję `replace_matches_in_column` do scalenia elementów w kolumnie `Suburb`, pamiętaj, że trzeba ją wywołać osobno dla każdego unikalnego elementu. Ile unikalnych elementóœ zostanie, jeśli minimalny próg podobieństwa ustalisz na wartość 90?
+#### zmienna porządkowa -> konwersja na liczbę
+
+``` Python
+from sklearn.preprocessing import LabelEncoder
+
+# Make copy to avoid changing original data 
+label_X_train = X_train.copy()
+label_X_valid = X_valid.copy()
+
+# Apply label encoder to each column with categorical data
+label_encoder = LabelEncoder()
+for col in object_cols:
+    label_X_train[col] = label_encoder.fit_transform(X_train[col])
+    label_X_valid[col] = label_encoder.transform(X_valid[col])
+
+print("MAE from Approach 2 (Label Encoding):") 
+print(score_dataset(label_X_train, label_X_valid, y_train, y_valid))
+```
+#### zmienna nominalna -> zastosowanie encodera
+``` Python
+from sklearn.preprocessing import LabelBinarizer
+
+lb = LabelBinarizer()
+lb_results = lb.fit_transform(cat_df_flights_onehot_sklearn['carrier'])
+lb_results_df = pd.DataFrame(lb_results, columns=lb.classes_)
+```
+
 
 
 ---
