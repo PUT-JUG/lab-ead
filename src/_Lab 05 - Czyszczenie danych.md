@@ -60,7 +60,7 @@ df_cleaned_zeros = df.fillna(0) # wypełnia zerami
 df_cleaned_bfill = df.fillna(method='bfill', axis=0).fillna(0) #wypełnia wartością poprzedzającą z kolumny, jeśli to niemożliwe, wstawia 0
 ```
 - Zastanów się kiedy takie podejście może być stosowane, czy można je użyć do klasyfikacji?, sprawdź w dokumentacji [fillna](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.fillna.html) jakie są jeszcze możliwości wypełnienia wypełnienia?
-
+- kiedy wypełnianie wartością sąsiednią ma sens? Jeśli stosujemy je do klasyfikacji to jaką strategię przyjąć w odniesieniu do brakujących wartości referencyjnych (jest to wartość, która ma być predykowana przez klasyfikator) a jaką w odniesieniu do brakujących cech (wartość/wartości, które są wejściem klasyfikatora)?
 
 5. Podejście 3: podstawienie wartości średniej/mediany/mody:
 ``` Python
@@ -72,7 +72,7 @@ df_train_numeric.loc[:] = imp_mean.fit_transform(df_train_numeric)#dopasowanie p
 
 df_test_numeric[:]  = imp_mean.transform(df_test_numeric) #zastosowanie modelu do transformacji zbioru testowego (bez wyznaczania parametrów)
 ```
-- kiedy wypełnianie wartością sąsiednią ma sens? Jeśli stosujemy je do klasyfikacji to jaką strategię przyjąć w odniesieniu do brakujących wartości referencyjnych (jest to wartość, która ma być predykowana przez klasyfikator) a jaką w odniesieniu do brakujących cech (wartość/wartości, które są wejściem klasyfikatora)?
+- kiedy wypełnianie wartością średnią/medianą ma sens? Jeśli stosujemy je do klasyfikacji to jaką strategię przyjąć w odniesieniu do brakujących wartości referencyjnych (jest to wartość, która ma być predykowana przez klasyfikator) a jaką w odniesieniu do brakujących cech (wartość/wartości, które są wejściem klasyfikatora)?
 - oceń skuteczność klasyfikacji i porównaj ją z pozostałymi podejściami
 
 
