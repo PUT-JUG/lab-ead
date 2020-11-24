@@ -99,36 +99,65 @@ df_test_numeric[:]  = imp_mean.transform(df_test_numeric)  # zastosowanie modelu
 
 ## Konwersja danych
 
-### Konwersja dat i czasów
+### Daty i czasy
 
-Dane bardzo często związane są z datą/czasem wystąpienia, rejestracji itp. Przykładowo, używany zbiór danych w kolumnie `Date` przechowuje datę sprzedaży. Ponieważ zawiera ona znaki inne niż cyfry/punkt dziesiętny zaczytywana jest domyślnie z pliku CSV jako string
+#### Konwersja dat i czasów
 
+Dane bardzo często związane są z datą/czasem wystąpienia, rejestracji itp. Przykładowo, używany zbiór danych w kolumnie `Date` przechowuje datę sprzedaży. Ponieważ zawiera ona znaki inne niż cyfry/punkt dziesiętny zaczytywana jest domyślnie z pliku CSV jako string:
 
-w celu dalszego wygodnego wykorzystania wymaga konwersji na 
+```python
+print(type(df.loc[0, "Date"]))
+```
 
+W celu dalszego wygodnego wykorzystania takie dane wymagają konwersji na format zrozumiały dla wykorzystywanych narzędzi. W Pandas mamy do dyspozycji funkcję `to_datetime()` pozwalającą na utworzenie serii/indeksu typu `Datetime` na podstawie źródłowych liczb, napisów etc:
 
+```python
+df.loc[:, "Datetime"] = pd.to_datetime(df.loc[:, "Date"])
+```
 
-- konwersja danych z datą
-- wyznaczanie interwałów
-- wyznaczanie dnia tygodnia
+Mnogość formatów zapisu dat i czasów (np. DD-MM-YYYY lub MM-DD-YYYY) powoduje jednak, że funkcja `to_datetime` może niepoprawnie odgadnąć format wejściowy. Porównaj uzyskane kolumny `Date` i `Datetime` - czy dane wejściowe były zawsze interpretowane tak samo?
 
-### zmienne nominalne
-- konwersja na zmienną nominalną
+Funkcja `to_datetime` ma wiele dodatkowych opcji: [to_datetime](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.to_datetime.html). Spróbuj za pommocą parametru `format=` wymusić poprawny format źródłowy daty. 
+
+#### Wyznaczanie interwałów
+
+**TODO**
+
+#### Wyznaczanie dnia tygodnia
+
+Pewne cechy wykazują zmienność nie wprost od upływu czasu (monotonicznie), co np. od dnia tygodnia, dnia miesiąca itp. Dysponując datą/czasem w formacie datetime łatwo skonwertujemy ją na dzień tygodnia w formacie liczbowym od 0 (poniedziałek) do 6 (niedziela).
+
+```python
+df.loc[:, "Day of week"] = df.loc[:, "Datetime"].dt.dayofweek()
+```
+
+Wykreśl histogram liczby dokonanych transakcji w zależności od dnia tygodnia.
+
+### Zmienne nominalne
+
+Zmienne nominalne to takie, które przyjmują wartości z określonego, skończonego zbioru, dla których nie istnieje żadne domyślne uporządkowanie (np. miasto urodzenia). W przypadku programowania można posłużyć się analogią do typów wyliczeniowych (np. `enum` z `C++`).
+
+#### Konwersja na zmienną nominalną
+
+**TODO**
 
 #### Łączenie zmiennych nominalnych (usuwanie literówek) przy pomocy fuzzywuzzy
 Często dane wprowadzane w importowane dane zawierające teskty (słowa) traktowane jako zmienne nominalne, zawierają literówki, różnią się wielkością liter lub np. w przypadku nazw miejsc: posiadają lub nie dodatkowe człony (np. Ostrów i Ostrów Wlkp i Ostrow Wielkoposlki, jak również ostrow wlkp).
 W przypadku zmiany różnicy w wielkości liter możliwe jest konwersja wszystkich elementów w kolumnie na np. małe litery oraz usunięcie znaków spacji. Sprawdź (używając `np.unique(...)`)ile różnych unikalnych elementów w kolumnie `Suburb`? Porównaj ten wynika z wynikiem otrzymanym po znormalizowaniu wielkości liter oraz usunięciu końcowych znaków spacji
+
 ```python
 # zmiana na małe litery
 df['Suburb'] = df['Suburb'].str.lower()
 # usunięcie końcowych spacji
 df['Suburb'] = df['Suburb'].str.strip()
 ```
-W danych mogą się jednak znajdować takie same elementy różniące się literą (literówka) lub posiadające dodatkowe człony w nazwie. Do porównania dwóch napisów, lub napisu z listą innych napisów można użyć moduł `fuzzywuzz`
+W danych mogą się jednak znajdować takie same elementy różniące się literą (literówka) lub posiadające dodatkowe człony w nazwie. Do porównania dwóch napisów, lub napisu z listą innych napisów można użyć moduł `fuzzywuzzy`
+
 ```python
 import fuzzywuzzy
 fuzzywuzzy.process.extract('Ostrów',['ostrow', 'Ostrów Wlkp', 'ostrów wlkp', 'Ostrzeszów'])
 ```
+
 Funkcja zwróci listę krotek, gdzie drugi element określa podobieństwo.
 Do scalenia pewnego ciągu znaków z elementami kolumny pandas, może służyć funkcja:
 
@@ -154,8 +183,10 @@ def replace_matches_in_column(df, column, string_to_match, min_ratio = 90):
 - spróbuj zastosować funkcję `replace_matches_in_column` do scalenia elementów w kolumnie `Suburb`, pamiętaj, że trzeba ją wywołać osobno dla każdego unikalnego elementu. Ile unikalnych elementów zostanie, jeśli minimalny próg podobieństwa ustalisz na wartość 90?
   
 #### zmienna porządkowa -> konwersja wartości liczbowe
+
 Wykorzystanie zmiennych jako wejścia w systemach klasyfikacji/regresji wymaga podania wartości liczbowej. Jednym z podejść, które można zastosować jest przypisanie poszczególnym wartością zmiennej nominalnej specyficznej wartości (np. 1,2,3...)
-``` Python
+
+```python
 from sklearn.preprocessing import LabelEncoder
 
 # Make copy to avoid changing original data 
@@ -167,14 +198,15 @@ label_encoder = LabelEncoder()
 col='CouncilArea'
 label_train[col] = label_encoder.fit_transform(label_train[col])
 label_test[col] = label_encoder.transform(label_test[col])
-
 ```
+
 - zastanów się czy podejście to sprawdzi się w celu uwzględnienia w predyktorze ceny nazw obszarów administracyjnych, lub dni tygodnia w których nastąpiła sprzedaż?
 - zastanów się czy podejście takie srawdzi się do klasyfikacji zmiennej nominalnej siła wiatru gdzie zbiorem wartości jest [brak, słaby, silny, bardzo silny]?
   
 #### zmienna nominalna -> enkoder binarny
 Innym możliwym podejściem jest konwersja zmiennej nominalnej o `n` wartościach na `n` kolumn, z których każda określa wartością 0 lub 1 to czy dana wartość wystąpiła, procedura ta nazwya się również `OneHotEncoder`. Porównanie sposobu transformacji za pomocą `LabelEncodera` i `LabelBinarizer`/(połączenia `LabelEncoder` i `OneHotEncoder`) przedstawiono na rysunku ![rysunku](./_images/lab_04/encoders.jpg)
-``` Python
+
+```python
 from sklearn.preprocessing import LabelBinarizer
 
 # Make copy to avoid changing original data 
