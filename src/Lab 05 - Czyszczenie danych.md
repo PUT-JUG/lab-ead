@@ -119,7 +119,17 @@ Mnogość formatów zapisu dat i czasów (np. DD-MM-YYYY lub MM-DD-YYYY) powoduj
 
 Funkcja `to_datetime` ma wiele dodatkowych opcji: [to_datetime](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.to_datetime.html). Spróbuj za pommocą parametru `format=` wymusić poprawny format źródłowy daty. 
 
-#### Wyznaczanie interwałów
+#### Wyznaczanie zakresów dat i interwałów
+
+Serię dat z określonym początkiem, końcem i okresem można wygenerować funkcją `date_range`: [dokumentacja](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.date_range.html)
+
+Zakres (interwał) dat, który może służyć do wyłuskania fragmentu tabeli można wygenerować funkcją `Interval`, podając jako granice `Timestamp`:
+
+Przykładowo:
+
+```python
+year_2017 = pd.Interval(pd.Timestamp('2017-01-01 00:00:00'), pd.Timestamp('2018-01-01 00:00:00'), closed='left')
+```
 
 **TODO**
 
@@ -131,19 +141,41 @@ Pewne cechy wykazują zmienność nie wprost od upływu czasu (monotonicznie), c
 df.loc[:, "Day of week"] = df.loc[:, "Datetime"].dt.dayofweek()
 ```
 
+🔥 Zadanie 🔥
+
 Wykreśl histogram liczby dokonanych transakcji w zależności od dnia tygodnia.
 
 ### Zmienne nominalne
 
-Zmienne nominalne to takie, które przyjmują wartości z określonego, skończonego zbioru, dla których nie istnieje żadne domyślne uporządkowanie (np. miasto urodzenia). W przypadku programowania można posłużyć się analogią do typów wyliczeniowych (np. `enum` z `C++`).
+Zmienne nominalne (*categorical data*) to takie, które przyjmują wartości z określonego, skończonego zbioru, dla których nie istnieje żadne domyślne uporządkowanie (np. miasto urodzenia, płeć). W przypadku programowania można posłużyć się analogią do typów wyliczeniowych (np. `enum` z `C++`). Zazwyczaj kategorii będzie znacznie mniej niż próbek danych.
 
 #### Konwersja na zmienną nominalną
 
-**TODO**
+Dane typu *categorical* możemy wygenerować na kilka sposobów, np ręcznie, wymuszając typ danych `category` parametrem `dtype`:
 
-#### Łączenie zmiennych nominalnych (usuwanie literówek) przy pomocy fuzzywuzzy
-Często dane wprowadzane w importowane dane zawierające teskty (słowa) traktowane jako zmienne nominalne, zawierają literówki, różnią się wielkością liter lub np. w przypadku nazw miejsc: posiadają lub nie dodatkowe człony (np. Ostrów i Ostrów Wlkp i Ostrow Wielkoposlki, jak również ostrow wlkp).
-W przypadku zmiany różnicy w wielkości liter możliwe jest konwersja wszystkich elementów w kolumnie na np. małe litery oraz usunięcie znaków spacji. Sprawdź (używając `np.unique(...)`)ile różnych unikalnych elementów w kolumnie `Suburb`? Porównaj ten wynika z wynikiem otrzymanym po znormalizowaniu wielkości liter oraz usunięciu końcowych znaków spacji
+```python
+categorical_series = pd.Series(["a", "b", "c", "a"], dtype="category")
+print(categorical_series)
+```
+
+lub konwertując istniejącą kolumnę DataFrame:
+
+```python
+df["B"] = df["A"].astype("category")
+```
+
+Dla omawianej bazy sprzedaży nieruchomości możemy przykładowo skonwertować kolumnę `RegionName`:
+
+```python
+df.loc[:, "RegionName"] = df.loc[:, "RegionName"].astype("category")
+print(df["Regionname"])
+```
+
+#### Łączenie zmiennych nominalnych (usuwanie literówek) przy pomocy `fuzzywuzzy`
+
+W przypadku ręcznego wprowadzania danych np. przez osoby ankietowane lub przez różne instytucje, dane nominalne różnią się wielkością liter, sposobem zapisu (ze znakami diakrytycznymi lub bez) lub zawierają literówki. W przypadku nazw miejsc nazwy mogą posiadać lub nie dodatkowe człony (np. Ostrów i Ostrów Wlkp i Ostrow Wielkoposlki, jak również ostrow wlkp). Wszystkie takie wpisy powinny trafić do jednej kategorii.
+
+W przypadku zmiany różnicy w wielkości liter możliwe jest konwersja wszystkich elementów w kolumnie na np. małe litery oraz usunięcie znaków spacji. Sprawdź (używając `np.unique(...)`) ile różnych unikalnych elementów w kolumnie `Suburb`? Porównaj ten wynik z wynikiem otrzymanym po znormalizowaniu wielkości liter oraz usunięciu końcowych znaków spacji
 
 ```python
 # zmiana na małe litery
@@ -151,10 +183,13 @@ df['Suburb'] = df['Suburb'].str.lower()
 # usunięcie końcowych spacji
 df['Suburb'] = df['Suburb'].str.strip()
 ```
+
 W danych mogą się jednak znajdować takie same elementy różniące się literą (literówka) lub posiadające dodatkowe człony w nazwie. Do porównania dwóch napisów, lub napisu z listą innych napisów można użyć moduł `fuzzywuzzy`
 
 ```python
-import fuzzywuzzy
+import fuzzywuzzy.process
+
+
 fuzzywuzzy.process.extract('Ostrów',['ostrow', 'Ostrów Wlkp', 'ostrów wlkp', 'Ostrzeszów'])
 ```
 
@@ -162,7 +197,9 @@ Funkcja zwróci listę krotek, gdzie drugi element określa podobieństwo.
 Do scalenia pewnego ciągu znaków z elementami kolumny pandas, może służyć funkcja:
 
 ```python
-import fuzzywuzzy
+import fuzzywuzzy.process
+
+
 def replace_matches_in_column(df, column, string_to_match, min_ratio = 90):
     # get a list of unique strings
     strings = df[column].unique()
@@ -180,14 +217,18 @@ def replace_matches_in_column(df, column, string_to_match, min_ratio = 90):
     # replace all rows with close matches with the input matches 
     df.loc[rows_with_matches, column] = string_to_match
 ```
-- spróbuj zastosować funkcję `replace_matches_in_column` do scalenia elementów w kolumnie `Suburb`, pamiętaj, że trzeba ją wywołać osobno dla każdego unikalnego elementu. Ile unikalnych elementów zostanie, jeśli minimalny próg podobieństwa ustalisz na wartość 90?
-  
-#### zmienna porządkowa -> konwersja wartości liczbowe
 
-Wykorzystanie zmiennych jako wejścia w systemach klasyfikacji/regresji wymaga podania wartości liczbowej. Jednym z podejść, które można zastosować jest przypisanie poszczególnym wartością zmiennej nominalnej specyficznej wartości (np. 1,2,3...)
+🔥 Zadanie 🔥
+
+Spróbuj zastosować funkcję `replace_matches_in_column` do scalenia elementów w kolumnie `Suburb`, pamiętaj, że trzeba ją wywołać osobno dla każdego unikalnego elementu `string_to_match`. Ile unikalnych elementów zostanie, jeśli minimalny próg podobieństwa ustalisz na wartość 90?
+  
+#### Konwersja *zmienna porządkowa* → *wartości liczbowe*
+
+Wykorzystanie zmiennych jako wejścia w systemach klasyfikacji/regresji wymaga podania wartości liczbowej. Jednym z podejść, które można zastosować jest przypisanie poszczególnym wartościom zmiennej nominalnej specyficznej wartości (np. 1, 2, 3, ...)
 
 ```python
 from sklearn.preprocessing import LabelEncoder
+
 
 # Make copy to avoid changing original data 
 label_train = train_df.copy()
@@ -200,14 +241,16 @@ label_train[col] = label_encoder.fit_transform(label_train[col])
 label_test[col] = label_encoder.transform(label_test[col])
 ```
 
-- zastanów się czy podejście to sprawdzi się w celu uwzględnienia w predyktorze ceny nazw obszarów administracyjnych, lub dni tygodnia w których nastąpiła sprzedaż?
-- zastanów się czy podejście takie srawdzi się do klasyfikacji zmiennej nominalnej siła wiatru gdzie zbiorem wartości jest [brak, słaby, silny, bardzo silny]?
+- ❓Zastanów się czy podejście to sprawdzi się w celu uwzględnienia w predyktorze ceny nazw obszarów administracyjnych, lub dni tygodnia w których nastąpiła sprzedaż?
+- ❓Zastanów się czy podejście takie sprawdzi się do klasyfikacji zmiennej nominalnej *siła wiatru*, gdzie zbiorem wartości jest [*brak*, *słaby*, *silny*, *bardzo silny*]?
   
-#### zmienna nominalna -> enkoder binarny
-Innym możliwym podejściem jest konwersja zmiennej nominalnej o `n` wartościach na `n` kolumn, z których każda określa wartością 0 lub 1 to czy dana wartość wystąpiła, procedura ta nazwya się również `OneHotEncoder`. Porównanie sposobu transformacji za pomocą `LabelEncodera` i `LabelBinarizer`/(połączenia `LabelEncoder` i `OneHotEncoder`) przedstawiono na rysunku ![rysunku](./_images/lab_04/encoders.jpg)
+#### Zmienna nominalna → enkoder binarny
+
+Innym możliwym podejściem jest konwersja zmiennej nominalnej o `n` wartościach na `n` kolumn, z których każda określa wartością 0 lub 1 to czy dana wartość wystąpiła. Procedura ta nazwya się również *one-hot encoder*. Porównanie sposobu transformacji za pomocą `LabelEncodera` i `LabelBinarizer`/(połączenia `LabelEncoder` i `OneHotEncoder`) przedstawiono na rysunku ![rysunku](./_images/lab_04/encoders.jpg)
 
 ```python
 from sklearn.preprocessing import LabelBinarizer
+
 
 # Make copy to avoid changing original data 
 label_train = train_df.copy()
@@ -219,9 +262,8 @@ col='CouncilArea'
 lb_results = label_binarizer.fit_transform(label_train[col])
 lb_results_df = pd.DataFrame(lb_results, columns=label_binarizer.classes_)
 ```
-- zastanów się czy podejście to sprawdzi się w celu uwzględnienia w predyktorze ceny nazw obszarów administracyjnych, lub dni tygodnia w których nastąpiła sprzedaż?
-- zastanów się czy podejście takie srawdzi się do klasyfikacji zmiennej nominalnej siła wiatru gdzie zbiorem wartości jest [brak, słaby, silny, bardzo silny]?
-
+- ❓Zastanów się czy podejście to sprawdzi się w celu uwzględnienia w predyktorze ceny nazw obszarów administracyjnych, lub dni tygodnia w których nastąpiła sprzedaż?
+- ❓Zastanów się czy podejście takie sprawdzi się do klasyfikacji zmiennej nominalnej *siła wiatru*, gdzie zbiorem wartości jest [*brak*, *słaby*, *silny*, *bardzo silny*]?
 
 ---
 Autorzy: *Piotr Kaczmarek* i *Jakub Tomczyński*
