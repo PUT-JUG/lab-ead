@@ -53,7 +53,7 @@ missing_values_count = df.isnull().sum()
 
 ### Podejście 1: usunięcie kolumn/wierszy zawierających przynajmniej 1 element pusty - przetestuj oba podejścia:
 
-```Python
+```python
 df_cleaned_rows = df_set.dropna()
 df_cleaned_cols = df_set.dropna(axis=1)
 ```
@@ -88,87 +88,31 @@ df_test_numeric[:]  = imp_mean.transform(df_test_numeric) #zastosowanie modelu d
 
 ## Konwersja danych
 
-### konwersja daty
-- konwersja danych z datą
-- wyznaczanie interwałów
-- wyznaczanie dnia tygodnia
-
-### zmienne nominalne
-- konwersja na zmienną nominalną
-#### Łączenie zmiennych nominalnych (usuwanie literówek) przy pomocy fuzzywuzzy
-Często dane wprowadzane w importowane dane zawierające teskty (słowa) traktowane jako zmienne nominalne, zawierają literówki, różnią się wielkością liter lub np. w przypadku nazw miejsc: posiadają lub nie dodatkowe człony (np. Ostrów i Ostrów Wlkp i Ostrow Wielkoposlki, jak również ostrow wlkp).
-W przypadku zmiany różnicy w wielkości liter możliwe jest konwersja wszystkich elementów w kolumnie na np. małe litery oraz usunięcie znaków spacji. Sprawdź (używając `np.unique(...)`)ile różnych unikalnych elementów w kolumnie `Suburb`? Porównaj ten wynika z wynikiem otrzymanym po znormalizowaniu wielkości liter oraz usunięciu końcowych znaków spacji
+### zmienna porządkowa -> konwersja na liczbę
 ```python
-# zmiana na małe litery
-df['Suburb']=df['Suburb'].str.lower()
-# usunięcie końcowych spacji
-df['Suburb'] = df['Suburb'].str.strip()
-```
-W danych mogą się jednak znajdować takie same elementy różniące się literą (literówka) lub posiadające dodatkowe człony w nazwie. Do porównania dwóch napisów, lub napisu z listą innych napisów można użyć moduł `fuzzywuzz`
-```python
-import fuzzywuzzy
-fuzzywuzzy.process.extract('Ostrów',['ostrow', 'Ostrów Wlkp', 'ostrów wlkp', 'Ostrzeszów'])
-```
-Funkcja zwróci listę krotek, gdzie drugi element określa podobieństwo.
-Do scalenia pewnego ciągu znaków z elementami kolumny pandas, może służyć funkcja:
-
-```python
-import fuzzywuzzy
-def replace_matches_in_column(df, column, string_to_match, min_ratio = 90):
-    # get a list of unique strings
-    strings = df[column].unique()
-    
-    # get the top 10 closest matches to our input string
-    matches = fuzzywuzzy.process.extract(string_to_match, strings, 
-                                         limit=10, scorer=fuzzywuzzy.fuzz.token_sort_ratio)
-
-    # only get matches with a ratio > 90
-    close_matches = [matches[0] for matches in matches if matches[1] >= min_ratio]
-
-    # get the rows of all the close matches in our dataframe
-    rows_with_matches = df[column].isin(close_matches)
-
-    # replace all rows with close matches with the input matches 
-    df.loc[rows_with_matches, column] = string_to_match
-```
-- spróbuj zastosować funkcję `replace_matches_in_column` do scalenia elementów w kolumnie `Suburb`, pamiętaj, że trzeba ją wywołać osobno dla każdego unikalnego elementu. Ile unikalnych elementów zostanie, jeśli minimalny próg podobieństwa ustalisz na wartość 90?
-  
-#### zmienna porządkowa -> konwersja wartości liczbowe
-Wykorzystanie zmiennych jako wejścia w systemach klasyfikacji/regresji wymaga podania wartości liczbowej. Jednym z podejść, które można zastosować jest przypisanie poszczególnym wartością zmiennej nominalnej specyficznej wartości (np. 1,2,3...)
-``` Python
 from sklearn.preprocessing import LabelEncoder
 
 # Make copy to avoid changing original data 
-label_train = train_df.copy()
-label_test = test_df.copy()
+label_X_train = X_train.copy()
+label_X_valid = X_valid.copy()
 
 # Apply label encoder to each column with categorical data
 label_encoder = LabelEncoder()
-col='CouncilArea'
-label_train[col] = label_encoder.fit_transform(label_train[col])
-label_test[col] = label_encoder.transform(label_test[col])
+for col in object_cols:
+    label_X_train[col] = label_encoder.fit_transform(X_train[col])
+    label_X_valid[col] = label_encoder.transform(X_valid[col])
 
+print("MAE from Approach 2 (Label Encoding):") 
+print(score_dataset(label_X_train, label_X_valid, y_train, y_valid))
 ```
-- zastanów się czy podejście to sprawdzi się w celu uwzględnienia w predyktorze ceny nazw obszarów administracyjnych, lub dni tygodnia w których nastąpiła sprzedaż?
-- zastanów się czy podejście takie srawdzi się do klasyfikacji zmiennej nominalnej siła wiatru gdzie zbiorem wartości jest [brak, słaby, silny, bardzo silny]?
-  
-#### zmienna nominalna -> enkoder binarny
-Innym możliwym podejściem jest konwersja zmiennej nominalnej o `n` wartościach na `n` kolumn, z których każda określa wartością 0 lub 1 to czy dana wartość wystąpiła, procedura ta nazwya się również `OneHotEncoder`. Porównanie sposobu transformacji za pomocą `LabelEncodera` i `LabelBinarizer`/(połączenia `LabelEncoder` i `OneHotEncoder`) przedstawiono na rysunku ![rysunku](./_images/lab_04/encoders.jpg)
+### zmienna nominalna -> zastosowanie encodera
 ``` Python
 from sklearn.preprocessing import LabelBinarizer
 
-# Make copy to avoid changing original data 
-label_train = train_df.copy()
-label_test = test_df.copy()
-
-label_binarizer = LabelBinarizer()
-
-col='CouncilArea'
-lb_results = label_binarizer.fit_transform(label_train[col])
-lb_results_df = pd.DataFrame(lb_results, columns=label_binarizer.classes_)
+lb = LabelBinarizer()
+lb_results = lb.fit_transform(cat_df_flights_onehot_sklearn['carrier'])
+lb_results_df = pd.DataFrame(lb_results, columns=lb.classes_)
 ```
-- zastanów się czy podejście to sprawdzi się w celu uwzględnienia w predyktorze ceny nazw obszarów administracyjnych, lub dni tygodnia w których nastąpiła sprzedaż?
-- zastanów się czy podejście takie srawdzi się do klasyfikacji zmiennej nominalnej siła wiatru gdzie zbiorem wartości jest [brak, słaby, silny, bardzo silny]?
 
 
 ---
