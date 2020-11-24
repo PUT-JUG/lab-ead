@@ -57,7 +57,7 @@ print(score_dataset(train_df_cleaned[cols_x], test_df_cleaned[cols_x], train_df_
 ```python
 missing_values_count = df.isnull().sum()
 ```
-- spróbuj określić dla każdej kolumny procent występowania wartości brakujących. Wyświetl je w postaci tabeli, gdzie indeksem jest nazwa kolumny, a kolumnami procent braków oraz całkowita liczba braków (możesz użyć metody `pd.concat`)
+- Spróbuj określić dla każdej kolumny procent występowania wartości brakujących. Wyświetl je w postaci tabeli, gdzie indeksem jest nazwa kolumny, a kolumnami procent braków oraz całkowita liczba braków (możesz użyć metody `pd.concat`)
 
 ### Podejście 1: usunięcie kolumn/wierszy zawierających przynajmniej 1 element pusty - przetestuj oba podejścia:
 
@@ -75,7 +75,7 @@ df_cleaned_cols = df_set.dropna(axis=1)
 
 ```python
 df_cleaned_zeros = df.fillna(0) # wypełnia zerami
-df_cleaned_bfill = df.fillna(method='bfill', axis=0).fillna(0)  # wypełnia wartością poprzedzającą z kdanej olumny, jeśli to niemożliwe, wstawia 0
+df_cleaned_bfill = df.fillna(method='bfill', axis=0).fillna(0)  # wypełnia wartością poprzedzającą z danej kolumny, jeśli to niemożliwe, wstawia 0
 ```
 
 - Zastanów się kiedy takie podejście może być stosowane, czy można je użyć do klasyfikacji?, sprawdź w dokumentacji [fillna](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.fillna.html) jakie są jeszcze możliwości wypełnienia wypełnienia?
@@ -131,17 +131,15 @@ Przykładowo:
 year_2017 = pd.Interval(pd.Timestamp('2017-01-01 00:00:00'), pd.Timestamp('2018-01-01 00:00:00'), closed='left')
 ```
 
-**TODO**
-
 #### Wyznaczanie dnia tygodnia
 
-Pewne cechy wykazują zmienność nie wprost od upływu czasu (monotonicznie), co np. od dnia tygodnia, dnia miesiąca itp. Dysponując datą/czasem w formacie datetime łatwo skonwertujemy ją na dzień tygodnia w formacie liczbowym od 0 (poniedziałek) do 6 (niedziela).
+Pewne cechy wykazują zmienność nie wprost od upływu czasu (monotonicznie), co np. od dnia tygodnia, dnia miesiąca itp. Dysponując datą/czasem w formacie datetime łatwo skonwertujemy ją na dzień tygodnia w formacie liczbowym od 0 (poniedziałek) do 6 (niedziela) przy pomocy metody `DataFrame.dt.dayofweek()`.
 
 ```python
 df.loc[:, "Day of week"] = df.loc[:, "Datetime"].dt.dayofweek()
 ```
 
-🔥 Zadanie 🔥
+#### 🔥 Zadanie 🔥
 
 Wykreśl histogram liczby dokonanych transakcji w zależności od dnia tygodnia.
 
@@ -218,7 +216,9 @@ def replace_matches_in_column(df, column, string_to_match, min_ratio = 90):
     df.loc[rows_with_matches, column] = string_to_match
 ```
 
-🔥 Zadanie 🔥
+#### 🔥 Zadanie 🔥
+
+Podmień wczytywany plik na [melb_data_distorted.csv](./_resources/lab_05/melb_data_distorted.csv), w którym w niektórych kolumnach tekstowych zostały wprowadzone typowe pomyłki lub różnice w zapisie.
 
 Spróbuj zastosować funkcję `replace_matches_in_column` do scalenia elementów w kolumnie `Suburb`, pamiętaj, że trzeba ją wywołać osobno dla każdego unikalnego elementu `string_to_match`. Ile unikalnych elementów zostanie, jeśli minimalny próg podobieństwa ustalisz na wartość 90?
   
@@ -258,7 +258,7 @@ label_test = test_df.copy()
 
 label_binarizer = LabelBinarizer()
 
-col='CouncilArea'
+col = 'CouncilArea'
 lb_results = label_binarizer.fit_transform(label_train[col])
 lb_results_df = pd.DataFrame(lb_results, columns=label_binarizer.classes_)
 ```
