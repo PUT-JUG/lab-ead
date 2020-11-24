@@ -6,17 +6,23 @@ Celem czyszczenia danych jest:
 - analiza rozkładów i usunięcie elementów odstających (outlierów) (Lab 06)
 - normalizacja danych i normalizacja rozkładu (Lab 06)
 
-W zadaniu spróbuj odnieść efekty wprowadzonych zmian do efektu dla zadania klasyfikacji. Do oceny zastosuj funkcję:
+### Zbiór danych
+
+W zadaniach będziemy posługiwać się zbiorem opisującym historię sprzedaży budynków, zawierającym szczegóły dotyczące nieruchomości oraz cenę za jaką zostały sprzedane: [melb_data.csv](./_resources/lab_05/melb_data.csv).
+
+### Ocena efektów - skuteczność klasyfikacji
+
+W zadaniach spróbuj odnieść efekty wprowadzonych zmian do efektu dla zadania klasyfikacji. Do oceny zastosuj funkcję:
 
 ```python
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error
 
 
-def score_dataset(X_train, X_valid, y_train, y_valid):
+def score_dataset(x_train, x_valid, y_train, y_valid):
     model = RandomForestRegressor(n_estimators=100, random_state=0)
-    model.fit(X_train, y_train)
-    preds = model.predict(X_valid)
+    model.fit(x_train, y_train)
+    preds = model.predict(x_valid)
     return mean_absolute_error(y_valid, preds)
 ```
 
@@ -25,14 +31,16 @@ Do oceny skuteczności klasyfikacji stosuj zawsze zbiór uczący i testowy, tzn.
 ```python
 from sklearn.datasets import make_blobs
 from sklearn.model_selection import train_test_split
-train_df,test_df = train_test_split(df, test_size=0.7)
-#czyszczenie danych
-#train_df_cleaned = ...
-#test_df_cleaned = ...
-cols_x = train_df_cleaned.columns.select_dtypes(include=[np.number]).difference(['Price']) #wybiera tylko kolumny z wartosciami numerycznymi,za wyjątkiem kolumny z wartością referencyjną
-cols_y = 'Price'
-print(score_dataset(train_df_cleaned[cols_x],test_df_cleaned[cols_x], train_df_cleaned[cols_y], test_df_cleaned[cols_y]))
 
+
+train_df, test_df = train_test_split(df, test_size=0.7)
+# czyszczenie danych
+# train_df_cleaned = ...
+# test_df_cleaned = ...
+
+cols_x = train_df_cleaned.select_dtypes(include=[np.number]).columns.difference(['Price'])  # wybiera tylko kolumny z wartosciami numerycznymi, za wyjątkiem kolumny z wartością referencyjną - wejście do klasyfikatora
+cols_y = 'Price'  # - wyjście z klasyfikatora
+print(score_dataset(train_df_cleaned[cols_x], test_df_cleaned[cols_x], train_df_cleaned[cols_y], test_df_cleaned[cols_y]))
 ```
 
 **UWAGA** 
@@ -64,43 +72,55 @@ df_cleaned_cols = df_set.dropna(axis=1)
   -  ograniczając liczbę wierszy sprawdź ile zostanie wierszy jeśli usunie się wiersze, które nie mają **równocześnie** wypełnionego pola `BuildingArea` i  `YearBuilt`
   
 ### Podejście 2: wypełnienie pustych wartości np. zerami lub wartością, która poprzedza wartość brakującą
-``` Python
+
+```python
 df_cleaned_zeros = df.fillna(0) # wypełnia zerami
 df_cleaned_bfill = df.fillna(method='bfill', axis=0).fillna(0)  # wypełnia wartością poprzedzającą z kdanej olumny, jeśli to niemożliwe, wstawia 0
 ```
+
 - Zastanów się kiedy takie podejście może być stosowane, czy można je użyć do klasyfikacji?, sprawdź w dokumentacji [fillna](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.fillna.html) jakie są jeszcze możliwości wypełnienia wypełnienia?
-- kiedy wypełnianie wartością sąsiednią ma sens? Jeśli stosujemy je do klasyfikacji to jaką strategię przyjąć w odniesieniu do brakujących wartości referencyjnych (jest to wartość, która ma być predykowana przez klasyfikator) a jaką w odniesieniu do brakujących cech (wartość/wartości, które są wejściem klasyfikatora)?
+- Kiedy wypełnianie wartością sąsiednią ma sens? Jeśli stosujemy je do klasyfikacji to jaką strategię przyjąć w odniesieniu do brakujących wartości referencyjnych (jest to wartość, która ma być predykowana przez klasyfikator) a jaką w odniesieniu do brakujących cech (wartość/wartości, które są wejściem klasyfikatora)?
 
 ### Podejście 3: podstawienie wartości średniej/mediany/mody:
 
-``` Python
+```python
 from sklearn.impute import SimpleImputer
+
+
 imp_mean = SimpleImputer(missing_values=np.nan, strategy='mean') 
-df_train_numeric = df_test.select_dtypes(include=[np.number]).copy()
-df_test_numeric = df_test.select_dtypes(include=[np.number]).copy()#wybór tylko kolumn przechowujacych liczby, należy wykonać kopię obiektu
-df_train_numeric.loc[:] = imp_mean.fit_transform(df_train_numeric)#dopasowanie parametrów (średnich) i transformacja zbioru uczącego
+df_train_numeric = train_df.select_dtypes(include=[np.number]).copy()
+df_test_numeric = test_df.select_dtypes(include=[np.number]).copy()#wybór tylko kolumn przechowujacych liczby, należy wykonać kopię obiektu
 
-df_test_numeric[:]  = imp_mean.transform(df_test_numeric) #zastosowanie modelu do transformacji zbioru testowego (bez wyznaczania parametrów)
+df_train_numeric.loc[:] = imp_mean.fit_transform(df_train_numeric)  # dopasowanie parametrów (średnich) i transformacja zbioru uczącego
+df_test_numeric[:]  = imp_mean.transform(df_test_numeric)  # zastosowanie modelu do transformacji zbioru testowego (bez wyznaczania parametrów)
 ```
-- kiedy wypełnianie wartością średnią/medianą ma sens? Jeśli stosujemy je do klasyfikacji to jaką strategię przyjąć w odniesieniu do brakujących wartości referencyjnych (jest to wartość, która ma być predykowana przez klasyfikator) a jaką w odniesieniu do brakujących cech (wartość/wartości, które są wejściem klasyfikatora)?
-- oceń skuteczność klasyfikacji i porównaj ją z pozostałymi podejściami
-
+- Kiedy wypełnianie wartością średnią/medianą ma sens? Jeśli stosujemy je do klasyfikacji to jaką strategię przyjąć w odniesieniu do brakujących wartości referencyjnych (jest to wartość, która ma być predykowana przez klasyfikator) a jaką w odniesieniu do brakujących cech (wartość/wartości, które są wejściem klasyfikatora)?
+- Oceń skuteczność klasyfikacji i porównaj ją z pozostałymi podejściami
 
 ## Konwersja danych
 
-### konwersja daty
+### Konwersja dat i czasów
+
+Dane bardzo często związane są z datą/czasem wystąpienia, rejestracji itp. Przykładowo, używany zbiór danych w kolumnie `Date` przechowuje datę sprzedaży. Ponieważ zawiera ona znaki inne niż cyfry/punkt dziesiętny zaczytywana jest domyślnie z pliku CSV jako string
+
+
+w celu dalszego wygodnego wykorzystania wymaga konwersji na 
+
+
+
 - konwersja danych z datą
 - wyznaczanie interwałów
 - wyznaczanie dnia tygodnia
 
 ### zmienne nominalne
 - konwersja na zmienną nominalną
+
 #### Łączenie zmiennych nominalnych (usuwanie literówek) przy pomocy fuzzywuzzy
 Często dane wprowadzane w importowane dane zawierające teskty (słowa) traktowane jako zmienne nominalne, zawierają literówki, różnią się wielkością liter lub np. w przypadku nazw miejsc: posiadają lub nie dodatkowe człony (np. Ostrów i Ostrów Wlkp i Ostrow Wielkoposlki, jak również ostrow wlkp).
 W przypadku zmiany różnicy w wielkości liter możliwe jest konwersja wszystkich elementów w kolumnie na np. małe litery oraz usunięcie znaków spacji. Sprawdź (używając `np.unique(...)`)ile różnych unikalnych elementów w kolumnie `Suburb`? Porównaj ten wynika z wynikiem otrzymanym po znormalizowaniu wielkości liter oraz usunięciu końcowych znaków spacji
 ```python
 # zmiana na małe litery
-df['Suburb']=df['Suburb'].str.lower()
+df['Suburb'] = df['Suburb'].str.lower()
 # usunięcie końcowych spacji
 df['Suburb'] = df['Suburb'].str.strip()
 ```
