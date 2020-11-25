@@ -246,7 +246,9 @@ label_test[col] = label_encoder.transform(label_test[col])
   
 #### Zmienna nominalna → enkoder binarny
 
-Innym możliwym podejściem jest konwersja zmiennej nominalnej o `n` wartościach na `n` kolumn, z których każda określa wartością 0 lub 1 to czy dana wartość wystąpiła. Procedura ta nazwya się również *one-hot encoder*. Porównanie sposobu transformacji za pomocą `LabelEncodera` i `LabelBinarizer`/(połączenia `LabelEncoder` i `OneHotEncoder`) przedstawiono na rysunku ![rysunku](./_images/lab_04/encoders.jpg)
+Innym możliwym podejściem jest konwersja zmiennej nominalnej o `n` wartościach na `n` kolumn, z których każda określa wartością 0 lub 1 to czy dana wartość wystąpiła. Procedura ta nazwya się również *one-hot encoder*. Porównanie sposobu transformacji za pomocą `LabelEncodera` i `LabelBinarizer`/(połączenia `LabelEncoder` i `OneHotEncoder`) przedstawiono na rysunku:
+
+[encoders](./_images/lab_04/encoders.jpg)
 
 ```python
 from sklearn.preprocessing import LabelBinarizer
