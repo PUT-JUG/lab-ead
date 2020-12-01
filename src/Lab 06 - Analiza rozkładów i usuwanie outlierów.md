@@ -20,11 +20,11 @@ Po przeanalizowaniu zawartości notatnika spróbuj wprowadzić następujące zmi
 6. Wybierając cechy numeryczne spróbuj ocenić dokładność klasyfikacji przy pomocy lasu drzew.
 7. Na podstawie własnej analizy i przekształceń wybierz 4 cechy, które twoim zdaniem będą najlepiej reprezentowały cenę i stosując metodę z poprzednich zajęć (las drzew) spróbuj ocenić dokładność klasyfikacji i porównać ją z pkt 7. Pamiętaj, że dla zbioru testowego należy przeprowadzić te same procedury przetwarzania, z tym, że np. wyznaczone dla zbioru uczącego zakresy kwartyli i IRQ, wyznaczony model normalizacji, należy zastosować bezpośrednio na zbiorze testowym bez ponownego wyznaczania wartości.
 
-### Analiza wartości 0
+<!-- ### Analiza wartości 0
 Traktowanie wartości '0' jako brakującej.
    - Ile jest elementów, które mają cenę sprzedaży równą 0?
    - Przeanalizuje przykładowe wiersze i zastanów się z czego to wynika
    - Dla elementów z ceną '0' Wyświetl wykres `scatter` i przeanalizuje czy istnieje korelacja między tymi elementami 
-   - czy ich usunięcie wpłynie na poprawę jakości klasyfikacji?
+   - czy ich usunięcie wpłynie na poprawę jakości klasyfikacji? -->
 ---
 Autorzy: *Piotr Kaczmarek* i *Jakub Tomczyński*
