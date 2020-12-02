@@ -4,7 +4,7 @@
 ## Wprowdzenie
 Przedmiotowe zajęcia wykorzystują [zbiór danych](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data). Zbiór zawiera informację o cenach sprzedaży nieruchomości oraz ich cechy. Zapoznaj się z opisem poszczególnych kolumn.  W EAD chodzi o zrozumienie zależności między cechami w tym dla przedmiotowego datasetu zależności między cechami a ceną sprzedaży. 
 
-Podczas laboratorium spróbuj uruchomić i przyswoić sobie metodykę analizy części cech zaprezentowaną w [notatniku](https://www.kaggle.com/pmarcelino/data-analysis-and-feature-extraction-with-python). Klikając przycisk `Copy and Edit` możesz uruchamiać poszczególne sekcje i modyfikować ich działanie. Spróbuj zrozumieć logikę procesu eksploracji który obejmuje:
+Podczas laboratorium spróbuj uruchomić i przyswoić sobie metodykę analizy części cech zaprezentowaną w [notatniku](https://www.kaggle.com/pmarcelino/comprehensive-data-exploration-with-python). Klikając przycisk `Copy and Edit` możesz uruchamiać poszczególne sekcje i modyfikować ich działanie. Spróbuj zrozumieć logikę procesu eksploracji który obejmuje:
 1. Analizę poszczególnych zmiennych, usuwanie outlierów
 2. Analizę zależności między zmiennymi w formie wykresu punktowego, analizy współczynnika korelacji
 3. Analizę rozkładów poszczególnych zmiennych, oraz porównanie go z standardowymi rozkładami (np. normalnym) lub rozkładami innych zmiennych.
