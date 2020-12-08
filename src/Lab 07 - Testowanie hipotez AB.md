@@ -21,7 +21,7 @@ Wyświetl histogram, sprawdź czy rozkład ma charakter rozkładu normalnego i o
 Spróbuj teraz oszacować przedział ufności dla poziomu ufności 0.95. 
 Przedział ufności danego parametru *θ* mieści się w zakresie (*θ<sub>1</sub>*; *θ<sub>2</sub>*) i opisany jest równaniem:
 
-![przedzial_ufnosci](images/lab_07/przedzial_ufnosci.svg)
+![przedzial_ufnosci](_images/lab_07/przedzial_ufnosci.svg)
 
 gdzie *ɑ* jest nazywane poziomem istotności.
 
