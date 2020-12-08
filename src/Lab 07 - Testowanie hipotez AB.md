@@ -5,9 +5,9 @@
 Przedział ufności pozwala na oszacowanie możliwego zakresu zmienności statystyki z założonym prawdopodobieństwem (zazwyczaj 95%).
 
 Wykonaj następujący kod, który z populacji (`x1`) losuje 10000 próbek bootstrapowych o rozmiarze 50 elementów:
-``` python
+```python
 mean = 0
-stdec = 0
+stdev = 0
 x1 = np.random.normal(loc=mean, scale=stdev, size=50)
 n_samples = 50
 means = []
@@ -19,21 +19,21 @@ for i in range(1, n_boot):
 Wyświetl histogram, sprawdź czy rozkład ma charakter rozkładu normalnego i oraz wartość średnią (`mn_boot`) i odchylenie standardowe (`sd_boot`).
 
 Spróbuj teraz oszacować przedział ufności dla poziomu ufności 0.95. 
-Przedział ufności danego parametru $\theta$ mieści się w zakresie ($\theta_1$;$\theta_2$) i opisany jest równaniem:
+Przedział ufności danego parametru *θ* mieści się w zakresie (*θ<sub>1</sub>*; *θ<sub>2</sub>*) i opisany jest równaniem:
 
-$P(\theta_1<\theta<\theta_2) = 1-\alpha = 0.95$
+![przedzial_ufnosci](images/lab_07/przedzial_ufnosci.svg)
 
-gdzie $\alpha$ jest nazywane poziomem istotności.
+gdzie *ɑ* jest nazywane poziomem istotności.
 
 Zadanie wykonaj na 2 sposoby:
-1. Zakładając poziom ufności 0.95, wektor `means` posortuj i usuń z niego po 2.5% skrajnych elementów. Następnie Odczytaj wartości pierwszego i ostatniego elementu z  zbioru, elementy te będą kresem dolnym i górnym przedziału ufności.
-2. Zakładając że rozkład jest normalny zastosuj rozkład t-studenta i funkcję  [t.interval](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.t.html)
+1. Zakładając poziom ufności 0.95, posortuj wektor `means` i usuń z niego po 2.5% skrajnych elementów. Następnie Odczytaj wartości pierwszego i ostatniego elementu z  zbioru, elementy te będą kresem dolnym i górnym przedziału ufności.
+2. Zakładając, że rozkład jest normalny zastosuj rozkład t-Studenta i funkcję  [t.interval](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.t.html)
    
    `t.interval(`$\alpha$ `, df=n_boot, loc=mean, scale=stdev)`.
    
    Zweryfikuj jaka jest różnica między przedziałem wyznaczonym w metodą nr 1.
 
-3. Możesz również wykorzystać funkcję [`bs.bootstrap`](https://pypi.org/project/bootstrapped/), która wyznacza wartość statystyki i przedział ufności metodą próbkowania bootstrapowego. Stosując tą metodę określ jaki jest przedział ufności dla wartości średniej i odchylenia standardowego. Sprawdź, czy otrzymane przedziały zawierają teoretyczną wartość średnią, i odchylenie std, które zostały podane jako argumenty funkcji generującej przebieg.
+3. Możesz również wykorzystać funkcję [`bs.bootstrap`](https://pypi.org/project/bootstrapped/), która wyznacza wartość statystyki i przedział ufności metodą próbkowania bootstrapowego. Stosując tą metodę określ jaki jest przedział ufności dla wartości średniej i odchylenia standardowego. Sprawdź, czy otrzymane przedziały zawierają teoretyczną wartość średnią i odchylenie standardowe, które zostały podane jako argumenty funkcji generującej przebieg.
 
 Spróbuj teraz wygenerować i wyświetlić histogram dla rozkładu skośny:
 ``` python
@@ -45,9 +45,10 @@ Dla rozkładu skośnego mediana i wartość średnia nie pokrywają się. Załó
 Prawdopodobieństwo testowe określa prawdopodobieństwo wystąpienia w populacji danej wartości statystyki  lub wartości bardziej odstającej, stąd wartość jeśli p<$\alpha$ to wartość znajduje się poza przedziałem ufności.
 
 ## Testy A/B
-Celem testów jest sprawdzenie czy różnica między dwoma zbiorami A i B jest istotna. Najczęściej test ten dotyczy oceny wartości średniej i określenia czy np. czy wartość średnia zbioru B leży poza przedziałem ufności wyznaczonej dla tej statstsyki w zbiorze A.
 
-Procedura testowania A/B polega na przyjęciu następujących Hipotez:
+Celem testów jest sprawdzenie czy różnica między dwoma zbiorami A i B jest istotna. Najczęściej test ten dotyczy oceny wartości średniej i określenia czy np. czy wartość średnia zbioru B leży poza przedziałem ufności wyznaczonej dla tej statystyki w zbiorze A.
+
+Procedura testowania A/B polega na przyjęciu następujących hipotez:
 - hipotezy $H_0$ - nie ma różnicy między zbiorem A i B
 - hipotezy alternatywnej $H_1$ jest istotna różnica między zbiorem A i B
 
@@ -60,7 +61,7 @@ Założony poziom istotności ($\alpha$) wpływan na zakres przedziału ufności
 Żeby dokonać weryfikacji dwukierunkowej, użyj T-Testu (dla zmiennych o rozkładzie zbliżonym do normalnego) lub testu permutacyjnego (dla zmiennych o dowolnym rozkładzie). Testy te pozwalają wyznaczyć wartość prawdopodobieństwa testowego:
 
 1. T-Test:
-``` python
+```python
 from scipy import stats
 n_samples = 50
 rvs1 = stats.norm.rvs(loc=0,scale=1,size=n_samples0)
@@ -68,7 +69,7 @@ rvs2 = stats.norm.rvs(loc=0.2,scale=0.5,size=n_samples)
 (stats, p_value) = stats.ttest_ind(rvs1, rvs2, equal_var = False)
 ```
 2. Test permutacyjny
-``` python
+```python
 from mlxtend.evaluate import permutation_test
 
 p_value = permutation_test(rvs1, rvs2,
@@ -101,7 +102,7 @@ alpha =0.05
 
  # Zadanie
 1. Podczas testów klinicznych szczepionki na COVID19 firma [Pfizer](https://www.pfizer.com/news/press-release/press-release-detail/pfizer-and-biontech-conclude-phase-3-study-covid-19-vaccine) wskazała, że spośród przetestowanej grupy, której podano szczepionkę 9  na 21500 zakaziło się wirusem, natomiast firma [Moderna](https://www.bbc.com/news/health-54902908) wskazała, że jej szczepionka jest skuteczniejsza ponieważ na 15000 badanych jedynie 5 osób zostało zakażonych. Spróbuj odpowiedzieć na pytania:
-   - jaka jest średnia skuteczność, odchylenie standardowe rozkłądu obu szczepionek i oszacuj (metodą próbkowania bootstrapowego) jaki jest przedział ufności (stwórz wektor binarny zawierający tyle elementów ile osób brało udział w badaniach w którym 0 odpowiada osobie dla której szczepionka nie zadziałała)
+   - Jaka jest średnia skuteczność, odchylenie standardowe rozkładu obu szczepionek i oszacuj (metodą próbkowania bootstrapowego) jaki jest przedział ufności (stwórz wektor binarny zawierający tyle elementów ile osób brało udział w badaniach w którym 0 odpowiada osobie, dla której szczepionka nie zadziałała)
    - Zweryfikuj czy prawdą jest, że jedna szczepionka jest skuteczniejsza od drugiej?
    - Wyznacz aktualną moc testu
    - Oblicz jaka powinna być populacja, przy założeniu wielkości efektu oszacowanego na posiadanej próbie, która pozwoli na stwierdzenie istotnej różnicy między szczepionkami z prawdopodobieństwem 60% 
@@ -110,7 +111,6 @@ alpha =0.05
 
 
 <!-- ## Testowanie hipotez dla rozkładów wielomianowych (multinomiar distribution) -->
-
 
 
 ---
