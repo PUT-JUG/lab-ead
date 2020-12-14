@@ -32,11 +32,11 @@ Zadanie wykonaj na 2 sposoby:
 ```python
 from scipy import stats
 
-
-t_student_interval = stats.t.interval(1 - alpha, df=n_samples - 1, loc=np.mean(x1), scale=np.std(x1) / np.sqrt(len(x1)))  # uwaga! pierwszy parametr oznacza poziom ufności 
+SE = np.std(x1) / np.sqrt(len(x1)) #błąd standardowy dla rozkładu normlanego
+t_student_interval = stats.t.interval(1 - alpha, df=n_samples - 1, loc=np.mean(x1), scale=SE)  # uwaga! pierwszy parametr oznacza poziom ufności 
 ```
    
-Zweryfikuj jaka jest różnica między przedziałem wyznaczonym metodą nr 1.
+Zweryfikuj jaka jest różnica między przedziałem wyznaczonym metodą nr 1 oraz jaka jest różnica między błędem standardowym (`SE`) a wariancją średniej wyznaczonej metodą bootstrapu (`st_boot`).
 
 3. Możesz również wykorzystać funkcję [`bs.bootstrap`](https://pypi.org/project/bootstrapped/), która wyznacza wartość statystyki i przedział ufności metodą próbkowania bootstrapowego. Stosując tą metodę określ jaki jest przedział ufności dla wartości średniej i odchylenia standardowego. Sprawdź, czy otrzymane przedziały zawierają teoretyczną wartość średnią i odchylenie standardowe, które zostały podane jako argumenty funkcji generującej przebieg:
 
@@ -99,13 +99,13 @@ p_value = permutation_test(rvs1, rvs2,
                            num_rounds=10000,
                            seed=0)
 ```
- W testach 1 i 2 otrzymaną wartość prawdopodobieństwa testowego porównaj z założony poziomem istotności, jeśli `p_value` < *ɑ* hipotezę *H_<sub>0</sub>* można odrzucić i przyjąć hipotezę alternatywną.
+ W testach 1 i 2 otrzymaną wartość prawdopodobieństwa testowego porównaj z założony poziomem istotności, jeśli `p_value` < *ɑ* hipotezę *H<sub>0</sub>* można odrzucić i przyjąć hipotezę alternatywną.
 
  ## Moc testu 
  
  Spróbuj powtórzyć testy z poprzedniego punktu wielokrotnie (np. 1000 razy) i określ jakie jest prawdopodobieństwo tego, że wynik testu będzie poniżej założonego poziomu istotności?
 
- Wartość którą otrzymasz jest nazywana mocą testu i określa prawdopodobieństwo nie popełnienia błędu II rodzaju (czyli odrzucenia hipotezy *H_<sub>1</sub>* mimo że była prawdziwa).
+ Wartość którą otrzymasz jest nazywana mocą testu i określa prawdopodobieństwo nie popełnienia błędu II rodzaju (czyli odrzucenia hipotezy *H<sub>1</sub>* mimo że była prawdziwa).
 
  Moc testu możemy również oszacować nie koniecznie tworząc nowe próbki, ale tworząc próbki bootstrapowe z aktualnie posiadanego zbioru.
 
