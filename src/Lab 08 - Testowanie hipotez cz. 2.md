@@ -33,10 +33,10 @@ Test chi kwadrat można również wykorzystać do badania niezależności zmienn
 
 |                    | włosy brązowe | włosy czarne | włosy jasne | włosy rude | Suma |
 |--------------------|---------------|--------------|-------------|------------|------|
-| oczy brązowe       | 438           | 228          | 115         | 16         | 857  |
+| oczy brązowe       | 438           | 228          | 115         | 16         | 797  |
 | oczy szare/zielone | 1387          | 746          | 946         | 53         | 3132 |
 | oczy niebieskie    | 807           | 189          | 1768        | 47         | 2811 |
-| Suma               | 2632          | 1223         | 2829        | 116        | 6800 |
+| Suma               | 2632          | 1163         | 2829        | 116        | 6740 |
 
 ```python
 data = [[438, 228, 115, 16], [1387, 746, 946, 53], [2632, 1223, 2829, 116]]
@@ -54,24 +54,24 @@ Możesz to zrealizować również używając funkcji `chi_contingency`, jednak t
 
 ## Test Anova 1-parametryczny
 
-Test Anova umożliwia sprawdzenie czy istnieje istotna różnica między 2 lub więcej rozkładami statystyki, gdzie zakłada się, że rozkłady są niezależne, normalne i mają zbliżona wariancję. W testach A/B możliwe było porównanie wyłącznie 2 niezależnych rozkładów.
+Test Anova umożliwia sprawdzenie czy istnieje istotna różnica między 2 lub więcej rozkładami statystyki, gdzie zakłada się, że rozkłady są niezależne, normalne i mają zbliżoną wariancję. W testach A/B możliwe było porównanie wyłącznie 2 niezależnych rozkładów.
 
 Załóżmy, że mamy dane o dziennym spożyciu wapnia (w mg/dzień) u grupy kontrolnej oraz u osób wykazujących niską gęstość kości (osteopenia) i osób cierpiących na osteoporozę. Chcemy sprawdzić czy istnieje istotna statystycznie różnica między suplementacją wapnia u osób z normalną gęstością kości, grupą o cechach osteopenii i osób cierpiących na osteoporozę. Zakładamy, że dane zostały pozyskane z danych szpitala dla losowych osób.
 
 | Normalna gęstość | Osteopenia | Osteoporoza |
 |:----------------:|:----------:|:-----------:|
-|       1200       |    1000    |     890     |
+|       1200       |    100    |     890     |
 |       1000       |    1100    |     650     |
-|        980       |     700    |     1100    |
+|        980       |     700    |     110    |
 |        900       |     800    |     900     |
 |        750       |     500    |     400     |
 |        800       |     700    |     350     |
 |        850       |     750    |     450     |
-|        500       |     850    |     550     |
+|        500       |     850    |     500     |
 
 ```python
-data = [[1200, 1000, 890], [1000, 1100, 650], [980, 700, 1100], [900, 800, 900],
-        [750, 500, 400], [800, 700, 350], [850, 750, 450], [500, 850, 550]]
+data = [[1200, 100, 890], [1000, 1100, 650], [980, 700, 110], [900, 800, 900],
+        [750, 500, 400], [800, 700, 350], [850, 750, 450], [500, 850, 500]]
 ```
 
 Procedura Anova:
@@ -93,6 +93,7 @@ from statsmodels.stats.multicomp import pairwise_tukeyhsd
 print(pairwise_tukeyhsd(np.concatenate([data1, data2, data3]), np.concatenate([['data1']*len(data1), ['data2']*len(data2), ['data3']*len(data3)])))
 ```
 4. Zinterpretuj wyniki, i wskaż między którymi z par różnica jest istotna. 
+
 5. Określ moc testu dla par, dla których zaobserwowano istotną różnicę. 
    
 # Zadanie
@@ -103,7 +104,7 @@ print(pairwise_tukeyhsd(np.concatenate([data1, data2, data3]), np.concatenate([[
 df['frekwencja'] = df['given']/np.maximum(1, df['nominal'])
 df['glosow_za'] = df['yes']/np.maximum(1, df['given'])
 ```
-3. Stosując analizę ANOVA wskaż regiony dla których wynik wyborczy nie różni się istotnie od wyniku uzyskanego w Moskwie. Nazwy pisane cyrylicą możesz przekodować stosując moduł [transliterate](https://pypi.org/project/transliterate/https://pypi.org/project/transliterate/)
+3. Stosując analizę ANOVA wskaż regiony dla których wynik wyborczy nie różni się istotnie od wyniku uzyskanego w Moskwie. Nazwy pisane cyrylicą możesz przekodować stosując moduł [transliterate](https://pypi.org/project/transliterate/)
    
 4. Przeanalizuj wyniki częstość głosów za, analizując częstotliwość występowania cyfr na drugim miejscu po przecinku. O ile wartość pierwszego miejsca zależy od preferencji wyborczych, można spodziewać się że prawdopodobieństwo występowania cyfr na drugim miejscu będzie równomierne. Zweryfikuj hipotezę, że obserwowana częstość występowania cyfr jest zgodna z rozkładem równomiernym.
 
