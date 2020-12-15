@@ -12,19 +12,18 @@ Dla zmiennej zliczanej (gdzie określa się liczbę wystąpień poszczególnych 
 
 ![chi_squared](_images/lab_08/chi_squared.svg)
 
-Gdzie *O<sub>i</sub>* jest zaobserwowaną częstością/liczbą wystąpień natomiast *E<sub>i</sub>* jest oczekiwaną częstością/liczbą wystąpień pochodzącą z rozkładu teoretycznego lub z innego rozkładu empirycznego względem którego chcemy przeprowadzić test. Graniczną wartość statystyki dla danego poziomu ufności (*1-ɑ*) możemy odczytać z [tablic](_images/lab_08/chi-square_distribution.jpg).
+Gdzie *O<sub>i</sub>* jest zaobserwowaną częstością/liczbą wystąpień natomiast *E<sub>i</sub>* jest oczekiwaną częstością/liczbą wystąpień pochodzącą z rozkładu teoretycznego lub z innego rozkładu empirycznego względem którego chcemy przeprowadzić test. Graniczną wartość statystyki dla danego poziomu ufności (*ɑ*) możemy odczytać z [tablic](_images/lab_08/chi-square_distribution.jpg).
 
 Załóżmy, że badacz na grupie N=60 sprawdzał 3 napoje (A, B, C) napój A smakował 20 osobom, napój B 25 osobom a napój C 15 osobom. Badacz założył, że jeśli napoje nie różniły się preferencjami to powinien uzyskać podobne wyniki we wszystkich grupach (po 20 osób). 
 Statystykę rozkładu chi kwadrat (`chi2`), oraz prawdopodobieństwo testowe (`p`) danej liczby obserwacji możemy wyznaczyć również używając funkcji:
 
 ```python
-from scipy.stats import chi2_contingency
+from scipy.stats import chisquare
 
 
-obs = [20, 25, 15]  # wartość obserwowana
-exp = [30, 30, 30]  # wartość oczekiwana
-table = np.array([obs, exp])
-chi2, p, df, _ = chi2_contingency(table)
+obs = np.array([20, 25, 15])  # wartość obserwowana
+exp = np.array([1/3, 1/3, 1/3]) * np.sum(obs)  # oczekiwana liczba wystąpień (suma musi być taka jak dla obs)
+chi2, p = chisquare(obs, exp)
 ```
 
 Spróbuj wyznaczyć wartość rozkładu chi kwadrat ręcznie (korzystając z wzoru), a następnie zweryfikować z wynikiem funkcji oraz określić graniczną wartość statystyki dla poziomu istotności *ɑ*=0.05, Jeśli *p*<*ɑ*, jest podstawa do odrzucenia hipotezy *H<sub>0</sub>* o braku istotnej różnicy między preferencjami.
@@ -39,7 +38,7 @@ Test chi kwadrat można również wykorzystać do badania niezależności zmienn
 | Suma               | 2632          | 1163         | 2829        | 116        | 6740 |
 
 ```python
-data = [[438, 228, 115, 16], [1387, 746, 946, 53], [2632, 1223, 2829, 116]]
+eyes_vs_hair = [[438, 228, 115, 16], [1387, 746, 946, 53], [2632, 1223, 2829, 116]]
 ```
 
 Jeśli kolor oczu jest niezależny od koloru włosów, to oczekiwana liczba wystąpień `Eij` (dla i-tego koloru włosów i j-tego koloru oczu jest opisana wyrażeniem:
@@ -50,7 +49,7 @@ Jeśli kolor oczu jest niezależny od koloru włosów, to oczekiwana liczba wyst
 
 gdzie *S<sub>i</sub>*, *S<sub>j</sub>* są sumami i-tej kolumny i j-tego wiersza, a *S<sub>total</sub>* liczbą wszystkich elementów.
 Wyznacz wszystkie wartości oczekiwanej liczby wystąpień dla założenia o niezależności obu zmiennych, a następnie oblicz test chi kwadrat z tabeli, liczba stopni swobody jest iloczynem stopni swobody dla każdej zmiennej (w kolumnach i w wierszach) i wynosi df = 6 a nie 11.
-Możesz to zrealizować również używając funkcji `chi_contingency`, jednak tabela będzie zawierać 3 wiersze odpowiadające kolorom oczu. Sprawdź ile wynosi prawdopodobieństwo testowe oraz liczba stopni swobody?
+Możesz to zrealizować używając funkcji `chi_contingency`, gdzie tabela będzie zawierać 3 wiersze odpowiadające kolorom oczu. Sprawdź ile wynosi prawdopodobieństwo testowe oraz liczba stopni swobody?
 
 ## Test Anova 1-parametryczny
 
