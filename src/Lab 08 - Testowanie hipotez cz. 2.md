@@ -6,25 +6,29 @@ Test używany do weryfikacji hipotez dla zmiennych mających rozkład [chi-kwadr
 
 W teście tym oraz rozkładzie istotną rolę odgrywa pojęcie stopni swobody `df`. Dla zmiennych nominalnych liczba stopni swobody wynosi `M-1` gdzie `M` jest liczbą niezależnych zmiennych (np. dla rzutów monetą `df=1`, dla rzutów kostką `df=5`). Wynika to z faktu, że dla losowania M zmiennych, jeśli wiadomo, że nie wylosowano `M-1` możliwych wartości to wartość wylosowana jest znana (zależna).
 
-Dla zmiennej zliczanej (gdzie określa się liczbę wystąpień poszczególnych wartości zmiennej nominalnej). Statystyka testowa ma postać:
+Dla zmiennej zliczanej (gdzie określa się liczbę wystąpień poszczególnych wartości zmiennej nominalnej) statystyka testowa ma postać:
 
-$\chi^2 = \sum^M_{i=1}\left(\frac{(O_i-E_i)^2}{E_i}\right)^2$
+![chi_squared](_images/lab_08/chi_squared.svg)
 
-Gdzie $O_i$ jest zaobserwowaną częstością/liczbą wystąpień natomiast $E_i$ jest oczekiwaną częstością/liczbą  wystąpień pochodzącą z rozkładu teoretycznego lub z innego rozkładu empirycznego względem któ©eco chcemy przeprowadzić test. Graniczną wartość statystyki dla danego poziomu ufności ($1-\alpha$) możemy odczytać z [tablic](https://i.stack.imgur.com/PbEqv.jpg).
+Gdzie *O<sup>i</sup>* jest zaobserwowaną częstością/liczbą wystąpień natomiast *E<sup>i</sup>* jest oczekiwaną częstością/liczbą wystąpień pochodzącą z rozkładu teoretycznego lub z innego rozkładu empirycznego względem którego chcemy przeprowadzić test. Graniczną wartość statystyki dla danego poziomu ufności (*1-ɑ*) możemy odczytać z [tablic](https://i.stack.imgur.com/PbEqv.jpg).
 
-Załóżmy, że badacz na grupie N=60 sprawdzał 3 napoje (A,B,C) napój A smakował 20 osobom, napój B 25 osobom a napój C 15 osobom. Badacz założył, że jeśli napoje nie różniły się preferencjami to powinien uzyskać podobne wyniki we wszystkich grupach (po 20 osób). 
-Statystyke rozkładu chi kwadrat (`chi2`), oraz prawdopodobiestwo testowe (`p`) danej liczby obserwacji możemy wyznaczyć również używając funkcji:
-``` python
+Załóżmy, że badacz na grupie N=60 sprawdzał 3 napoje (A, B, C) napój A smakował 20 osobom, napój B 25 osobom a napój C 15 osobom. Badacz założył, że jeśli napoje nie różniły się preferencjami to powinien uzyskać podobne wyniki we wszystkich grupach (po 20 osób). 
+Statystykę rozkładu chi kwadrat (`chi2`), oraz prawdopodobieństwo testowe (`p`) danej liczby obserwacji możemy wyznaczyć również używając funkcji:
+
+```python
 from scipy.stats import chi2_contingency
-obs = [20, 25, 15]#wartość obserwowana
-exp = [30, 30, 30]# wartość oczekiwana
+
+
+obs = [20, 25, 15]  # wartość obserwowana
+exp = [30, 30, 30]  # wartość oczekiwana
 table = np.array([obs, exp])
-chi2,p,df,_ = chi2_contingency(table)
+chi2, p, df, _ = chi2_contingency(table)
 ```
 
-Spróbuj wyznaczyć wartość rozkłądu chi kwadrat ręcznie a następnie zweryfikować z wynikiem funkcji oraz określić graniczną wartość statystyki dla poziomu istotności $\alpha=0.05$, Jeśli $p<\alpha$ jest podstawa do odrzucenia hipotezy $H_0$ o braku istotnej różnicy między preferencjami.
+Spróbuj wyznaczyć wartość rozkładu chi kwadrat ręcznie (korzystając z wzoru), a następnie zweryfikować z wynikiem funkcji oraz określić graniczną wartość statystyki dla poziomu istotności *ɑ*=0.05, Jeśli *p*<*ɑ*, jest podstawa do odrzucenia hipotezy *H<sup>0</sup>* o braku istotnej różnicy między preferencjami.
 
 Test chi kwadrat można również wykorzystać do badania niezależności zmiennych. Załóżmy, że mamy tablicę opisującą relację między kolorem włosów a kolorem oczu: 
+
 |                    | włosy brązowe | włosy czarne | włosy jasne | włosy rude | Suma |
 |--------------------|---------------|--------------|-------------|------------|------|
 | oczy brązowe       | 438           | 228          | 115         | 16         | 857  |
@@ -32,17 +36,17 @@ Test chi kwadrat można również wykorzystać do badania niezależności zmienn
 | oczy niebieskie    | 807           | 189          | 1768        | 47         | 2811 |
 | Suma               | 2632          | 1223         | 2829        | 116        | 6800 |
 
-Jeśli  czy kolor oczu jest niezależny od koloru włosów  to oczekiwana liczba wystąpień `Eij` (dla i-tego koloru włosów i j-tego koloru oczy jest opisana wyrażeniem:
+Jeśli kolor oczu jest niezależny od koloru włosów, to oczekiwana liczba wystąpień `Eij` (dla i-tego koloru włosów i j-tego koloru oczu jest opisana wyrażeniem:
 
-$E_{ij} = \frac{S_i*S_j}{S_{total}}$
+![chi_squared](_images/lab_08/eij.svg)
 
-
-gdzie $S_i, S_j$ są sumami i-tej kolumny i j-tego wiersza, a $S_{total}$ liczbą wszystkich elementów.
+gdzie *S<sup>i</sup>*, *S<sup>j</sup>* są sumami i-tej kolumny i j-tego wiersza, a *S<sup>total</sup>* liczbą wszystkich elementów.
 Wyznacz wszystkie wartości oczekiwanej liczby wystąpień dla założenia o niezależności obu zmiennych, a następnie oblicz test chi kwadrat z tabeli, liczba stopni swobody jest iloczynem stopni swobody dla każdej zmiennej (w kolumnach i w wierszach) i wynosi df = 6 a nie 11.
 Możesz to zrealizować również używając funkcji `chi_contingency`, jednak tabela będzie zawierać 3 wiersze odpowiadające kolorom oczu. Sprawdź ile wynosi prawdopodobieństwo testowe oraz liczba stopni swobody?
 
 ## Test Anova 1-parametryczny
-Test Anova umożliwia spradzenie czy istnieje istotna różnica między 2 lub więcej rozkładami statystyki, gdzie zakłada się że rozkłady są niezależne, normalne i mają zbliżona wariancję. testach A/B możliwe było porównanie wyłącznie 2 niezależnych rozkładów.
+
+Test Anova umożliwia spradzenie czy istnieje istotna różnica między 2 lub więcej rozkładami statystyki, gdzie zakłada się, że rozkłady są niezależne, normalne i mają zbliżona wariancję. W testach A/B możliwe było porównanie wyłącznie 2 niezależnych rozkładów.
 
 Załóżmy, że mamy dane o dziennym spożyciu wapnia (w mg/dzień) u grupy kontrolnej oraz u osób wykazujących niską gęstość kości (osteopenia) i osób cierpiących na osteoporozę. Chcemy sprawdzić czy istnieje istotna statystycznie różnica  miedzy suplementacją wapnia  a osobami z normalną gęstością kości i grupą o cechach osteopeni i osób cierpiących na osteoporozę. Zakłądamy że dane zostały pozyskane z danych szpitala dla losowych osób.
 | Normalna gęstość | Osteopenia | Osteoporoza |
