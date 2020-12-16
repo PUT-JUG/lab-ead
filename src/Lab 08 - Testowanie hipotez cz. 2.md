@@ -38,7 +38,7 @@ Test chi kwadrat można również wykorzystać do badania niezależności zmienn
 | Suma               | 2632          | 1163         | 2829        | 116        | 6740 |
 
 ```python
-eyes_vs_hair = [[438, 228, 115, 16], [1387, 746, 946, 53], [2632, 1223, 2829, 116]]
+eyes_vs_hair = [[438, 228, 115, 16], [1387, 746, 946, 53], [807, 189, 1768, 47]]
 ```
 
 Jeśli kolor oczu jest niezależny od koloru włosów, to oczekiwana liczba wystąpień `Eij` (dla i-tego koloru włosów i j-tego koloru oczu jest opisana wyrażeniem:
