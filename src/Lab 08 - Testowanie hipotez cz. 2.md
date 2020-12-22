@@ -49,7 +49,7 @@ Jeśli kolor oczu jest niezależny od koloru włosów, to oczekiwana liczba wyst
 
 gdzie *S<sub>i</sub>*, *S<sub>j</sub>* są sumami i-tej kolumny i j-tego wiersza, a *S<sub>total</sub>* liczbą wszystkich elementów.
 Wyznacz wszystkie wartości oczekiwanej liczby wystąpień dla założenia o niezależności obu zmiennych, a następnie oblicz test chi kwadrat z tabeli, liczba stopni swobody jest iloczynem stopni swobody dla każdej zmiennej (w kolumnach i w wierszach) i wynosi df = 6 a nie 11.
-Możesz to zrealizować używając funkcji `chi_contingency`, gdzie tabela będzie zawierać 3 wiersze odpowiadające kolorom oczu. Sprawdź ile wynosi prawdopodobieństwo testowe oraz liczba stopni swobody?
+Możesz to zrealizować używając funkcji `chi2_contingency`, gdzie tabela będzie zawierać 3 wiersze odpowiadające kolorom oczu. Sprawdź ile wynosi prawdopodobieństwo testowe oraz liczba stopni swobody?
 
 ## Test Anova 1-parametryczny
 
