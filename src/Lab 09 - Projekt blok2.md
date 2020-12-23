@@ -31,8 +31,8 @@ Współczynnik reprodukcji dla dnia `i` wyznacz jako:
 gdzie wyrażenie uwzględnia że pierwsze objawy zakażenia występują po 5 dniach od wystąpienia kontaktu.
 
 ### Dane meteorologiczne
-Dane meteorologiczne o minimalnej i maksymalnej temperaturze w danym miesiącu (dane z 2018r) dostępne są w pliku [TerraClimate_tmax_2018.nc](../src/_resources/lab_09/TerraClimate_tmax_2018.nc)
-[TerraClimate_tmin_2018.nc](../src/_resources/lab_09/TerraClimate_tmin_2018.nc)
+Dane meteorologiczne o minimalnej i maksymalnej temperaturze w danym miesiącu (dane z 2018r) dostępne są w pliku [TerraClimate_tmax_2018.nc](./_resources/lab_09/TerraClimate_tmax_2018.nc)
+[TerraClimate_tmin_2018.nc](./_resources/lab_09/TerraClimate_tmin_2018.nc)
 
 Przykład importu pliku wygląda następująco:
 ``` python
