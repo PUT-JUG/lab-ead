@@ -2,11 +2,11 @@
 
 ## Dataset
 
-Na zajęciach wykorzystywany będzie dość popularny zbiór zawierający informację o cechach morfologicznych 3 różnych gatunków irysów (setosa, versicolor, virginica), dla których mierzone były 4 cechy: szerokość i wysokość pręcików i płatków ![obraz](../src/_images/lab_10/iris.png).
+Na zajęciach wykorzystywany będzie dość popularny zbiór zawierający informację o cechach morfologicznych 3 różnych gatunków irysów (setosa, versicolor, virginica), dla których mierzone były 4 cechy: szerokość i wysokość pręcików i płatków ![iris](_images/lab_10/iris.png).
 
 Więcej na ten temat możesz znaleźć w [wiki](https://en.wikipedia.org/wiki/Iris_flower_data_set)
 
-Plik z bazą można pobrać tutaj: [iris.csv](../src/_resources/lab_10/iris.csv)
+Plik z bazą można pobrać tutaj: [iris.csv](_resources/lab_10/iris.csv)
 
 ```python
 import pandas as pd
@@ -84,7 +84,7 @@ W ludzkim układzie ruchowym występuje wiele synergii wywołanych przez uwarunk
 
 Podobne synergie można wyznaczać również w robotyce, np. w celu uproszczenia procesu sterowania układem.
 
-[![pazdzierz](../src/_images/lab_10/pazdzierz_thumb.jpg)](../src/_images/lab_10/pazdzierz.jpg)
+[![pazdzierz](_images/lab_10/pazdzierz_thumb.jpg)](_images/lab_10/pazdzierz.jpg)
 
 Podczas prac nad chwytakiem antropomorficznym zebrano zestaw danych o położeniu poszczególnych palców przy wykonywaniu chwytów różnego typu, podczas manipulacji różnymi obiektami. Chwytak posiadał pięć obserowalnych napędów, zwracających informacje w skali 0 (wyprostowany) do 255 (zgięty):
 
@@ -96,7 +96,7 @@ Podczas prac nad chwytakiem antropomorficznym zebrano zestaw danych o położeni
 
 Wektor sterujący takiego chwytaka miałby zatem 5 elementów. Wykorzystując zależności pomiędzy położeniami poszczególnych palców możemy jednak spróbować reprezentować te dane za pomocą mniejszej liczby informacji.
 
-1. Pobierz dane jako plik CSV i wczytaj do skryptu: [grasping.csv](../src/_resources/lab_10/grasping.csv)
+1. Pobierz dane jako plik CSV i wczytaj do skryptu: [grasping.csv](_resources/lab_10/grasping.csv)
 2. Przeprowadź analizę rozkładu parametrów w odniesieniu do kategorii chwytu (`Grasp_type`), gdzie 1 - chwyt precyzyjny, 2 - chwyt trójpalczasty, 3 - chwyt siłowy (na podstawie wykresów)
 3. Zastosuj analizę PCA w stosunku do pozycji poszczególnych napędów. Wykreśl wyniki dla pierwszych dwóch składowych na wykresie typu scatter, symbolami oznaczającymi przynależność do konkretnej kategorii.
 4. Sprawdź jaka jest dokładność odwzorowania sterowania dla poszczególnych chwytów, gdybyśmy ograniczyli wektor sterujący do 1, 2 lub 3 zmiennych - przelicz wartości na podstawie wybranych składowych z powrotem na pozycje w napędach i porównaj z oryginalnymi odczytami. Wyznacz jaki procent chwytów moglibyśmy reprezentować przyjmując dopuszczalny błąd pozycjonowania równy 5 (w oryginalnej skali 0-255).
