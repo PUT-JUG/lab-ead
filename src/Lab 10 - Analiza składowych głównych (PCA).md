@@ -55,7 +55,7 @@ Jaka jest różnica? Czy jest możliwe, że dla zbioru złożonego z jednej cech
 ## Analiza składowych głównych (PCA)
 
 Dokonaj przekształcenia zbioru danych metodą analizy składowych głównych. Więcej na ten temat możesz znaleźć w materiałach z wykładu.
-Wyznaczenie skłądowych głównych polega na wyznaczeniu macierzy rotacji w przestrzeni cech, która maksymalizuje wariancję wzdłuż kolejnych składowych.
+Wyznaczenie składowych głównych polega na wyznaczeniu macierzy rotacji w przestrzeni cech, która maksymalizuje wariancję wzdłuż kolejnych składowych.
 
 Transformację PCA możesz wykonać realizując następujący kod:
 
@@ -74,7 +74,7 @@ iris_pca['variety'] = iris['variety']
 ```
 
 1. Spróbuj zaobserwować co zmieniło się w macierzy korelacji oraz w wykresie par cech?
-2. Przeanalizuj zmienną `pca.components_` zawierającą macierz rotacji. Pa,miętaj że po wyznaczeniu parametrów transformacji PCA, możesz ją zrealizować mnożąc macierz cech przez macierz rotacji: `np.transpose(pca.components_@np.transpose(X))` lub wywołując metodę `pca.transform(X)`
+2. Przeanalizuj zmienną `pca.components_` zawierającą macierz rotacji. Pamiętaj, że po wyznaczeniu parametrów transformacji PCA, możesz ją zrealizować mnożąc macierz cech przez macierz rotacji: `np.transpose(pca.components_@np.transpose(X))` lub wywołując metodę `pca.transform(X)`
 3. Przeanalizuj zdolność wyjaśniającą każdej ze składowych: `pca.explained_variance_ratio_` ile procent zbioru można odtworzyć jeśli wykorzystamy tylko 2 cechy?
 4. Czy wybór cech do klasyfikacji w oparciu o zdolność wyjaśniającą w tym przypadku jest bardziej skuteczny niż wybór cech do klasyfikacji na podstawie analizy eksploracyjnej? Spróbuj uzasadnić swoją obserwację?
 
@@ -86,7 +86,7 @@ Podobne synergie można wyznaczać również w robotyce, np. w celu uproszczenia
 
 [![pazdzierz](_images/lab_10/pazdzierz_thumb.jpg)](_images/lab_10/pazdzierz.jpg)
 
-Podczas prac nad chwytakiem antropomorficznym zebrano zestaw danych o położeniu poszczególnych palców przy wykonywaniu chwytów różnego typu, podczas manipulacji różnymi obiektami. Chwytak posiadał pięć obserowalnych napędów, zwracających informacje w skali 0 (wyprostowany) do 255 (zgięty):
+Podczas prac nad chwytakiem antropomorficznym zebrano zestaw danych o położeniu poszczególnych palców przy wykonywaniu chwytów różnego typu, podczas manipulacji różnymi obiektami. Chwytak posiadał pięć obserwowalnych napędów, zwracających informacje w skali 0 (wyprostowany) do 255 (zgięty):
 
 * zginający palca wskazującego (`Index`)
 * zginający palca środkowego (`Middle`)
