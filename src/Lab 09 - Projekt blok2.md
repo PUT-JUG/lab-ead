@@ -1,4 +1,4 @@
-# Lab 04 - Projekt podsumowujący zajęć dotyczących testowania hipotez
+# Lab 09 - Projekt podsumowujący zajęć dotyczących testowania hipotez
 
 ## Cel projektu
 Celem projektu jest utrwalenie podsumowanie elementów związanych z testowaniem hipotez.
