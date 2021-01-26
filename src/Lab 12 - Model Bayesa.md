@@ -17,8 +17,9 @@ sms_data = pd.read_csv('SMSSpamCollection', header=None, sep='\t', names=['Label
 W bazie są 2 kolumny oznaczane jako `Label` i `SMS`
 
 ## Czyszczenie tekstu
-Ponieważ podejście do klasyfikacji oparte o model Bayesa polega na wyznaczeniu prawdopodobieństwa przynależności danej wiadomości do spamu, pod warunkiem, że znane są prawdopodobieństwa warunkowe poszczególnych wyrazów. W związku z tym wyrazy powinny zostać zunifikowane (zreduowane do korpusu, zamienione na małe litery), ponadto powinny zostać usunięte znaki interpunkcyjne i inne wartości, które nie są wyrazami.
-``` python
+Ponieważ podejście do klasyfikacji oparte o model Bayesa polega na wyznaczeniu prawdopodobieństwa przynależności danej wiadomości do spamu, pod warunkiem, że znane są prawdopodobieństwa warunkowe poszczególnych wyrazów. W związku z tym wyrazy powinny zostać zunifikowane (zredukowane do korpusu, zamienione na małe litery), ponadto powinny zostać usunięte znaki interpunkcyjne i inne wartości, które nie są wyrazami.
+
+```python
 def prep(string):
     
     # Remove HTML tags.
@@ -52,13 +53,15 @@ sms_data['clean_sms'] =....
 
 ## Algorytm Bayesa
 Na początku dokonajmy podziału na część która zostanie wykorzystana do stworzenia modelu (zbiór uczący) i zbiór testowy:
-``` python 
+
+```python 
 train_data = sms_data.sample(frac=0.8,random_state=1).reset_index(drop=True)
 test_data = sms_data.drop(train_data.index).reset_index(drop=True)
 train_data = train_data.reset_index(drop=True)
 ```
 
 Prawdopodobieństwo przynależności wiadomości do zbioru spamu i hamu, oraz liczbę wyrazów odpowiednio w zbiorze spamu i hamu można wyznaczyć jako:
+
 ``` python
 Pspam = train_data['Label'].value_counts()['spam'] / train_data.shape[0]
 Pham = train_data['Label'].value_counts()['ham'] / train_data.shape[0]
@@ -80,10 +83,11 @@ word_counts_per_sms = pd.DataFrame([
 train_data = pd.concat([train_data.reset_index(), word_counts_per_sms], axis=1).iloc[:,1:]
 ``` 
 
-Zakładając że train_data jest zbiorem obserwacji definiującym model Bayes prawdopodobieństwo warunkowe przynależności danego elementu do zbioru spamu opisuje funkcja:
+Zakładając że train_data jest zbiorem obserwacji definiującym model Bayesa prawdopodobieństwo warunkowe przynależności danego elementu do zbioru spamu opisuje funkcja:
 
 ![](./_images/lab_12/p_conditional.png)
-gdzie N_wi|spam oznacza liczbę wystąpień danego wyrazu we wiadomościach typu spam, N_spam  oznacza całkowitą libcze wyrazów we wiadomościach typu spam. Alpha jest współczynnikiem, który ma zanczenie gdy dany wyraz nie występuje  w modelu, wtedy, przyjmowane jest, że prawdopodobieństwo wystąpienia dla spamu i hamu są równe i wynoszą 1/N_vocabulary/
+
+gdzie N_wi|spam oznacza liczbę wystąpień danego wyrazu we wiadomościach typu spam, N_spam oznacza całkowitą liczbę wyrazów we wiadomościach typu spam. Alpha jest współczynnikiem, który ma znaczenie gdy dany wyraz nie występuje  w modelu, wtedy, przyjmowane jest, że prawdopodobieństwo wystąpienia dla spamu i hamu są równe i wynoszą 1/N_vocabulary/
 
 Implementacja funkcji może mieć formę:
 ``` python
@@ -99,11 +103,12 @@ def p_w_ham(word):
     # do zdefiniowania
 ```
 
-prawdopodobieństwo warunkowe tego że dana wiadomość jest spamem (Posterior probability) opisane jest wzortwierdzeniem Bayesa:
+prawdopodobieństwo warunkowe tego że dana wiadomość jest spamem (Posterior probability) opisane jest twierdzeniem Bayesa:
 ![](./_images/lab_12/p_spam_cond_text.png)
 
 Bazując na wzorze oraz na szkielecie napisz funkcję, która dokonuje klasyfikacji wiadomości:
-``` python
+
+```python
 def classify(message):
     p_spam_given_message = Pspam
     p_ham_given_message = Pham
@@ -118,18 +123,20 @@ def classify(message):
         return 'unknown'
 ```
 Dokonaj klasyfikacji wiadomości:
-``` python
+
+```python
 test_data['predicted'] = test_data['clean_sms'].apply(classify)
 ```
 
-Skuteczność klasyfikacji możesz sprawdzić zliczająć ilośc prawidłowych klasyfikacji.
-``` python
+Skuteczność klasyfikacji możesz sprawdzić zliczając ilośc prawidłowych klasyfikacji.
+
+```python
 correct = (test_data['predicted'] == test_data['Label']).sum() / test_data.shape[0] * 100
 ```
 
 Pytania:
 1. Jaka jest dokładność klasyfikatora
-2. Które wyrazy mają (top 10) najwyższe prawdopodobieństwo tego że wchodzą w skłąd wiadomości typu spam
+2. Które wyrazy mają (top 10) najwyższe prawdopodobieństwo tego że wchodzą w skład wiadomości typu spam
 3. Które wiadomość należące do spamu (top 3) mają najwyższe prawdopodobieństwo że są spamem?
 
 
