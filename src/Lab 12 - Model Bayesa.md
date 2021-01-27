@@ -2,7 +2,7 @@
 
 ## Dataset
 
-Dataset zawiera zestaw krótkich wiadomości tekstowych (sms), który został poetykietowany jako `spam` i `ham`. Zestaw pochodzi z [bazy UCI](https://archive.ics.uci.edu/ml/datasets/sms+spam+collection) i można go pobrać z  [SMSSpamCollection](_resources/lab_12/SMSSpamCollection)
+Dataset zawiera zestaw krótkich wiadomości tekstowych (sms), który został poetykietowany jako `spam` i `ham`. Zestaw pochodzi z [bazy UCI](https://archive.ics.uci.edu/ml/datasets/sms+spam+collection) i można go pobrać z  [SMSSpamCollection](_resources/lab_12/SMSSpamCollection.bin)
 
 ```python
 import pandas as pd
