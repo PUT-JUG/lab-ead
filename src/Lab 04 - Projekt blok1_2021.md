@@ -17,7 +17,7 @@ Na stronie Social Security Administration umieszczono dane zawierającą listę 
    - stosunek liczby narodzin dziewczynek do liczby narodzin chłopców (wykres na dole)
 W którym roku zanotowano najmniejszą, a w którym największą różnicę w liczbie urodzeń między chłopcami a dziewczynkami (pytanie dotyczy podwykresu przedstawiającego stosunek liczby urodzin)? 
 6. Wyznacz 1000 najpopularniejszych imion dla każdej płci w całym zakresie czasowym, metoda powinna polegać na wyznaczeniu 1000 najpopularniejszych imion dla każdego roku i dla każdej płci a następnie ich zsumowaniu w celu ustalenia rankingu top 1000 dla każdej płci.
-7. Wyświetl wykresy zmian dla imienia męskiego *John*  pierwszego imienia w żeńskiego:
+7. Wyświetl wykresy zmian dla imienia męskiego *John*  pierwszego imienia w żeńskiego rankingu top-1000:
     - na osi Y po lewej liczbę razy kiedy imę zostało nadane w każdym roku (zanotuj ile razy nadano to imię w 1930, 1970 i 2015r)?
     - na osi Y po prawej popularność tych imion w każdym z tych lat
 8. Wykreśl wykres z podziałem na lata i płeć zawierający informację jaki procent w danym roku stanowiły imiona należące do rankingu top1000 (wyznaczonego dla całego zbioru). Wykres ten opisuje różnorodność imion, zanotuj rok w którym zaobserwowano największą różnicę w różnorodności między imionami męskimi a żeńskimi.
@@ -25,9 +25,9 @@ W którym roku zanotowano najmniejszą, a w którym największą różnicę w li
     - dokonaj agregacji wszystkich urodzeń w pełnym zbiorze danych z podziałem na rok i płeć i ostatnią literę,
     - wyodrębnij dane dla lat 1915, 1965, 2018
     - znormalizuj dane względem całkowitej liczby urodzin w danym roku
-    - wyświetl dane popularności litery dla ~~każdej płci~~ mężczyzn w postaci wykresu słupkowego zawierającego poszczególne lata i gdzie słupki grupowane są wg litery. Zanotuj, dla której litery wystąpił największy wzrost/spadek między rokiem 1910 a 2015)
+    - wyświetl dane popularności litery dla ~~każdej płci~~ mężczyzn w postaci wykresu słupkowego zawierającego poszczególne lata i gdzie słupki grupowane są wg litery. Zanotuj, dla której litery wystąpił największy wzrost/spadek między rokiem 1915 a 2018)
     - Dla 3 liter dla których zaobserwowano największą zmianę wyświetl przebieg trendu popularności w ~~czasie~~ maksymalnym przedziale czasu
-10.  Znajdź imiona, które nadawane były zarówno dziewczynkom jak i chłopcom (zanotuj te które w całym horyzoncie czasu mają zbliżoną liczebność (stosunek nadanych imion meskich i żeńskich). Wyznacz imię, dla którego zaobserwowano "nieznaczną przewagęimion męskich)
+10.  Znajdź imiona, które nadawane były zarówno dziewczynkom jak i chłopcom (zanotuj te które w całym horyzoncie czasu mają zbliżoną liczebność (stosunek nadanych imion meskich i żeńskich). Wyznacz imię, dla którego zaobserwowano "nieznaczną przewagę imion męskich)
 <!-- 11. Spróbuj znaleźć najpopularniejsze imiona, które przez pewien czas były imionami żeńskimi/męskimi a następnie stały się imionami męskimi/żeńskimi.
     - możesz spróbować wyliczyć dla każdego imienia stosunek w którym nadawane było chłopcom i dziewczynkom
     - następnie oblicz zagregowaną wartość tego współczynnika w latach 1880-1920 oraz w okresie 2000-2020 i na tej podstawie wybrać imiona dla których zaobserwowana zmiana jest największa (zanotuj dwa najpopularniejsze imiona)
@@ -41,7 +41,7 @@ W którym roku zanotowano najmniejszą, a w którym największą różnicę w li
 
 12.  Wczytaj dane z bazy opisującej śmiertelność w okresie od 1959-2018r w poszczególnych grupach wiekowych: [USA_ltper_1x1.sqlite](_resources/lab_04/USA_ltper_1x1.sqlite), opis: https://www.mortality.org/Public/ExplanatoryNotes.php. Spróbuj zagregować dane już na etapie zapytania SQL.  
 13. Wyznacz przyrost naturalny w analizowanym okresie
-14. Wyznacz i wyświetl współczynnik przeżywalności dzieci w pierwszym roku życia
+14. Wyznacz i wyświetl współczynnik przeżywalności dzieci w pierwszym roku życia w analizowanym okresie.
 <!-- 15. Na wykresie z pkt 14 wyznacz współczynnik przeżywalności dzieci w pierwszych 5 latach życia (pamiętaj, że dla roku urodzenia x należy uwzględnić śmiertelność w grupie wiekowej 0 lat w roku x, 1rok w roku x+1 itd).
     
     **Uwaga**: Współczynnik przeżywalności w roku `y` może być wyznaczony na podstawie informacji o liczbie urodzin w danym roku `lu_y` oraz umieralności dzieci (`dx(k)_y+k`) w wieku `k` lat w roku `y+k`. Może być wyrażona wzorem:
