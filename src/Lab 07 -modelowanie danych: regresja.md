@@ -40,16 +40,17 @@ Warto zwrócić uwagę na następujące metryki:
 
 Mogłoby się wydawać, że otrzymane są bardzo dobre poza wynikiem testu Omnibus, który może wskazywać na to że występują inne, nieuwzględnione w modelu zależności.
 ``` python
+import statsmodels.graphics.gofplots as sm
 fig, axs = plt.subplots(2,2, squeeze=False)
-data['Prediction'] = model.predict(data)
+data['Prediction'] = res.predict(data)
 plt.tight_layout()
 
 ax = data.plot.scatter(x='Load',y='Deflection', ax=axs[0,0])
 data.plot(x='Load',y='Prediction', ax=axs[0,0], color='red')
 # plt.subplot(2,2,2)
-residuals = model.predict(data)-data['Deflection']
-axs[0,1].scatter(data['Load'], (residuals))
-axs[0,1].set_xlabel('Load')
+residuals = res.predict(data)-data['Deflection']
+axs[0,1].scatter(data['Deflection'], (residuals))
+axs[0,1].set_xlabel('Deflection')
 axs[0,1].set_ylabel('Residual values')
 
 axs[1,0].hist(residuals)
