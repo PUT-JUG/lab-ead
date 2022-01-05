@@ -22,7 +22,7 @@ from scipy.stats import chisquare
 
 
 obs = np.array([20, 25, 15])  # wartość obserwowana
-exp = np.array([1/3, 1/3, 1/3]) * np.sum(obs)  # oczekiwana liczba wystąpień (suma musi być taka jak dla obs)
+exp = np.array([1/3, 1/3, 1/3]) * np.sum(obs)  # oczekiwana liczba wystąpień (suma musi być taka jak dla obs!!!)
 chi2, p = chisquare(obs, exp)
 ```
 
