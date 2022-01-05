@@ -5,7 +5,7 @@ Celem projektu jest utrwalenie podsumowanie elementów związanych z testowaniem
 Przedmiotem projektu będzie analiza danych dotyczących zużycia w latach 2004/5-2018 prądu w regionie miasta [Dayton](https://chmura.put.poznan.pl/s/aJ95P7abs9OANRK) oraz stanu [Virginia](https://chmura.put.poznan.pl/s/fIz5Ksytujup80b). Dodatkowo dla analizowanych obszarów będzie trzeba pozyskać dane o warunkach klimatycznych (z kilku dostępnych możliwości polecam np. [visualcrossing.com](https://www.visualcrossing.com/)])
 
 ## Informacje dotyczące opracowania i prezentacji danych
-Ostateczny raport z analizy przedstaw w formie jupyter notebook, możesz jednak dołączyć dodatkowe pliki ze skryptami, z których korzysta notatnik. Jeśli WYkorzystujesz dane (np. informację o temperaturze) to należy je również załączyć. Jeśli do pozyskania danych wykorzystałeś własne skrypty to również powinny być dołączone z krótką informacją dotyczącą ich przeznaczenia.
+Ostateczny raport z analizy przedstaw w formie jupyter notebook, możesz jednak dołączyć dodatkowe pliki ze skryptami, z których korzysta notatnik. Jeśli Wykorzystujesz dane (np. informację o temperaturze) to należy je również załączyć. Jeśli do pozyskania danych wykorzystałeś własne skrypty to również powinny być dołączone z krótką informacją dotyczącą ich przeznaczenia.
 Jeśli analizujesz istotność danego czynnika, istotność różnicy zużycia energii między dniami roboczymi a świątecznymi, czy poszukujesz anomalii w zużyciu energii pamiętaj o tym, że wnioski muszą opierać się na analizie przedziałów ufności (w przypadku czynników analizowanych przy pomocy regresji), lub wynikach testów statystycznych. Zastosowany sposób analizy powinien zostać krótko uzasadniony.
 
 ## Zadania
