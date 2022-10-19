@@ -248,6 +248,7 @@ print(req.text)
 ```
 
 **Uwaga!** w darmowej wersji konta liczba zapytań do One Call API jest ograniczona do 1000 dziennie i 60 na minutę. O ile program ogranicza się do pojedynczego zapytania, nie powinno stanowić to problemu, jednak kiedy odpytujemy np. wiele lokalizacji w pętli lub prowadzimy testy programu możemy szybko osiągnąć ten limit.
+W czasie oczekiwania na generację klucza, można skorzystać z [dumpu wyniku](_resources/lab_02/ow.dump.json) wygenerowanego przez zapytanie.
 
 Zapisz uzyskaną odpowiedź do pliku tekstowego `weather_forecast.json`.
 
