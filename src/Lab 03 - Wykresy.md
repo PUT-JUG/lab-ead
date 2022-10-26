@@ -56,7 +56,7 @@ Pamiętaj, że wszystkie wykresy rysowane są w ramach *axes*, a nie w ramach *f
 
 ## `plot`
 
-Podstawowym i najczęściej wykorzystywanym wykresem jest `plot` (<https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html>), który wyświetla wartości `y` względem wartości `x` jako linie lub jako punkty. Wielokrotne wywołanie funkcji rysującej w ramach danego *axes* powoduje wykreślenie wielu wykresów jeden na drugim:
+Podstawowym i najczęściej wykorzystywanym wykresem jest `plot` (<https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html>), który wyświetla wartości `y` względem wartości `x` jako linie lub jako punkty. Wielokrotne wywołanie funkcji rysującej w ramach danego *axes* powoduje wykreślenie wielu wykresów jeden na drugim:
 
 ```python
 x = np.linspace(0, 2, 100)
@@ -120,7 +120,7 @@ axs[1][1].plot(x, np.random.random(len(x)), '*-.')
 
 ![02_plot_fmt](_images/lab_03/02_plot_fmt.svg)
 
-Pełną listę modyfikatorów można znaleźć w dokumentacji metody `plot`: <https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html>
+Pełną listę modyfikatorów można znaleźć w dokumentacji metody `plot`: <https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html>
 
 ---
 
@@ -154,7 +154,7 @@ Do ustawienia tytułu pojedynczego wykresy (*axes*) korzystamy z metody `Axes.se
 ax.set_title('Rozkład Gaussa', fontsize=16)
 ```
 
-<https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_title.html>
+<https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_title.html>
 
 W przypadku umieszczenia wielu *axes*, w jednym *figure*, może istnieć konieczność ustawienia głównego tytułu, za pomocą metody wykonywanej dla *figure* `suptitle`, np.:
 
@@ -162,7 +162,7 @@ W przypadku umieszczenia wielu *axes*, w jednym *figure*, może istnieć koniecz
 fig.suptitle('TYTUŁ')
 ```
 
-<https://matplotlib.org/api/_as_gen/matplotlib.pyplot.suptitle.html>
+<https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.suptitle.html>
 
 uzyskując następujący efekt:
 
@@ -172,8 +172,8 @@ uzyskując następujący efekt:
 
 Opisy osi ustawiamy korzystając z:
 
-- `Axes.set_xlabel` - <https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_xlabel.html>
-- `Axes.set_ylabel` - <https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_ylabel.html>
+- `Axes.set_xlabel` - <https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlabel.html>
+- `Axes.set_ylabel` - <https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_ylabel.html>
 
 ### Legenda
 
@@ -183,7 +183,7 @@ W celu umieszczenia na danym wykresie (*axes*) legendy opisujące poszczególne 
 ax.legend(['Opis 1', 'Opis 2', 'Opis 3'])
 ```
 
-Legenda jest w pełni konfigurowalna, pełną listę opcji znajdziemy w dokumentacji: <https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.legend.html>
+Legenda jest w pełni konfigurowalna, pełną listę opcji znajdziemy w dokumentacji: <https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.legend.html>
 
 Warto zwrócić uwagę na parametr `loc` pozwalający umieścić legendę w innej lokalizacji, niż ta wygenerowana automatycznie. Parametr `loc` przyjmuje następujące wartości:
 
@@ -201,14 +201,14 @@ Warto zwrócić uwagę na parametr `loc` pozwalający umieścić legendę w inne
 
 ### Siatka
 
-Do załączenia siatki na wykresie używamy metody `Axes.grid`: <https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.grid.html>. Warto zwrócić uwagę, że w przypadku bardziej zaawansowanych scenariuszy można wykorzystać dwa poziomy gęstości siatki: *major* (główna) i *minor* (pomocnicza)
+Do załączenia siatki na wykresie używamy metody `Axes.grid`: <https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.grid.html>. Warto zwrócić uwagę, że w przypadku bardziej zaawansowanych scenariuszy można wykorzystać dwa poziomy gęstości siatki: *major* (główna) i *minor* (pomocnicza)
 
 ### Zakresy osi
 
 Istnieje możliwość ustawienia zakresu osi. Korzystamy z:
 
-- `Axes.set_xlim` - <https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_xlim.html>
-- `Axes.set_ylim` - <https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_ylim.html>
+- `Axes.set_xlim` - <https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xlim.html>
+- `Axes.set_ylim` - <https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_ylim.html>
 
 Często wykorzystujemy tę możliwość, gdy chcemy ograniczyć zakres aktualnego wyświetlania wykresu, lub kiedy automatycznie wygenerowany zakres nie jest satysfakcjonujący. Zwróć uwagę, że wykres rozkładu prawdopodobieństwa wykonany w ramach wcześniejszego zadania kończy się na około 0.58, przestawienie zakresu wyświetlania na <0, 1> zwiększy czytelność prezentowanych danych:
 
@@ -220,8 +220,8 @@ ax.set_ylim(0, 1)
 
 Zmiana etykiet osi może być konieczna gdy chcemy na przykład zwiększyć lub zmniejszyć liczebność wyświetlanych etykiet (ich gęstość), lub gdy automatycznie wygenerowane etykiety nie spełniają naszych oczekiwań. Korzystamy z:
 
-- `Axes.set_xticks` - <https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_xticks.html>
-- `Axes.set_yticks` - <https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_yticks.html>
+- `Axes.set_xticks` - <https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xticks.html>
+- `Axes.set_yticks` - <https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_yticks.html>
 
 W przypadku wykresu rozkładu prawdopodobieństwa z wcześniejszego zadania etykiety osi X zostały wygenerowane w zakresie <-4, 4>. Ponieważ dane wejściowe dla osi X są z zakresu <-5, 5) lepszą czytelność uzyskamy ustawiając taki właśnie zakres:
 
@@ -239,7 +239,7 @@ Różnicę pomiędzy etykietami głównymi, a pomocniczymi przedstawiono na poni
 
 ![06_major_minor_ticks](_images/lab_03/06_major_minor_ticks.svg)
 
-Wygląd etykiet możemy modyfikować korzystając z metody `Axes.tick_params` - <https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.tick_params.html>, możliwa jest na przykład zmiana orientacji, koloru, czy wielkości wygenerowanych etykiet.
+Wygląd etykiet możemy modyfikować korzystając z metody `Axes.tick_params` - <https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.tick_params.html>, możliwa jest na przykład zmiana orientacji, koloru, czy wielkości wygenerowanych etykiet.
 
 ---
 
@@ -253,11 +253,11 @@ Korzystając z powyższych instrukcji zmodyfikuj wykres z poprzedniego zadania, 
 
 <!-- ## `Scatter`
 
-`Scatter` (<https://matplotlib.org/api/_as_gen/matplotlib.pyplot.scatter.html>) jest rodzajem wykresu, zbliżonym do `plot`, z tą różnicą że w jego przypadku mamy możliwość zdefiniowania rozmiaru i koloru każdego z punktu. Otrzymujemy w ten sposób trzeci wymiar informacji prezentowany na 2-wymiarowym wykresie. -->
+`Scatter` (<https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html>) jest rodzajem wykresu, zbliżonym do `plot`, z tą różnicą że w jego przypadku mamy możliwość zdefiniowania rozmiaru i koloru każdego z punktu. Otrzymujemy w ten sposób trzeci wymiar informacji prezentowany na 2-wymiarowym wykresie. -->
 
 ## `bar`
 
-`bar` (<https://matplotlib.org/api/_as_gen/matplotlib.pyplot.bar.html>) pozwala utworzyć wykres słupkowy. Każdy słupek umieszczany jest w punkcie określony listą/macierzą `x`, posiada wysokość i szerokość określoną przez `height` i `width`. Np.:
+`bar` (<https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.bar.html>) pozwala utworzyć wykres słupkowy. Każdy słupek umieszczany jest w punkcie określony listą/macierzą `x`, posiada wysokość i szerokość określoną przez `height` i `width`. Np.:
 
 ```python
 fig, ax = plt.subplots()
@@ -293,7 +293,7 @@ ax.legend()
 
 ## Tekstowe etykiety osi
 
-`matplotlib` daje możliwość nadpisania liczbowych etykiet za pomocą ciągów znaków, tak aby wprowadzić bardziej czytelny opis. Szczególnie sprawdza się to w połączeniu z wykresami słupkowymi. Do utworzenia opisów tekstowych służy metoda `Axes.set_xticklabels` (<https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_xticklabels.html>) i `Axes.set_yticklabels` (<https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_yticklabels.html>).
+`matplotlib` daje możliwość nadpisania liczbowych etykiet za pomocą ciągów znaków, tak aby wprowadzić bardziej czytelny opis. Szczególnie sprawdza się to w połączeniu z wykresami słupkowymi. Do utworzenia opisów tekstowych służy metoda `Axes.set_xticklabels` (<https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_xticklabels.html>) i `Axes.set_yticklabels` (<https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_yticklabels.html>).
 
 **UWAGA:** `Axes.set_xticklabels` powinna zostać zawsze poprzedzona wywołaniem metody `Axes.set_xticks`, która ustali rozmieszczenie etykiet, w przeciwnym wypadku opisy mogą trafić w nieokreślone miejsce na osi `x`. Podobnie w przypadku `Axes.set_yticklabels`.
 
@@ -326,7 +326,7 @@ Korzystając z wczytanych danych wygeneruj poniższy wykres:
 
 ## `errorbar`
 
-`errorbar` (<https://matplotlib.org/api/_as_gen/matplotlib.pyplot.errorbar.html>) pozwala w bardzo prosty sposób wygenerować paski błędów, które często wykorzystywane są do prezentacji niepewności pomiarowej, odchylenia/wariancji przedstawionych na wykresie danych. `errorbar` jest niezależnym wykresem i można go stosować z każdym innym wykresem, w tym z `plot` i `bar`.
+`errorbar` (<https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.errorbar.html>) pozwala w bardzo prosty sposób wygenerować paski błędów, które często wykorzystywane są do prezentacji niepewności pomiarowej, odchylenia/wariancji przedstawionych na wykresie danych. `errorbar` jest niezależnym wykresem i można go stosować z każdym innym wykresem, w tym z `plot` i `bar`.
 
 Jako parametry `errorbar` przyjmuje wektory położeń `x` i `y` znaczników, oraz ich rozmiar w kierunku osi x i y: `xerr` oraz `yerr`. Pominięcie jedno z parametrów rozmiaru znacznika spowoduje wykreślenie pasków błędów tylko w jednej osi. Zależnie od formatu przekazanych parametrów `xerr` i `yerr` paski błędów będą przyjmować następujące konfiguracje:
 
@@ -365,7 +365,7 @@ Do wykresu słupkowego z poprzedniego zadania dodaj paski błędów, zarówno dl
 
 ## `hist`
 
-Funkcja `hist` (<https://matplotlib.org/api/_as_gen/matplotlib.pyplot.hist.html>) automatycznie, bez pisania dodatkowego kodu, oblicza histogram danych wejściowych i go wykreśla. Jako parametr podajemy dane wejściowe `x`, oraz określamy liczebność zakresów `bins`. `bins` może być także wektorem, jeżeli chcemy ręcznie określić zakresy. Ustawienie parametru `density` na `True` powoduje wykreślenie histogramu gęstości prawdopodobieństwa. Przykładowo:
+Funkcja `hist` (<https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.hist.html>) automatycznie, bez pisania dodatkowego kodu, oblicza histogram danych wejściowych i go wykreśla. Jako parametr podajemy dane wejściowe `x`, oraz określamy liczebność zakresów `bins`. `bins` może być także wektorem, jeżeli chcemy ręcznie określić zakresy. Ustawienie parametru `density` na `True` powoduje wykreślenie histogramu gęstości prawdopodobieństwa. Przykładowo:
 
 ```python
 x1 = np.random.randn(10000)
