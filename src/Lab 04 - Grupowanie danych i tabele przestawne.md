@@ -19,15 +19,15 @@ Dla wszystkich zmiennych w tym nominalnych działają metody count, first, last
 
 ### 🔥 Zadanie 1 🔥 
 
-Wczytaj [dane temperatur]() i wyznacz średnią temperaturę, minimalną i maksymalną temperaturę w danym regionie. Następnie wyznacz te same wskazania dla poszczególnych miesięcy. 
+Wczytaj [dane temperatur](https://chmura.put.poznan.pl/s/WuUUiklnK9CHnU0) i wyznacz średnią temperaturę, minimalną i maksymalną temperaturę w danym regionie. Następnie wyznacz te same wskazania dla poszczególnych miesięcy. 
 
 
 ### Multiindex
-Grupowanie tworzy hierarchiczną strukturę indexów (multindex). Dla tego typu danych nadal można wybierać poszczególne rekordy stosując metodę `.loc` podając wartość indeksu jako krotkę. 
+Grupowanie tworzy hierarchiczną strukturę indexów (multiindex). Dla tego typu danych nadal można wybierać poszczególne rekordy stosując metodę `.loc` podając wartość indeksu jako krotkę. 
 np. Dla DataFrame z zadania 1:
 ![temperatury_multiindex](_resources/lab_04a/group_by_temp.png)
 
-wybranie temperatury dla Afryki i Europy będzie w roku 2015 miało postać:
+wybranie temperatury dla Afryki i Europy w roku 2015 ma formę:
 ``` python
     df.loc[(['Europe', 'Africa'], 2015),:]
 ```
@@ -54,14 +54,14 @@ Powyższa funkcja robi to samo co kod w zadaniu 1, jednak dodatkowo index region
 
 ### 🔥 Zadanie 2 🔥 
 
-Dla datasetu z zadania 1 wyznacz temperatury w grudniu i czerwcu dla wszystkich regionów. Na 2 subplotach (czerwiec/grudzień) wyświetl w formie wykresu liniowego zmiany temperatur w latach obserwacji dla poszczególnych regionów, czy łątwiej ten wykres wygenerować dla tabeli przestawnej czy dla datasetu z zadania 1?
+Dla datasetu z zadania 1 wyznacz temperatury w grudniu i czerwcu dla wszystkich regionów. Na 2 subplotach (czerwiec/grudzień) wyświetl w formie wykresu liniowego zmiany temperatur w latach obserwacji dla poszczególnych regionów, czy łatwiej ten wykres wygenerować dla tabeli przestawnej czy dla datasetu z zadania 1?
 
 
-### 🔥 Zadanie 3 🔥 
-Wczytaj dataset zawierający informacje o [pasażerach Titanica](titanic_train.csv).
-1. Używając grupowania lub tabeli przestawnej spróbuj stworzyć dataset zawierający informację o liczbie osób które przeżyły katastrofę z podziałem na płeć i klasę, w której podróżowały
-2. Wyznacz udział  procentowy osób, które przeżyły z uwzględnieniem płci i klasy biletu 
-3. Wyniki z pkt 2 wyświetl w formie wykresu słupkowego, gdzie bary podgrupowane są wg płci a w obrębie grupy przedstawiony jest procentowa przeżywalność w poszczególnych klasach. Pamiętaj żeby wykres opatrzony był legendą.
+### 🔥 Zadanie 3 - końcowe🔥 
+Wczytaj dataset zawierający informacje o [pasażerach Titanica]([titanic_train.csv](https://chmura.put.poznan.pl/s/iTFzgANpoh6zkeB).
+1. Używając grupowania lub tabeli przestawnej spróbuj stworzyć dataset zawierający informację o liczbie osób które przeżyły katastrofę z podziałem na płeć i klasę w której podróżowały
+2. Wyznacz udział  procentowy osób, które przeżyły z uwzględnieniem płci i klasy biletu
+3. Wyniki z pkt 2 wyświetl w formie wykresu słupkowego, gdzie bary pogrupowane są wg płci a w obrębie grupy przedstawiony jest procentowa przeżywalność w poszczególnych klasach. Pamiętaj żeby wykres opatrzony był legendą.
 
 
 
