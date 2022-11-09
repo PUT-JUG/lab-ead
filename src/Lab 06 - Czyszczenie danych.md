@@ -133,10 +133,10 @@ year_2017 = pd.Interval(pd.Timestamp('2017-01-01 00:00:00'), pd.Timestamp('2018-
 
 #### Wyznaczanie dnia tygodnia
 
-Pewne cechy wykazują zmienność nie wprost od upływu czasu (monotonicznie), co np. od dnia tygodnia, dnia miesiąca itp. Dysponując datą/czasem w formacie datetime łatwo skonwertujemy ją na dzień tygodnia w formacie liczbowym od 0 (poniedziałek) do 6 (niedziela) przy pomocy metody `DataFrame.dt.dayofweek()`.
+Pewne cechy wykazują zmienność nie wprost od upływu czasu (monotonicznie), co np. od dnia tygodnia, dnia miesiąca itp. Dysponując datą/czasem w formacie datetime łatwo skonwertujemy ją na dzień tygodnia w formacie liczbowym od 0 (poniedziałek) do 6 (niedziela) przy pomocy pola `DataFrame.dt.dayofweek`.
 
 ```python
-df.loc[:, "Day of week"] = df.loc[:, "Datetime"].dt.dayofweek()
+df.loc[:, "Day of week"] = df.loc[:, "Datetime"].dt.dayofweek
 ```
 
 #### 🔥 Zadanie 🔥
