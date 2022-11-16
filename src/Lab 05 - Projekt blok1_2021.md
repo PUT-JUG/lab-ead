@@ -41,10 +41,10 @@ W którym roku zanotowano najmniejszą, a w którym największą różnicę w li
     </center>
     Wtedy Jeśli dane imię występuje wyłącznie dla mężczyzn wartością wyrażenia będzie 1, jeśli tylko u kobiet 0. Przyjmij, że w rankingu zmiany imienia ze względu na płeć uwzględniane są tylko elementy, których początkowa i końcowa dysproporcja była mniejsza niż 70%. Np. w latach 1880-1920 wartość współczynnika wynosiła więcej niż 0.7 lub mniej niż 0.3 a następnie zmieniła się odpowiednio na wartość mniejszą niż 0.3 lub większą niż 0.7. Listę rankingową skonstruuj wybierając imiona wg popularności w rankingu 2000 najpolularniejszych imion (dla obu płci). -->
 
-1.   Wczytaj dane z bazy opisującej dane demograficzne w okresie od 1935-2020r w poszczególnych grupach wiekowych W USA: [USA_demography](_resources/lab_04/demography_us.sqlite), opis: https://www.mortality.org/Data/ExplanatoryNotes ([wersja_pdf](_resources/lab_04/Explanatory Notes.pdf)). Spróbuj zagregować dane już na etapie zapytania SQL.  
-2.  Wyznacz i wyświetl przyrost naturalny w każdym roku analizowanego okresu
-3.  Wyznacz i wyświetl współczynnik przeżywalności dzieci w pierwszym roku życia ww każdym roku analizowanego okresu.
-4.  Dokonaj porównania różnic w przyroście naturalnym bazującym na liczbie nadawanych imion dziewczynek i chłopców w danym roku z danymi dotyczącymi liczby urodzin z bazy danych 
+11.   Wczytaj dane z bazy opisującej dane demograficzne w okresie od 1935-2020r w poszczególnych grupach wiekowych W USA: [USA_demography](_resources/lab_04/demography_us.sqlite), opis: https://www.mortality.org/Data/ExplanatoryNotes ([wersja_pdf](_resources/lab_04/Explanatory Notes.pdf)). Spróbuj zagregować dane już na etapie zapytania SQL.  
+12.  Wyznacz i wyświetl przyrost naturalny w każdym roku analizowanego okresu
+13.  Wyznacz i wyświetl współczynnik przeżywalności dzieci w pierwszym roku życia ww każdym roku analizowanego okresu.
+14.  Dokonaj porównania różnic w przyroście naturalnym bazującym na liczbie nadawanych imion dziewczynek i chłopców w danym roku z danymi dotyczącymi liczby urodzin z bazy danych 
     - przedstaw te różnice w formie graficznej (jako błąd względny w poszczególnych latach)
     - wyznacz i wyświetl informacje o roku w którym ten błąd był największy a w którym najmniejszy (węź pod uwagę wartość bezwzględną)
 <!-- 15. Na wykresie z pkt 14 wyznacz współczynnik przeżywalności dzieci w pierwszych 5 latach życia (pamiętaj, że dla roku urodzenia x należy uwzględnić śmiertelność w grupie wiekowej 0 lat w roku x, 1rok w roku x+1 itd).
