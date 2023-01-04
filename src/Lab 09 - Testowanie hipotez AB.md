@@ -91,13 +91,13 @@ rvs2 = stats.norm.rvs(loc=0.2, scale=0.5, size=n_samples)
 
 2. Test permutacyjny
 ```python
-from mlxtend.evaluate import permutation_test
+# from mlxtend.evaluate import permutation_test
+from scipy.stats import permutation_test
+def statistic(x, y, axis=0):
+    return np.mean(x, axis=axis) - np.mean(y, axis=axis)
 
-
-p_value = permutation_test(rvs1, rvs2,
-                           method='approximate',
-                           num_rounds=10000,
-                           seed=0)
+p_value = permutation_test((rvs1, rvs2), statistic,
+                           n_resamples=np.inf, alternative='two-sided')
 ```
  W testach 1 i 2 otrzymaną wartość prawdopodobieństwa testowego porównaj z założony poziomem istotności, jeśli `p_value` < *ɑ* hipotezę *H<sub>0</sub>* można odrzucić i przyjąć hipotezę alternatywną.
 
