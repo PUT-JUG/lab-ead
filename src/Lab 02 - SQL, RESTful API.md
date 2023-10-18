@@ -23,25 +23,22 @@ Do komunikacji z bazą danych wykorzystamy pakiet `sqlite3`. Pełną dokumentacj
 
 Podczas kursu skupimy się na odczycie danych z bazy, ale biblioteka pozwala też oczywiście na zapis.
 
-Pobierz przykładową bazę danych ze sklepu sprzedającego albumy muzyczne: https://github.com/lerocha/chinook-database#how-do-i-download-and-create-the-chinook-database
+Pobierz przykładową bazę danych ze sklepu sprzedającego albumy muzyczne: https://github.com/lerocha/chinook-database/tree/master/ChinookDatabase/DataSources
 
 Pobierz z sekcji *Downloads* plik `Chinook_Sqlite.sqlite`. Otwórz pobrany plik w wybranej przeglądarce SQLite i pobieżnie przejrzyj strukturę bazy danych, zawarte w niej tabele i informacje.
 
 Stwórz skrypt Pythona i zaimportuj bibliotekę `sqlite3`. Następnie wykonaj poniższy kod - przykładową operację odczytu wszystkich danych z tabeli `Album`
 
 ```python
+## Connect to database Chinook_Sqlite.sqlite with SQl Alchemy and read the table 'Album'  to  df DataFrame
 conn = sqlite3.connect("Chinook_Sqlite.sqlite")  # połączenie do bazy danych - pliku
-c = conn.cursor()
-
-for row in c.execute('SELECT * FROM Album'):
-    print(row)
-
+df = pd.read_sql_query("SELECT * FROM Album", conn)
 conn.close()
 ```
 
 #### `SELECT`, `WHERE`, `ORDER BY`
 
-Połączenie do bazy - pliku oraz pobranie *kursora* do połączenia wykonujemy raz przed operacjami na bazie danych. Właściwe operacje przekazywane są jako tekst do metody `execute` kursora, mamy w związku z tym do czynienia z "zagnieżdżeniem" języków programowania. Powyższy przykład uruchamia najczęściej wykorzystywaną w SQL komendę `SELECT`, służącą do pobierania danych i odczytuje wszystkie kolumny (`*`) z tabeli `Album`. W tym przypadku `execute` zwraca iterowalny obiekt, w którym każdy z elementów jest krotką - wierszem z tabeli.
+Powyższy przykład uruchamia najczęściej wykorzystywaną w SQL komendę `SELECT`, służącą do pobierania danych i odczytuje wszystkie kolumny (`*`) z tabeli `Album`. W tym przypadku `read_sql_query` zwraca DataFrame reprezentujący tabelę.
 
 Ponieważ zmiana układu tabeli w bazie danych spowodowałaby, że dane zostaną zwrócone w innym układzie. W związku z tym w kodzie innym niż testowy nigdy nie powinno pojawić się tego typu zapytanie. Zamiast tego możemy podać jawnie nazwy kolumn:
 
@@ -180,7 +177,7 @@ Wynik:
 
 Stwórz zapytanie SQL do bazy, dzięki któremu uzyskasz listę albumów wraz z ich wykonawcą.
 
-Przetestuj różne formy `JOIN` (`INNER` oraz `LEFT`), dla wariantu `LEFT` sprawdź wynik w sytuacjach kiedy pierwszym argumentem jest tablica z albumami oraz tablica z wykonawcami. Zatanów się z czego wynikają różnice.
+Przetestuj różne formy `JOIN` (`INNER` oraz `LEFT`), dla wariantu `LEFT` sprawdź wynik w sytuacjach kiedy pierwszym argumentem jest tablica z albumami oraz tablica z wykonawcami. Zastanów się z czego wynikają różnice.
 
 ---
 
@@ -265,8 +262,9 @@ Bardzo wygodną przeglądarką plików JSON jest Firefox - spróbuj otworzyć w 
 2. Zwróć uwagę na odczytane temperatury. Sprawdź w dokumentacji jak przełączyć jednostki na metryczne i popraw zapytanie.
 
 3. Przepisz informacje z prognozy godzinnej (pole `hourly`) odczytanego JSON-a do DataFrame. Umieść w DataFrame kolumny takie jak `temp`, `feels_like`, `humidity`, `wind_speed`. Zwróć uwagę na pola `dt` w uzyskanej odpowiedzi - są to znaczniki czasu w formacie UNIX (sekundy liczone od 00:00:00 UTC on 1 January 1970). Skonwertuj znaczniki na format `Datetime` pandasa, wykorzystując funkcję `pd.to_datetime`: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.to_datetime.html
+4. Oczytaj 
 
-4. Wykreśl prognozę pogody na wykresie liniowym korzystając z metody `pd.DataFrame.plot`
+5. Wykreśl prognozę pogody na wykresie liniowym korzystając z metody `pd.DataFrame.plot`
 
 ---
 
@@ -290,4 +288,4 @@ Dla wszystkich spotkanych Pokemonów
 3. Napisz funkcję `attack_against(attacker: str, attacked: str, database: pd.DataFrame)` zwracającą skuteczność ataku Pokemona o nazwie `attacker` na Pokemona o nazwie `attacked`. Jeśli w bazie nie będzie wystarczających informacji zwracaj wartość `None`.
 
 ---
-Autorzy: *Jakub Tomczyński*
+Autorzy: *Jakub Tomczyński, Piotr Kaczmarek*
