@@ -30,7 +30,7 @@ Pobierz z sekcji *Downloads* plik `Chinook_Sqlite.sqlite`. Otwórz pobrany plik 
 Stwórz skrypt Pythona i zaimportuj bibliotekę `sqlite3`. Następnie wykonaj poniższy kod - przykładową operację odczytu wszystkich danych z tabeli `Album`
 
 ```python
-## Connect to database Chinook_Sqlite.sqlite with SQl Alchemy and read the table 'Album'  to  df DataFrame
+
 conn = sqlite3.connect("Chinook_Sqlite.sqlite")  # połączenie do bazy danych - pliku
 df = pd.read_sql_query("SELECT * FROM Album", conn)
 conn.close()
