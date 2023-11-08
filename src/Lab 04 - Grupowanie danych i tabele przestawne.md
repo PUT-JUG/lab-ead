@@ -84,7 +84,7 @@ average_signal = np.mean(segments, axis=0)
 
 Wczytaj i wyświetl [sygnał ECG](_resources/lab_04/raw_ecg.csv) oraz chwile w których wykryto załamki R [beatTimestamps](_resources/lab_04/ecg_beats.csv). Czas wystąpienia załamka R podawany jest jako index próbki.
 
-Wiedząc, że częstotliwość próbkowania wynosi 500Hz, wyznacza wartość średnią fali ecg 550ms przed i 400ms po załamku R. Zmierz  wartość amplitudy załamka P, R, i T, oraz interwał Q-T. Sposób pomiaru przedstawiono na rysunku poniżej.
+Wiedząc, że częstotliwość próbkowania wynosi 500Hz, wyznacza wartość średnią fali ecg w przedziale (-550ms; 400ms) względem wykrytych załamków R. Dla uśrednionego przebiegu zmierz  wartość amplitudy załamka P, R, i T, oraz interwał Q-T. Sposób pomiaru przedstawiono na rysunku poniżej.
 
 <img src="_resources/lab_04/ecg.png" width="200">
 
