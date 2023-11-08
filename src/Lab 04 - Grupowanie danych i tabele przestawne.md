@@ -1,4 +1,4 @@
-# Lab 04 - Grupowanie danych i tabele przestawne
+# Lab 04 - Grupowanie danych, tabele przestawne i wektoryzacja
 
 ## Wprowadzenie
 ### Grupowanie danych `DataFrame.groupby(..)`
@@ -56,9 +56,40 @@ Powyższa funkcja robi to samo co kod w zadaniu 1, jednak dodatkowo index region
 
 Dla datasetu z zadania 1 wyznacz temperatury w grudniu i czerwcu dla wszystkich regionów. Na 2 subplotach (czerwiec/grudzień) wyświetl w formie wykresu liniowego zmiany temperatur w latach obserwacji dla poszczególnych regionów, czy łatwiej ten wykres wygenerować dla tabeli przestawnej czy dla datasetu z zadania 1?
 
+### Wektoryzacja
+Wektoryzacja to technika przetwarzania danych, która polega na zastosowaniu operacji na całych kolumnach (lub wierszach) zamiast na pojedynczych elementach. W Pandas operacje na kolumnach są wektoryzowane, co oznacza, że można je stosować do całych kolumn jednocześnie.
+Przeanalizuj poniższy kod, który wyznacza wartość średnią fragmentu sygnału triggerowanego przez zdarzenie:):
+``` python
+signal_example = np.random.rand(10000)  # Example of a signal
 
-### 🔥 Zadanie 3 - końcowe🔥 
-Wczytaj dataset zawierający informacje o [pasażerach Titanica]([titanic_train.csv](https://chmura.put.poznan.pl/s/iTFzgANpoh6zkeB).
+# Generate example event timestamps
+event_timestamps = np.sort(np.random.randint(1000, 9000, 20))  # Example event timestamps
+
+# Create a time window around each event (e.g., -200 ms to 200 ms)
+window_start = -0.2  # Start 200 ms before the event
+window_end = 0.2  # End 200 ms after the event
+
+# Create a time vector representing the time points for the analysis
+sample_rate = 1000  # Example sampling rate (1 kHz)
+time_vector = np.linspace(window_start, window_end, int((window_end - window_start) * sample_rate) + 1)
+
+# Use NumPy vectorized operations to extract segments around each event
+segments = signal_example[(event_timestamps[:, np.newaxis] + sample_rate * time_vector).astype(int)]
+
+# Compute the average signal across all segments using vectorized operations
+average_signal = np.mean(segments, axis=0)
+```
+
+### 🔥 Zadanie 3🔥
+
+Wczytaj i wyświetl [sygnał ECG](_resources/lab_04/raw_ecg.csv) oraz chwile w których wykryto załamki R [beatTimestamps](_resources/lab_04/ecg_beats.csv). Czas wystąpienia załamka R podawany jest jako index próbki.
+
+Wiedząc, że częstotliwość próbkowania wynosi 500Hz, wyznacza wartość średnią fali ecg 550ms przed i 400ms po załamku R. Zmierz  wartość amplitudy załamka P, R, i T, oraz interwał Q-T. Sposób pomiaru przedstawiono na rysunku poniżej.
+
+<img src="_resources/lab_04/ecg.png" width="200">
+
+### 🔥 Zadanie 4 - końcowe🔥 
+Wczytaj dataset zawierający informacje o [pasażerach Titanica](https://chmura.put.poznan.pl/s/iTFzgANpoh6zkeB).
 1. Używając grupowania lub tabeli przestawnej spróbuj stworzyć dataset zawierający informację o liczbie osób które przeżyły katastrofę z podziałem na płeć i klasę w której podróżowały
 2. Wyznacz udział  procentowy osób, które przeżyły z uwzględnieniem płci i klasy biletu
 3. Wyniki z pkt 2 wyświetl w formie wykresu słupkowego, gdzie bary pogrupowane są wg płci a w obrębie grupy przedstawiony jest procentowa przeżywalność w poszczególnych klasach. Pamiętaj żeby wykres opatrzony był legendą.
