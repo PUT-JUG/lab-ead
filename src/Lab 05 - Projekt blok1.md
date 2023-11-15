@@ -27,7 +27,7 @@ W którym roku zanotowano najmniejszą, a w którym największą różnicę w li
     - znormalizuj dane względem całkowitej liczby urodzin w danym roku
     - wyświetl dane popularności litery dla mężczyzn w postaci wykresu słupkowego zawierającego poszczególne lata i gdzie słupki grupowane są wg litery. Wyświetl, dla której litery wystąpił największy wzrost/spadek między rokiem 1917 a 2022)
     - Dla 3 liter dla których zaobserwowano największą zmianę wyświetl przebieg trendu popularności w maksymalnym przedziale czasu
-10.  Znajdź w rankingu top1000 imiona, które nadawane były zarówno dziewczynkom jak i chłopcom (stosunek nadanych imion męskich i żeńskich). Wyznacz 2 imiona, dla których zaobserwowano największą zmianę. Do analizy zmiany  wykorzystaj 2 przedziały: zagregowane dane do roku 1930 i od roku 2000. 
+10.  Znajdź w rankingu top1000 imiona, które nadawane były zarówno dziewczynkom jak i chłopcom (stosunek nadanych imion męskich i żeńskich). Wyznacz 2 imiona, dla których zaobserwowano największą zmianę (definiowanej jako największa różnica stosunku imion męskich do żeńskich w badanych latach). Do analizy zmiany  wykorzystaj 2 przedziały: zagregowane dane do roku 1930 i od roku 2000. 
      - wyświetl te imiona
      - wkreśl przebieg trendu dla tych imion
 <!-- 11. Spróbuj znaleźć najpopularniejsze imiona, które przez pewien czas były imionami żeńskimi/męskimi a następnie stały się imionami męskimi/żeńskimi.
