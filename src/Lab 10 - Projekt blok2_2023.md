@@ -36,7 +36,7 @@ Dane zawierają (poniżej wymieniono pliki oraz kolumny, których nazwa nie jest
 
 `state_names.csv` - lista landów i ich skrótów
 
-`weather.csv` - pogoda w poszczegónych landach i poszczególnych dniach, 
+`weather.csv` - pogoda w poszczególnych landach i poszczególnych dniach, 
 
 
 ## Informacje dotyczące opracowania i prezentacji danych

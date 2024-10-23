@@ -223,7 +223,22 @@ Stwórz na podstawie powyższego zapytania DataFrame, w którym umieścisz wszys
 
 ---
 
-### OpenWeather API
+#### 🔥 Zadanie 4 🔥 
+
+Świadczenie usług webowych wymaga oczywiście utrzymania infrastruktury serwerowej, w związku z czym wiele serwisów prowadzonych jest jako działalność komercyjna, gdzie część lub całość dostępu wymaga wykupienia dostępu lub przynajmniej utworzenia konta. Autoryzacja odbywa się często z wykorzystaniem *tokenu*, indywidualnego dla użytkownika.
+
+Jako przykładowe API wymagające autoryzacji wykorzystamy dedykowany serwis przechowujący tytuły i autorów książek.
+Opis api można zależć [tutaj](_resources/lab_03/doc.md)
+
+1. Odczytaj swój token z informacji umieszczonych na ekursach
+2. Spróbuj połączyć się z serwerem i pobrać pełną listę książek. Zapisz ją do DataFrame, ile tych książek jest. Wyświetl pierwszy i ostatni tytuł na liście posortowanej alfabetycznie.
+3. Dodaj do listy nowy tytuł ulubionej książki.
+4. Zweryfikuj czy pojawił się na liście
+
+---
+
+
+<!-- ### OpenWeather API
 
 Świadczenie usług webowych wymaga oczywiście utrzymania infrastruktury serwerowej, w związku z czym wiele serwisów prowadzonych jest jako działalność komercyjna, gdzie część lub całość dostępu wymaga wykupienia dostępu lub przynajmniej utworzenia konta. Autoryzacja odbywa się często z wykorzystaniem *tokenu*, indywidualnego dla użytkownika.
 
@@ -285,7 +300,7 @@ Dla wszystkich spotkanych Pokemonów
 
 2. Z bazy danych odczytaj informację z kolumn **against_\*** mówiącą o skuteczności ataku
 
-3. Napisz funkcję `attack_against(attacker: str, attacked: str, database: pd.DataFrame)` zwracającą skuteczność ataku Pokemona o nazwie `attacker` na Pokemona o nazwie `attacked`. Jeśli w bazie nie będzie wystarczających informacji zwracaj wartość `None`.
+3. Napisz funkcję `attack_against(attacker: str, attacked: str, database: pd.DataFrame)` zwracającą skuteczność ataku Pokemona o nazwie `attacker` na Pokemona o nazwie `attacked`. Jeśli w bazie nie będzie wystarczających informacji zwracaj wartość `None`. -->
 
 ---
-Autorzy: *Jakub Tomczyński, Piotr Kaczmarek*
+Autorzy: *Piotr Kaczmarek*
