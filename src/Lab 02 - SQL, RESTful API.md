@@ -192,8 +192,15 @@ Do obsługi zapytań HTTP w Python wykorzystamy bibliotekę `requests`.
 W ramach pierwszego przykładu sprawdźmy aktualne kursy Bitcoin korzystając z API opisanego na stronie https://www.blockchain.com/api/exchange_rates_api
 
 ```python
-req = requests.get("https://blockchain.info/ticker")  # wysłanie zapytania GET pod odpowiedni adres, zapisanie odpowiedzi
-print(req.text)  # zawartość odpowiedzi znajduje się w polu text
+response = requests.get("https://blockchain.info/ticker")  # wysłanie zapytania GET pod odpowiedni adres, zapisanie odpowiedzi
+print(response.text)  # zawartość odpowiedzi znajduje się w polu text
+```
+Możliwe jest żeby w zapytaniu zmodyfikować również nagłowek zapytania przesyłając dodatkowe informacje wymagane przez protokół:
+```python
+headers = {
+    "Pole":"wartosc"
+}
+response = requests.get(url, headers=headers)
 ```
 
 Odpowiedź zwracana jest w formacie JSON (JavaScript Object Notation). Format wywodzi się z JavaScript i bardzo często wykorzystywany w zastosowaniach webowych czy IoT, niekoniecznie w powiązaniu z JS. JSON pozwala na przesłanie danych w formie par klucz-wartość jako ciągłego tekstu, która jednocześnie jest czytelna dla człowieka i może być sparsowana przez program. W Python format ten bardzo dobrze tłumaczy się z/na natywne słowniki przez moduł `json`:
@@ -230,10 +237,11 @@ Stwórz na podstawie powyższego zapytania DataFrame, w którym umieścisz wszys
 Jako przykładowe API wymagające autoryzacji wykorzystamy dedykowany serwis przechowujący tytuły i autorów książek.
 Opis api można zależć [tutaj](_resources/lab_03/doc.md)
 
-1. Odczytaj swój token z informacji umieszczonych na ekursach
-2. Spróbuj połączyć się z serwerem i pobrać pełną listę książek. Zapisz ją do DataFrame, ile tych książek jest. Wyświetl pierwszy i ostatni tytuł na liście posortowanej alfabetycznie.
-3. Dodaj do listy nowy tytuł ulubionej książki.
+1. Odczytaj swój token z informacji umieszczonych na ekursach i przekaż go w nagłówku jako wartość pola "Authorization"
+2. Spróbuj połączyć się z serwerem i pobrać pełną listę książek (endpoint /books, metoda GET). Zapisz ją do DataFrame, ile tych książek jest. Wyświetl pierwszy i ostatni tytuł na liście posortowanej alfabetycznie.
+3. Dodaj do listy nowy tytuł ulubionej książki (endpoint /books, metoda POST).
 4. Zweryfikuj czy pojawił się na liście
+5. Możesz przejrzeć dokumentację w zakresie innych metod obsługiwanych przez server
 
 ---
 
