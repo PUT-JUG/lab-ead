@@ -8,7 +8,7 @@ http://localhost:5000
 #### Authentication
 All endpoints require a valid token to be included in the request headers.
 
-- **Header:** `Authorization: Bearer <token>`
+- **Header:** `Authorization: <token>`
 
 #### Endpoints
 
@@ -18,13 +18,13 @@ All endpoints require a valid token to be included in the request headers.
    - **Method:** `GET`
    - **Description:** Retrieves a list of all books.
    - **Headers:**
-     - `Authorization: Bearer <token>`
+     - `Authorization: <token>`
    - **Response Codes:**
      - `200 OK`: Successfully retrieved the list of books.
      - `401 Unauthorized`: Invalid or missing token.
    - **Example Call:**
      ```bash
-     curl -X GET http://localhost:5000/books -H "Authorization: Bearer <token>"
+     curl -X GET http://localhost:5000/books -H "Authorization: <token>"
      ```
 
 2. **Get a book by ID**
@@ -33,14 +33,14 @@ All endpoints require a valid token to be included in the request headers.
    - **Method:** `GET`
    - **Description:** Retrieves a book by its ID.
    - **Headers:**
-     - `Authorization: Bearer <token>`
+     - `Authorization: <token>`
    - **Response Codes:**
      - `200 OK`: Successfully retrieved the book.
      - `404 Not Found`: Book with the specified ID does not exist.
      - `401 Unauthorized`: Invalid or missing token.
    - **Example Call:**
      ```bash
-     curl -X GET http://localhost:5000/books/1 -H "Authorization: Bearer <token>"
+     curl -X GET http://localhost:5000/books/1 -H "Authorization: <token>"
      ```
 
 3. **Add a new book**
@@ -49,7 +49,7 @@ All endpoints require a valid token to be included in the request headers.
    - **Method:** `POST`
    - **Description:** Adds a new book to the collection.
    - **Headers:**
-     - `Authorization: Bearer <token>`
+     - `Authorization: <token>`
    - **Request Body:**
      ```json
      {
@@ -64,7 +64,7 @@ All endpoints require a valid token to be included in the request headers.
      - `401 Unauthorized`: Invalid or missing token.
    - **Example Call:**
      ```bash
-     curl -X POST http://localhost:5000/books -H "Authorization: Bearer <token>" -H "Content-Type: application/json" -d '{"title": "New Book Title", "author": "Author Name", "year": 2023}'
+     curl -X POST http://localhost:5000/books -H "Authorization: <token>" -H "Content-Type: application/json" -d '{"title": "New Book Title", "author": "Author Name", "year": 2023}'
      ```
 
 4. **Update a book by ID**
@@ -73,7 +73,7 @@ All endpoints require a valid token to be included in the request headers.
    - **Method:** `PUT`
    - **Description:** Updates the details of a book by its ID.
    - **Headers:**
-     - `Authorization: Bearer <token>`
+     - `Authorization: <token>`
    - **Request Body:**
      ```json
      {
@@ -89,7 +89,7 @@ All endpoints require a valid token to be included in the request headers.
      - `401 Unauthorized`: Invalid or missing token.
    - **Example Call:**
      ```bash
-     curl -X PUT http://localhost:5000/books/1 -H "Authorization: Bearer <token>" -H "Content-Type: application/json" -d '{"title": "Updated Book Title", "author": "Updated Author Name", "year": 2023}'
+     curl -X PUT http://localhost:5000/books/1 -H "Authorization: <token>" -H "Content-Type: application/json" -d '{"title": "Updated Book Title", "author": "Updated Author Name", "year": 2023}'
      ```
 
 5. **Delete a book by ID**
@@ -98,14 +98,14 @@ All endpoints require a valid token to be included in the request headers.
    - **Method:** `DELETE`
    - **Description:** Deletes a book by its ID.
    - **Headers:**
-     - `Authorization: Bearer <token>`
+     - `Authorization: <token>`
    - **Response Codes:**
      - `204 No Content`: Successfully deleted the book.
      - `404 Not Found`: Book with the specified ID does not exist.
      - `401 Unauthorized`: Invalid or missing token.
    - **Example Call:**
      ```bash
-     curl -X DELETE http://localhost:5000/books/1 -H "Authorization: Bearer <token>"
+     curl -X DELETE http://localhost:5000/books/1 -H "Authorization: <token>"
      ```
 
 ### Explanation of Returned Codes
