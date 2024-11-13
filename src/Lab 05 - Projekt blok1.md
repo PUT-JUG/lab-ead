@@ -42,7 +42,7 @@ W którym roku zanotowano najmniejszą, a w którym największą różnicę w li
     Wtedy Jeśli dane imię występuje wyłącznie dla mężczyzn wartością wyrażenia będzie 1, jeśli tylko u kobiet 0. Przyjmij, że w rankingu zmiany imienia ze względu na płeć uwzględniane są tylko elementy, których początkowa i końcowa dysproporcja była mniejsza niż 70%. Np. w latach 1880-1920 wartość współczynnika wynosiła więcej niż 0.7 lub mniej niż 0.3 a następnie zmieniła się odpowiednio na wartość mniejszą niż 0.3 lub większą niż 0.7. Listę rankingową skonstruuj wybierając imiona wg popularności w rankingu 2000 najpolularniejszych imion (dla obu płci). -->
 11. Imiona w Polsce
     Celem tej części jest zastosowanie stworzonych mechanizmów dla datasetu zawieraj
-    1.  Wczytaj z bazy [imiona_pl](https://chmura.put.poznan.pl/s/OAEeapqpDZcmRu7) zestaw danych zawierający liczbę nadawanych imion w okresie 2000-2023 w Polsce.
+    1.  Wczytaj z bazy [imiona_pl](https://chmura.put.poznan.pl/s/WIP4dBFsVTzLrKA) zestaw danych zawierający liczbę nadawanych imion w okresie 2000-2023 w Polsce.
     - zapytanie sql powinno tworzyć pojedynczą tabelę, zawierającą imię, rok, oraz liczbę nadanych imion dla dziewczynek i chłopców. W bazie są 2 oddzielne tabele dla każdej z płci.
     2. Stwórz ranking top 200 imion i porównaj czy obserwacje z pkt. 8 dotyczące trendów w nadawaniu imion w USA są również obserwowalne w Polsce. Jako daty referencyjne weź rok 2000, 2013, 2023. Stosując histogram spróbuj odpowiedzieć na pytanie co zmieniło się między rokiem 2000 a 2013 czy zmiana w trendzie wynika tylko z zmiany zwyczajów czy też innych czynników
     3. Znajdź 2 imiona, które stosunkowo czesto nadawane były dziewczynkom i chłopcom
