@@ -6,7 +6,7 @@ W celu realizacji części zadań zapoznaj się z przykładami i informacjami do
 Informacje na ten temat możesz znaleźć [tutaj](https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html)
 
 ## Opis zadania
-Na stronie Social Security Administration umieszczono dane zawierającą listę imion oraz częstotliwość ich występowania w latach 1880-2022. Pliki z danymi w formacie CSV dostępne są [tutaj](https://www.ssa.gov/oact/babynames/names.zip).
+Na stronie Social Security Administration umieszczono dane zawierającą listę imion oraz częstotliwość ich występowania w latach 1880-2023. Pliki z danymi w formacie CSV dostępne są [tutaj](https://www.ssa.gov/oact/babynames/names.zip).
 
 1. Wczytaj dane ze wszystkich plików do pojedynczej tablicy (używając Pandas).
 2. Określi ile różnych (unikalnych) imion zostało nadanych w tym czasie.
@@ -20,16 +20,16 @@ W którym roku zanotowano najmniejszą, a w którym największą różnicę w li
 7. Wyświetl na jednym wykresie zmiany dla imienia męskiego *John* i  pierwszego imienia żeńskiego rankingu top-1000 (zaopatrz wykres w odpowiednią legendę):
     - na osi Y po lewej liczbę razy kiedy imę zostało nadane w każdym roku (wyświetl ile razy nadano to imię w 1934, 1980 i 2022r)?
     - na osi Y po prawej popularność tych imion w każdym z tych lat
-8. Wykreśl wykres z podziałem na lata i płeć zawierający informację jaki procent w danym roku stanowiły imiona należące do rankingu top1000 (wyznaczonego dla całego zbioru (pkt 6)). Wykres ten opisuje różnorodność imion, wyświetl rok, w którym zaobserwowano największą różnicę w różnorodności między imionami męskimi a żeńskimi .
+8. Wykreśl wykres z podziałem na lata i płeć zawierający informację jaki procent w danym roku stanowiły imiona należące do rankingu top1000 (wyznaczonego dla całego zbioru (pkt 6)). Wykres ten powinien przedstawiać zmianę różnorodności imion w kolejnych latach z podziałem na płeć. Zaznacz na wykresie oraz wyświetl w konsoli rok, w którym zaobserwowano największą różnicę w różnorodności między imionami męskimi a żeńskimi. Odpowiedz na pytanie wyświetlając odpowiedni tekst w skrypcie: "Co zmieniło się na przestrzeni ostatnich 140 lat jeśli chodzi o różnorodność imion? czy różnorodność zależy od płci?"
 9. Zweryfikuj hipotezę czy prawdą jest, że w obserwowanym okresie rozkład ostatnich liter imion męskich uległ istotnej zmianie? W tym celu 
     - dokonaj agregacji wszystkich urodzeń w pełnym zbiorze danych z podziałem na rok i płeć i ostatnią literę,
-    - wyodrębnij dane dla lat 1917, 1967, 2022
+    - wyodrębnij dane dla lat 1910, 1970, 2023
     - znormalizuj dane względem całkowitej liczby urodzin w danym roku
-    - wyświetl dane popularności litery dla mężczyzn w postaci wykresu słupkowego zawierającego poszczególne lata i gdzie słupki grupowane są wg litery. Wyświetl, dla której litery wystąpił największy wzrost/spadek między rokiem 1917 a 2022)
-    - Dla 3 liter dla których zaobserwowano największą zmianę wyświetl przebieg trendu popularności w maksymalnym przedziale czasu
-10.  Znajdź w rankingu top1000 imiona, które nadawane były zarówno dziewczynkom jak i chłopcom (stosunek nadanych imion męskich i żeńskich). Wyznacz 2 imiona, dla których zaobserwowano największą zmianę (definiowanej jako największa różnica stosunku imion męskich do żeńskich w badanych latach). Do analizy zmiany  wykorzystaj 2 przedziały: zagregowane dane do roku 1930 i od roku 2000. 
+    - wyświetl dane popularności litery dla mężczyzn w postaci wykresu słupkowego zawierającego poszczególne lata i gdzie słupki grupowane są wg litery. Wyświetl, dla której litery wystąpił największy wzrost/spadek między rokiem 1910 a 2023)
+    - Dla 3 liter dla których zaobserwowano największą zmianę wyświetl przebieg trendu popularności w całym okresie  czasu
+10.  Znajdź w rankingu top1000 imiona, które nadawane były zarówno dziewczynkom jak i chłopcom (stosunek nadanych imion męskich i żeńskich). Wyznacz 2 imiona (jedno które z kiedyś było typowo męskie a aktualnie jest imieniem żeńskim i drugie które kiedyś było typowo żeńskim a aktualnie jest typowo męskim). Typowo męskie imię to takie dla którego iloraz imion nadawanych chłopcom do całkowitej liczby imion jest bliski 1 (`p_m`), analogicznie iloraz można zdefiniować dla dziewczynek (`p_k`). Największa zmiana między rokiem X a rokiem Y może być zdefiniowana jako średnia z sumy `(p_m(X)+p_k(Y))/2`. Do analizy zmiany konotacji imienia wykorzystaj 2 przedziały: zagregowane dane do roku 1920 i od roku 2000. 
      - wyświetl te imiona
-     - wkreśl przebieg trendu dla tych imion
+     - wkreśl przebieg trendu dla tych imion obrazujący zmianę konotacji danego imienia na przestrzeni lat
 <!-- 11. Spróbuj znaleźć najpopularniejsze imiona, które przez pewien czas były imionami żeńskimi/męskimi a następnie stały się imionami męskimi/żeńskimi.
     - możesz spróbować wyliczyć dla każdego imienia stosunek w którym nadawane było chłopcom i dziewczynkom
     - następnie oblicz zagregowaną wartość tego współczynnika w latach 1880-1920 oraz w okresie 2000-2020 i na tej podstawie wybrać imiona dla których zaobserwowana zmiana jest największa (zanotuj dwa najpopularniejsze imiona)
@@ -40,13 +40,18 @@ W którym roku zanotowano najmniejszą, a w którym największą różnicę w li
      <img src="_images/lab_proj1/popularity.png" alt="drawing" height="50"/> 
     </center>
     Wtedy Jeśli dane imię występuje wyłącznie dla mężczyzn wartością wyrażenia będzie 1, jeśli tylko u kobiet 0. Przyjmij, że w rankingu zmiany imienia ze względu na płeć uwzględniane są tylko elementy, których początkowa i końcowa dysproporcja była mniejsza niż 70%. Np. w latach 1880-1920 wartość współczynnika wynosiła więcej niż 0.7 lub mniej niż 0.3 a następnie zmieniła się odpowiednio na wartość mniejszą niż 0.3 lub większą niż 0.7. Listę rankingową skonstruuj wybierając imiona wg popularności w rankingu 2000 najpolularniejszych imion (dla obu płci). -->
-
-1.    Wczytaj dane z bazy opisującej dane demograficzne w okresie od 1935-2020r w poszczególnych grupach wiekowych W USA: [USA_demography](_resources/lab_04/demography_us_2023.sqlite3), opis: https://www.mortality.org/Data/ExplanatoryNotes ([wersja_pdf](_resources/lab_04/Explanatory Notes.pdf)). Spróbuj zagregować dane już na etapie zapytania SQL.  
-2.   Wyznacz i wyświetl przyrost naturalny w każdym roku analizowanego okresu
-3.   Wyznacz i wyświetl współczynnik przeżywalności dzieci w pierwszym roku życia ww każdym roku analizowanego okresu.
-4.   Dokonaj porównania różnic w przyroście naturalnym bazującym na liczbie nadawanych imion dziewczynek i chłopców w danym roku z danymi dotyczącymi liczby urodzin z bazy danych 
+11. Imiona w Polsce
+    Celem tej części jest zastosowanie stworzonych mechanizmów dla datasetu zawieraj
+    1.  Wczytaj z bazy [imiona_pl](https://chmura.put.poznan.pl/s/OAEeapqpDZcmRu7) zestaw danych zawierający liczbę nadawanych imion w okresie 2000-2023 w Polsce.
+    - zapytanie sql powinno tworzyć pojedynczą tabelę, zawierającą imię, rok, oraz liczbę nadanych imion dla dziewczynek i chłopców. W bazie są 2 oddzielne tabele dla każdej z płci.
+    2. Stwórz ranking top 200 imion i porównaj czy obserwacje z pkt. 8 dotyczące trendów w nadawaniu imion w USA są również obserwowalne w Polsce. Jako daty referencyjne weź rok 2000, 2013, 2023. Stosując histogram spróbuj odpowiedzieć na pytanie co zmieniło się między rokiem 2000 a 2013 czy zmiana w trendzie wynika tylko z zmiany zwyczajów czy też innych czynników
+    3. Znajdź 2 imiona, które stosunkowo czesto nadawane były dziewczynkom i chłopcom
+<!-- 1.    Wczytaj dane z bazy opisującej dane demograficzne w okresie od 1935-2020r w poszczególnych grupach wiekowych W USA: [USA_demography](_resources/lab_04/demography_us_2023.sqlite3), opis: https://www.mortality.org/Data/ExplanatoryNotes ([wersja_pdf](_resources/lab_04/Explanatory Notes.pdf)). Spróbuj zagregować dane już na etapie zapytania SQL.  
+1.   Wyznacz i wyświetl przyrost naturalny w każdym roku analizowanego okresu
+2.   Wyznacz i wyświetl współczynnik przeżywalności dzieci w pierwszym roku życia ww każdym roku analizowanego okresu.
+3.   Dokonaj porównania różnic w przyroście naturalnym bazującym na liczbie nadawanych imion dziewczynek i chłopców w danym roku z danymi dotyczącymi liczby urodzin z bazy danych 
     - przedstaw te różnice w formie graficznej (jako błąd względny w poszczególnych latach)
-    - wyznacz i wyświetl informacje o roku w którym ten błąd był największy a w którym najmniejszy (węź pod uwagę wartość bezwzględną)
+    - wyznacz i wyświetl informacje o roku w którym ten błąd był największy a w którym najmniejszy (węź pod uwagę wartość bezwzględną) -->
 <!-- 15. Na wykresie z pkt 14 wyznacz współczynnik przeżywalności dzieci w pierwszych 5 latach życia (pamiętaj, że dla roku urodzenia x należy uwzględnić śmiertelność w grupie wiekowej 0 lat w roku x, 1rok w roku x+1 itd).
     
     **Uwaga**: Współczynnik przeżywalności w roku `y` może być wyznaczony na podstawie informacji o liczbie urodzin w danym roku `lu_y` oraz umieralności dzieci (`dx(k)_y+k`) w wieku `k` lat w roku `y+k`. Może być wyrażona wzorem:
