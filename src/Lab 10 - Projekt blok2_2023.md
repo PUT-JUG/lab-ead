@@ -10,14 +10,16 @@ Przedmiotem projektu będzie analiza danych dotyczących sprzedaży jednej z du�
 Dane zawierają (poniżej wymieniono pliki oraz kolumny, których nazwa nie jest oczywista):
 
 `store_data.csv` - informacje na temat sprzedaży poszczególnych sklepów w obserwowanym okresie
-    - **Sales** - obrót handlowy w danym dniu (to jest to, co prognozujesz)
-    - **Customers** - liczba klientów w danym dniu
-    - **Open** - wskaźnik, czy sklep był otwarty: 0 = zamknięty, 1 = otwarty
-    - **StateHoliday** - wskazuje świąteczny dzień państwowy. Zazwyczaj wszystkie sklepy, z niewielkimi wyjątkami, są zamknięte w dniach świątecznych. Zauważ, że wszystkie szkoły są zamknięte w dni świąteczne i weekendy. a = dzień państwowy, b = święta wielkanocne, c = Boże Narodzenie, 0 = brak
-    - **SchoolHoliday** - wskazuje, czy (Sklep, Data) był dotknięty zamknięciem szkół publicznych
-    - **Promo** - wskazuje, czy sklep prowadzi promocję w danym dniu
+
+- **Sales** - obrót handlowy w danym dniu (to jest to, co prognozujesz)
+- **Customers** - liczba klientów w danym dniu
+- **Open** - wskaźnik, czy sklep był otwarty: 0 = zamknięty, 1 = otwarty
+- **StateHoliday** - wskazuje świąteczny dzień państwowy. Zazwyczaj wszystkie sklepy, z niewielkimi wyjątkami, są zamknięte w dniach świątecznych. Zauważ, że wszystkie szkoły są zamknięte w dni świąteczne i weekendy. a = dzień państwowy, b = święta wielkanocne, c = Boże Narodzenie, 0 = brak
+- **SchoolHoliday** - wskazuje, czy (Sklep, Data) był dotknięty zamknięciem szkół publicznych
+- **Promo** - wskazuje, czy sklep prowadzi promocję w danym dniu
 
 `store.csv` - informacja dotycząca poszczególnych sklepów
+
   - **StoreType** - różnicuje między 4 różnymi modelami sklepów: a, b, c, d
   - **Assortment** - opisuje poziom asortymentu: a = podstawowy, b = dodatkowy, c = rozszerzony
   - **CompetitionDistance** - odległość w metrach do najbliższego konkurencyjnego sklepu
@@ -55,6 +57,7 @@ W analizie danych poszukujemy czynników wpływających na sprzedaż, tak, żeby
 W ramach projektu minimalne należy sprawdzić jak (i czy) następujące czynniki wpływają sprzedaż oraz spróbować wyjaśnić następujące kwestie:
 
 Czynniki wpływające na sprzedaż oraz na liczbę odwiedzających i wartość koszyka
+
 1. Typ sklepu
 2. Dni wolne od nauki szkolnej
 3. trwanie promocji
@@ -68,6 +71,7 @@ Czynniki wpływające na sprzedaż oraz na liczbę odwiedzających i wartość k
 W analize w/w czynników prócz analizy globalnego wpływu na wszystkie dla całej populacji, spróbuj również ocenić czy istnieją istotne różnice między landami jeśli chodzi o wpływ  najważniejszych czynników (wytypuj własne  hipotezy na podstawie własnej analizy i wybierz 3 najbardziej prawdopodobne czynniki do analizy uwzględniającej specyfikę geograficzną)? Możesz np. sprawdzić czy pora roku (lub miesiąc) ma istotny  wpływ na zmianę sprzedaży pomiędzy landami np. tymi znajdującymi się an morzem czy w górach.
 
 Wpływ analizowanych czynników oceniaj stosując metody statystyczne:
+
 - dla czynników analizowanych za pomocą regresji możesz wykorzystać dane generowane z modelu ols
 - dla czynników  (np. obecność promocji) wykorzystaj testy A/B
 
@@ -75,6 +79,7 @@ Wpływ analizowanych czynników oceniaj stosując metody statystyczne:
 Spróbuj zaproponować sposób analizy, który pozwoli stwierdzić co mogą oznaczać typy sklepów a,b,c,d. Analizę oprzyj na analizie różnic między nimi (np. dotyczącej czasu pracy, obrotu, liczby klientów)
 
 **Sugestie**
+
 Do analizy  możesz wykorzystać np. korelację, regresję, możesz również spróbować zamodelować obserwowane zjawiska za pomocą funkcji analitycznej. Możesz założyć, że część czynników ma charakter ciągły a część może być traktowana jako zmienne nominalne. Sprawdź czy podane czynniki są wzajemnie zależne, i czy są addytywne?
 
 Możesz próbować również, stosujące metody uczenia nienadzorowanego ocenić czy możemy, analizując dane z tabeli `store_data.csv` znaleźć pewne grupy (skupienia) sklepów i czy te skupienia są zależne np. od kategorii, asortymentu lub landu.

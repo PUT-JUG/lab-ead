@@ -110,9 +110,7 @@ p_value = permutation_test((rvs1, rvs2), statistic,
  Moc testu możemy również oszacować nie koniecznie tworząc nowe próbki, ale tworząc próbki bootstrapowe z aktualnie posiadanego zbioru.
 
  Możliwe jest również oszacowanie mocy testu lub określenie liczebności próby, która pozwala na uzyskanie wyniku określonej mocy.
- W tym celu należy wskazać oczekiwaną wielość efektu, która określona parametrem Cohen's *d* ma postać:
-
-![effect_size](_images/lab_07/effect_size.svg)
+ W tym celu należy wskazać oczekiwaną wielość efektu, która określona parametrem Cohen's *d* ma postać: ![effect_size](_images/lab_07/effect_size.svg)
 
  Wyznacz wielkość efektu dla dla badanej poprzednio próby `rvs1` i `rvs2` oblicz moc testu: 
  
@@ -127,7 +125,7 @@ result = analysis.solve_power(effect, power=None, nobs1=len(rvs1), ratio=1.0, al
  W funkcji `solve_power` podstawiając wartość `None` pod wybrany argument i uzupełniając wartości pozostałych 2 argumentów można wyznaczyć np. liczebność próby, która powinna zostać zarejestrowana żeby uzyskać założoną moc testu przy szacowanej wielkości  efektu. Spróbuj określić jaką liczebność powinien mieć zbiór żeby uzyskać moc testu na poziomie 90%.
 
 
- # Zadanie
+## Zadanie
 
 1. Podczas testów klinicznych szczepionki na COVID19 firma [Pfizer](https://www.pfizer.com/news/press-release/press-release-detail/pfizer-and-biontech-conclude-phase-3-study-covid-19-vaccine) wskazała, że spośród przetestowanej grupy, której podano szczepionkę 9 na 21500 zakaziło się wirusem, natomiast firma [Moderna](https://www.bbc.com/news/health-54902908) wskazała, że jej szczepionka jest skuteczniejsza ponieważ na 15000 badanych jedynie 5 osób zostało zakażonych. Spróbuj odpowiedzieć na pytania:
    
