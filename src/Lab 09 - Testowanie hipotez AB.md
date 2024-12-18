@@ -128,8 +128,9 @@ result = analysis.solve_power(effect, power=None, nobs1=len(rvs1), ratio=1.0, al
 
 
  # Zadanie
- 
+
 1. Podczas testów klinicznych szczepionki na COVID19 firma [Pfizer](https://www.pfizer.com/news/press-release/press-release-detail/pfizer-and-biontech-conclude-phase-3-study-covid-19-vaccine) wskazała, że spośród przetestowanej grupy, której podano szczepionkę 9 na 21500 zakaziło się wirusem, natomiast firma [Moderna](https://www.bbc.com/news/health-54902908) wskazała, że jej szczepionka jest skuteczniejsza ponieważ na 15000 badanych jedynie 5 osób zostało zakażonych. Spróbuj odpowiedzieć na pytania:
+   
    - Jaka jest średnia skuteczność, odchylenie standardowe rozkładu obu szczepionek i oszacuj (metodą próbkowania bootstrapowego) jaki jest przedział ufności (stwórz wektor binarny zawierający tyle elementów ile osób brało udział w badaniach w którym 0 odpowiada osobie, dla której szczepionka nie zadziałała)
    - Zweryfikuj czy prawdą jest, że jedna szczepionka jest skuteczniejsza od drugiej?
    - Wyznacz aktualną moc testu
