@@ -24,7 +24,7 @@ Temat projektu określa pewne ramy, które powinien objąć, szczegółowe rozwi
 
 W analizie danych poszukujemy czynników wpływających na rozwój depresji, tak, żeby po ich określeniu można było dokonać oceny ryzyka depresji w danej grupie wiekowej. Szczegółowy opis cech można znaleźć w CookBook oraz na stronie [icpsr](https://www.icpsr.umich.edu/web/NACJD/studies/27521/variables).
 
-Jako wskaźnik wystąpienia depresji możesz wykorzystać m.in. następujące zmienne:
+Jako wskaźnik wystąpienia depresji możesz wykorzystać m.in. następujące zmienne (pamiętaj, żeby nie używać ich jako zmiennych niezależnych w modelu umożliwiającym rozpoznanie depresji):
 
 - DEPRESSIONINDEX obejmujący połączenie indeksu dla wszystkich grup wiekowych  - wskaźnik natężenia depresji w skali 0-9 dla grupy dorosłych  i w wieku młodzieńczym - należy zwrócić uwagę na ankiety bez udzielonej odpowiedzi kodowane jako -9
 - DEP_EPISODE doświadczenie epizodu depresji w okresie całego zycia
@@ -87,7 +87,7 @@ Inne informacje rodzinne:
 - MARRIED aktualny stan cywilny
 - CHILDRENINHOME
 
-Przed uzyciem danej cechy zapoznaj się z jej specyfikacją oraz informacjami o brakujących wartościach. Podejmij decyzję w jaki sposób traktować wartości brakujące, uzasadnij swój wybór w odniesieniu do najważniejszych zmiennych a w szczególności indeksu depresji.
+Przed użyciem danej cechy zapoznaj się z jej specyfikacją oraz informacjami o brakujących wartościach. Podejmij decyzję w jaki sposób traktować wartości brakujące, uzasadnij swój wybór w odniesieniu do najważniejszych zmiennych a w szczególności indeksu depresji.
 
 
 ### Faza I - analiza czynnikowa i eksploracja
@@ -104,7 +104,7 @@ Przed uzyciem danej cechy zapoznaj się z jej specyfikacją oraz informacjami o 
 
 **Sugestie**
 
-1. Do analizy  możesz wykorzystać np. korelację, regresję (w tym model ols umożlwiiający ocenę istotności zmiennej oraz istnienie powiązań między zmiennymi), możesz również spróbować stworzyć własne cechy. Możesz założyć, że część czynników ma charakter ciągły a część (zdecydowana większość) może być traktowana jako zmienne nominalne lub mieszane, 
+1. Do analizy  możesz wykorzystać np. korelację, regresję (w tym model ols umożliwiający ocenę istotności zmiennej oraz istnienie powiązań między zmiennymi), możesz również spróbować stworzyć własne cechy. Możesz założyć, że część czynników ma charakter ciągły a część (zdecydowana większość) może być traktowana jako zmienne nominalne lub mieszane, 
 
 2. Możesz próbować również, stosujące metody uczenia nienadzorowanego ocenić czy możemy, analizując dane  znaleźć pewne grupy (clustry) osób i czy te grupy są zależne np. od kategorii wskaźników depresji.
 
@@ -112,7 +112,7 @@ Przed uzyciem danej cechy zapoznaj się z jej specyfikacją oraz informacjami o 
 ### Faza  II - predykcja
 
 W fazie tej należy wykorzystać wnioski  a fazy I do budowy modelu regresyjnego OLS umożliwiającego ocenę ryzyka depresji u danej osoby.  Dla porównania możesz również spróbować stworzyć model oparty np. o drzewa decyzyjne i porównać jego wyniki z wynikami modelu wykorzystującego OLS.
-Budowa modelu oceny ryzyka składa się z 2 etapów
+Budowa modelu oceny ryzyka składa się z następujących etapów
 
 1. Stwórz model regresyjny umożliwiający oszacowanie natężenia depresji u danej osoby lub model, który dokonuje klasyfikacji na osoby z depresją i bez - decyzję które podejście wybrać podejmij w oparciu o własne testy i analizy. 
 2. Dokonaj ocenę modelu, (użyj do tego zbioru walidacyjnego), pamiętaj żeby ten zbiór miał możliwie podobny rozkład populacji
