@@ -67,7 +67,7 @@ Stan zdrowia:
 - SCHDSKIP liczba dni opuszczony z powodu wagarów
 - TXLCAD - informacja o terapii uzależnień od narkotyków lub alkoholu
 - DSTNCALM, DSTTIRE, DSTSITST, DSTDEPRS, DSTCHEER, DSTNRVOS
-- można również znaleźć informację o myślach samobójczych czy też problemach ze snem
+- można również znaleźć informację o myślach samobójczych (YOWRSATP, YOWRSPLN, ADWRDLOT, ADWRSTHK) czy też problemach ze snem (YO_MDEA4, ADWRSLEP, ADWRSMOR) lub zaburzeniach apetytu (YO_MDEA3, ADWRELES)
 
 Inne informacje rodzinne:
 - IRMARIT - stan cywilny
