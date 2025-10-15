@@ -35,8 +35,33 @@ conn = sqlite3.connect("Chinook_Sqlite.sqlite")  # połączenie do bazy danych -
 df = pd.read_sql_query("SELECT * FROM Album", conn)
 conn.close()
 ```
+### DuckDB
+Alternatywnie do SQLite można wykorzystać DuckDB - bazę danych zaprojektowaną do szybkiego przetwarzania dużych ilości danych analitycznych. DuckDB może być używany jako samodzielna baza danych lub jako biblioteka wbudowana w aplikacje, podobnie jak SQLite. DuckDB jest zoptymalizowany pod kątem wydajności i skalowalności, co czyni go odpowiednim do analizy dużych zbiorów danych.
+Ponadto umożliwia bezpośrednie odczytywanie i zapisywanie danych w formatach takich jak CSV, Parquet czy JSON, co ułatwia integrację z różnymi źródłami danych.
 
-#### `SELECT`, `WHERE`, `ORDER BY`
+Przykładowy kod do odczytu danych z bazy DuckDB:
+```python
+import duckdb
+import pandas as pd
+conn = duckdb.connect()
+conn.execute("INSTALL sqlite_scanner;")
+conn.execute("LOAD sqlite_scanner;")
+
+# Attach the SQLite database
+conn.execute("ATTACH 'Chinook_Sqlite.sqlite' AS chinook_db (TYPE SQLITE);") # połączenie do bazy danych - pliku
+df = conn.execute("SELECT * FROM chinook_db.Album").fetchdf()
+conn.close()
+``` 
+
+Jeśli dane są zawarte np. w kilku plikach csv, można je odczytać bezpośrednio w zapytaniu SQL:
+```python
+conn = duckdb.connect()   
+df = conn.execute("SELECT * FROM read_csv_auto()'data/*.csv')").fetchdf()
+```
+
+wtedy zapytanie takie obejmuje wszystkie pliki csv w katalogu data, mechanizm ten jest zdecydowanie szybszy niż odczyt plików do DataFrame, łączenie ich i późniejsza analiza po stronie Pandas.
+
+### Podstawy SQL: `SELECT`, `WHERE`, `ORDER BY`
 
 Powyższy przykład uruchamia najczęściej wykorzystywaną w SQL komendę `SELECT`, służącą do pobierania danych i odczytuje wszystkie kolumny (`*`) z tabeli `Album`. W tym przypadku `read_sql_query` zwraca DataFrame reprezentujący tabelę.
 
@@ -78,7 +103,7 @@ SELECT ArtistId, Name FROM Artist WHERE ArtistID BETWEEN 20 and 40 ORDER BY Name
 
 #### 🔥 Zadanie 1 🔥
 
-Pobierz z tabeli **Invoice** listę transakcji (zawierającą **InvoiceId**, **CustomerId**, **BillingCity** oraz **Total** z kraju **USA**, sortując wpisy po nazwie miasta, w kolejności odwrotnej do alfabetycznej.
+Pobierz z tabeli **Invoice** listę transakcji (zawierającą **InvoiceId**, **CustomerId**, **BillingCity** oraz **Total** z kraju **USA**), sortując wpisy po nazwie miasta, w kolejności odwrotnej do alfabetycznej.
 
 Wyświetl wpisy w konsoli w postaci:
 
@@ -137,7 +162,7 @@ SELECT Track.Name, Album.Title FROM Track INNER JOIN Album ON Track.AlbumId = Al
 
 Zwrócona tabela będzie zawierała tytuły piosenek pobrane z tabeli **Track**, tytuły albumów z tabeli **Album**, a wpisy zostaną dopasowane na podstawie kolumny **AlbumId** - kryterium `Track.AlbumId = Album.AlbumId`. Zwrócone zostaną tylko te wpisy, które istnieją w obu tabelach.
 
-Po bardziej rozbudowane przykłady zajrzyj do https://www.sqlitetutorial.net/sqlite-inner-join/
+Po bardziej rozbudowane przykłady zajrzyj [tutaj](https://www.sqlitetutorial.net/sqlite-inner-join/)
 
 `LEFT JOIN` zwróci wszystkie wpisy znajdujące się w pierwszym argumencie. Brakujące wartości zostaną wypełnione wartościami `NULL`:
 
@@ -189,7 +214,7 @@ Koncepcja nie definiuje standardu protokołu, ale najczęściej wykorzystywany p
 
 Do obsługi zapytań HTTP w Python wykorzystamy bibliotekę `requests`.
 
-W ramach pierwszego przykładu sprawdźmy aktualne kursy Bitcoin korzystając z API opisanego na stronie https://www.blockchain.com/api/exchange_rates_api
+W ramach pierwszego przykładu sprawdźmy aktualne kursy Bitcoin korzystając z API opisanego na [stronie](https://www.blockchain.com/api/exchange_rates_api)
 
 ```python
 response = requests.get("https://blockchain.info/ticker")  # wysłanie zapytania GET pod odpowiedni adres, zapisanie odpowiedzi
@@ -235,7 +260,7 @@ Stwórz na podstawie powyższego zapytania DataFrame, w którym umieścisz wszys
 Świadczenie usług webowych wymaga oczywiście utrzymania infrastruktury serwerowej, w związku z czym wiele serwisów prowadzonych jest jako działalność komercyjna, gdzie część lub całość dostępu wymaga wykupienia dostępu lub przynajmniej utworzenia konta. Autoryzacja odbywa się często z wykorzystaniem *tokenu*, indywidualnego dla użytkownika.
 
 Jako przykładowe API wymagające autoryzacji wykorzystamy dedykowany serwis przechowujący tytuły i autorów książek.
-Opis api można zależć [tutaj](_resources/lab_03/doc.md)
+Opis api można znaleźć [tutaj](_resources/lab_03/doc.md)
 
 1. Odczytaj swój token z informacji umieszczonych na ekursach i przekaż go w nagłówku jako wartość pola "Authorization"
 2. Spróbuj połączyć się z serwerem i pobrać pełną listę książek (endpoint /books, metoda GET). Zapisz ją do DataFrame, ile tych książek jest. Wyświetl pierwszy i ostatni tytuł na liście posortowanej alfabetycznie.
