@@ -56,7 +56,7 @@ conn.close()
 Jeśli dane są zawarte np. w kilku plikach csv, można je odczytać bezpośrednio w zapytaniu SQL:
 ```python
 conn = duckdb.connect()   
-df = conn.execute("SELECT * FROM read_csv_auto()'data/*.csv')").fetchdf()
+df = conn.execute("SELECT * FROM read_csv_auto('data/*.csv')").fetchdf()
 ```
 
 wtedy zapytanie takie obejmuje wszystkie pliki csv w katalogu data, mechanizm ten jest zdecydowanie szybszy niż odczyt plików do DataFrame, łączenie ich i późniejsza analiza po stronie Pandas.

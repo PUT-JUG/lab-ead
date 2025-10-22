@@ -380,9 +380,15 @@ axs[1].hist(x2, 20, density=True, facecolor='r')
 
 #### 🔥 Zadanie 5 🔥
 
-Wczytaj plik: [wyniki głosowania w wyborach prezydenckich w Rosji 2020](https://chmura.put.poznan.pl/s/TSaazB8DHn5TIEi)
-1. Stwórz w wczytanym dataframe nową kolumnę zawierająca względną liczbę głosów za. Jest to iloraz wartości  liczby głosów za (kolumna `yes`) do liczby głosów oddanych (kolumna `given`)
-2. Wyświetl histogram względnej liczby głosów za dla domyślnych ustawień
-3. Zmień liczbę binów histogramu na 100. Czy możesz zauważyć jakieś anomalie?
+Wczytaj plik: [wyniki głosowania w wyborach prezydenckich w Rosji 2024](https://chmura.put.poznan.pl/s/rsiPjNy7rtej9C2) 
+1. Zapoznaj się z kolumnami tego zbioru.
+2. wyświetl histogram procentowej liczby głosów za aktualnie urzędującym prezydentem. 
+3. Zmień liczbę binów na histogramie na 500. Czy można zaobserwować anomali takie jak w roku 2020 (patrz wykład lub [zbiór z roku 2020](https://chmura.put.poznan.pl/s/TSaazB8DHn5TIEi)
+<!--
+4. Stwórz w wczytanym dataframe nową kolumnę zawierająca względną liczbę głosów za aktualnie urzędującym prezydentem. Jest to iloraz wartości  liczby głosów za (kolumna `yes`) do liczby głosów oddanych (kolumna `given`)
+5. Wyświetl histogram względnej liczby głosów za dla domyślnych ustawień
+6. Zmień liczbę binów histogramu na 100. Czy możesz zauważyć jakieś anomalie? -->
+   
 ---
+
 Autorzy: *Tomasz Mańkowski, Piotr Kaczmarek*
