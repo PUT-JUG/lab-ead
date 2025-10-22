@@ -386,6 +386,7 @@ Wczytaj plik: [wyniki głosowania w wyborach prezydenckich w Rosji 2024](https:/
 2. wyświetl histogram procentowej liczby głosów za aktualnie urzędującym prezydentem. 
 3. Zmień liczbę binów na histogramie na 500. Czy można zaobserwować anomali takie jak w roku 2020 (patrz wykład lub [zbiór z roku 2020](https://chmura.put.poznan.pl/s/TSaazB8DHn5TIEi))
 4. Dla chętnych: spróbuj przeanalizowac histogram frekwenci na wyborach w 2024 roku. Czy można zauważyć jakieś anomalie? (frekwencję można obliczyć jako iloza kolumny określającej liczbe osób uprawnionych do głosowania podzielone przez sume liczby kart w urnach stacjonarnych i przenosnych)
+
 <!--
 1. Stwórz w wczytanym dataframe nową kolumnę zawierająca względną liczbę głosów za aktualnie urzędującym prezydentem. Jest to iloraz wartości  liczby głosów za (kolumna `yes`) do liczby głosów oddanych (kolumna `given`)
 2. Wyświetl histogram względnej liczby głosów za dla domyślnych ustawień
