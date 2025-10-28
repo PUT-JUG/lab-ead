@@ -6,7 +6,7 @@ W celu realizacji części zadań zapoznaj się z przykładami i informacjami do
 Informacje na ten temat możesz znaleźć [tutaj](https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html)
 
 ## Opis zadania
-Na stronie Social Security Administration umieszczono dane zawierającą listę imion oraz częstotliwość ich występowania w latach 1880-2023. Pliki z danymi w formacie CSV dostępne są [tutaj](https://www.ssa.gov/oact/babynames/names.zip).
+Na stronie Social Security Administration umieszczono dane zawierającą listę imion oraz częstotliwość ich występowania w latach 1880-2024. Pliki z danymi w formacie CSV dostępne są [tutaj](https://www.ssa.gov/oact/babynames/names.zip).
 
 1. Wczytaj dane ze wszystkich plików do pojedynczej tablicy (używając Pandas lub DuckDB).
 2. Określi ile różnych (unikalnych) imion zostało nadanych w tym czasie.
@@ -32,19 +32,31 @@ W którym roku zanotowano najmniejszą, a w którym największą różnicę w li
      - wkreśl przebieg trendu konotacji dla tych imion obrazujący zmianę konotacji danego imienia na przestrzeni lat
 11.  Imiona w Polsce
     
-    Celem tej części jest zastosowanie stworzonych mechanizmów dla datasetu zawierającego imiona nadawane w Polsce w latach 2000-2024. Spróbuj w ten sposob tworzyć funkcje, żeby można było je wykorzystywać dla obu datasetów. Oczywiście przy wczytywaniu mozesz dokonać z transformacji struktury tabel i nazw kolumn, tak, żeby uzyskać spójność zgodność między datasetami.
+    Celem tej części jest zastosowanie stworzonych mechanizmów dla datasetu zawierającego imiona nadawane w Polsce w latach 2000-2024. Spróbuj w ten sposob tworzyć funkcje, żeby można było je wykorzystywać dla obu datasetów. Oczywiście przy wczytywaniu możesz dokonać z transformacji struktury tabel i nazw kolumn, tak, żeby uzyskać spójność zgodność między datasetami.
+
     1.  Wczytaj z bazy [imiona_pl](https://chmura.put.poznan.pl/s/foC9qaKz7B8cQBK) zestaw danych zawierający liczbę nadawanych imion w okresie 2000-2024 w Polsce. Zapytanie sql powinno tworzyć pojedynczą tabelę, zawierającą imię, rok, oraz liczbę nadanych imion dla dziewczynek i chłopców. W bazie są 2 oddzielne tabele dla każdej z płci.
     2. Stwórz ranking top 200 imion i porównaj czy obserwacje z pkt. 8 dotyczące trendów w nadawaniu imion w USA są również obserwowalne w Polsce. Jako daty referencyjne weź rok 2000, 2013, 2024. Stosując histogram liczby nadawanych imion spróbuj odpowiedzieć na pytanie co zmieniło się między rokiem 2000 a 2013 czy zmiana w trendzie wynika tylko z zmiany zwyczajów czy też innych czynników (czy potrafisz zidentyfikować te czynniki?)
     3. Przeanalizuj czy w Polsce również preferowane są imiona kończące się na określone litery (jak w USA). Wyznacz 3 litery, dla których zaobserwowano największą zmianę popularności między rokiem 2000 a 2024. Dla tych liter wyświetl przebieg trendu popularności w całym okresie czasu (dla każdego roku)
     
 
 ## *Uwagi:*
-    - jako rozwiązanie prześlij skrypt - pojedynczy plik `py`. Pliki wejściowe (dane w zadaniu) powinny być zaczytywane ścieżką względną z podkatalogu `./data`. 
+    - jako rozwiązanie prześlij skrypt - pojedynczy plik `py`. Pliki wejściowe (dane w zadaniu) powinny być zaczytywane ścieżką względną z podkatalogu `./data` w którym znajdują się rozpakowane pliki źródłowe z imionami oraz baza danych o nazwie tożsamej z tą pobraną z strony. 
     - przed przesłanie rozwiązania proszę zweryfikować czy skrypt się uruchamia. (skrypty z błędami nie będą analizowane)
     - w komentarzach umieść informację o zadaniu, którego dotyczy dana część kodu
     - kody będą poddane analizie antyplagaitowej
 
+**Kryteria oceny:**
 
+- **Zgodność z wymaganiami zadania (60%)** - poprawna implementacja wszystkich punktów zadania zgodnie ze specyfikacją
+- **Jakość i organizacja kodu (20%)** - zastosowanie dobrych praktyk programistycznych:
+  - refaktoryzacja i modularność kodu
+  - parametryzacja zamiast wartości zhardcodowanych
+  - ponowne wykorzystanie funkcji w różnych kontekstach
+  - czytelność i dokumentacja kodu
+- **Wydajność i optymalizacja (20%)** - efektywne wykorzystanie narzędzi:
+  - minimalizacja czasu wykonania
+  - zastosowanie operacji wektoryzowanych
+  - wykorzystanie zaawansowanych funkcjonalności bibliotek Pandas i Matplotlib, DuckDB
 
 ---
 Autorzy: *Piotr Kaczmarek* 
