@@ -40,10 +40,10 @@ Celem tej części jest zastosowanie stworzonych mechanizmów dla datasetu zawie
 
 
 ## *Uwagi:*
-    - jako rozwiązanie prześlij skrypt - pojedynczy plik `py`. Pliki wejściowe (dane w zadaniu) powinny być zaczytywane ścieżką względną z podkatalogu `./data` w którym znajdują się rozpakowane pliki źródłowe z imionami oraz baza danych o nazwie tożsamej z tą pobraną z strony. 
-    - przed przesłanie rozwiązania proszę zweryfikować czy skrypt się uruchamia. (skrypty z błędami nie będą analizowane)
-    - w komentarzach umieść informację o zadaniu, którego dotyczy dana część kodu
-    - kody będą poddane analizie antyplagaitowej
+- jako rozwiązanie prześlij skrypt - pojedynczy plik `py`. Pliki wejściowe (dane w zadaniu) powinny być zaczytywane ścieżką względną z podkatalogu `./data` w którym znajdują się rozpakowane pliki źródłowe z imionami oraz baza danych o nazwie tożsamej z tą pobraną z strony. 
+- przed przesłanie rozwiązania proszę zweryfikować czy skrypt się uruchamia. (skrypty z błędami nie będą analizowane)
+- w komentarzach umieść informację o zadaniu, którego dotyczy dana część kodu
+- kody będą poddane analizie antyplagaitowej
 
 **Kryteria oceny:**
 
