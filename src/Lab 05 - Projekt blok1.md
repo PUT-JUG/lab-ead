@@ -32,12 +32,12 @@ W którym roku zanotowano najmniejszą, a w którym największą różnicę w li
      - wkreśl przebieg trendu konotacji dla tych imion obrazujący zmianę konotacji danego imienia na przestrzeni lat
 11.  Imiona w Polsce
     
-    Celem tej części jest zastosowanie stworzonych mechanizmów dla datasetu zawierającego imiona nadawane w Polsce w latach 2000-2024. Spróbuj w ten sposob tworzyć funkcje, żeby można było je wykorzystywać dla obu datasetów. Oczywiście przy wczytywaniu możesz dokonać z transformacji struktury tabel i nazw kolumn, tak, żeby uzyskać spójność zgodność między datasetami.
+Celem tej części jest zastosowanie stworzonych mechanizmów dla datasetu zawierającego imiona nadawane w Polsce w latach 2000-2024. Spróbuj w ten sposob tworzyć funkcje, żeby można było je wykorzystywać dla obu datasetów. Oczywiście przy wczytywaniu możesz dokonać z transformacji struktury tabel i nazw kolumn, tak, żeby uzyskać spójność zgodność między datasetami.
 
-    1.  Wczytaj z bazy [imiona_pl](https://chmura.put.poznan.pl/s/foC9qaKz7B8cQBK) zestaw danych zawierający liczbę nadawanych imion w okresie 2000-2024 w Polsce. Zapytanie sql powinno tworzyć pojedynczą tabelę, zawierającą imię, rok, oraz liczbę nadanych imion dla dziewczynek i chłopców. W bazie są 2 oddzielne tabele dla każdej z płci.
-    2. Stwórz ranking top 200 imion i porównaj czy obserwacje z pkt. 8 dotyczące trendów w nadawaniu imion w USA są również obserwowalne w Polsce. Jako daty referencyjne weź rok 2000, 2013, 2024. Stosując histogram liczby nadawanych imion spróbuj odpowiedzieć na pytanie co zmieniło się między rokiem 2000 a 2013 czy zmiana w trendzie wynika tylko z zmiany zwyczajów czy też innych czynników (czy potrafisz zidentyfikować te czynniki?)
-    3. Przeanalizuj czy w Polsce również preferowane są imiona kończące się na określone litery (jak w USA). Wyznacz 3 litery, dla których zaobserwowano największą zmianę popularności między rokiem 2000 a 2024. Dla tych liter wyświetl przebieg trendu popularności w całym okresie czasu (dla każdego roku)
-    
+- Wczytaj z bazy [imiona_pl](https://chmura.put.poznan.pl/s/foC9qaKz7B8cQBK) zestaw danych zawierający liczbę nadawanych imion w okresie 2000-2024 w Polsce. Zapytanie sql powinno tworzyć pojedynczą tabelę, zawierającą imię, rok, oraz liczbę nadanych imion dla dziewczynek i chłopców. W bazie są 2 oddzielne tabele dla każdej z płci.
+- Stwórz ranking top 200 imion i porównaj czy obserwacje z pkt. 8 dotyczące trendów w nadawaniu imion w USA są również obserwowalne w Polsce. Jako daty referencyjne weź rok 2000, 2013, 2024. Stosując histogram liczby nadawanych imion spróbuj odpowiedzieć na pytanie co zmieniło się między rokiem 2000 a 2013 czy zmiana w trendzie wynika tylko z zmiany zwyczajów czy też innych czynników (czy potrafisz zidentyfikować te czynniki?)
+- Przeanalizuj czy w Polsce również preferowane są imiona kończące się na określone litery (jak w USA). Wyznacz 3 litery, dla których zaobserwowano największą zmianę popularności między rokiem 2000 a 2024. Dla tych liter wyświetl przebieg trendu popularności w całym okresie czasu (dla każdego roku)
+
 
 ## *Uwagi:*
     - jako rozwiązanie prześlij skrypt - pojedynczy plik `py`. Pliki wejściowe (dane w zadaniu) powinny być zaczytywane ścieżką względną z podkatalogu `./data` w którym znajdują się rozpakowane pliki źródłowe z imionami oraz baza danych o nazwie tożsamej z tą pobraną z strony. 
