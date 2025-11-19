@@ -8,7 +8,7 @@ Informacje na ten temat możesz znaleźć [tutaj](https://pandas.pydata.org/pand
 ## Opis zadania
 Na stronie Social Security Administration umieszczono dane zawierającą listę imion oraz częstotliwość ich występowania w latach 1880-2024. Pliki z danymi w formacie CSV dostępne są [tutaj](https://www.ssa.gov/oact/babynames/names.zip).
 
-1. Wczytaj dane ze wszystkich plików do pojedynczej tablicy (używając Pandas lub DuckDB).
+1. Wczytaj dane ze wszystkich plików do pojedynczej tablicy (używając Pandas lub DuckDB). Pamiętaj żeby dane w tabeli zostały posortowane wg lata rosnąco, nie zakładaj, że kolejność plików jest odpowiednia.
 2. Określi ile różnych (unikalnych) imion zostało nadanych w tym czasie.
 3. Określi ile różnych (unikalnych) imion zostało nadanych w tym czasie rozróżniając imiona męskie i żeńskie.
 4. Stwórz nowe kolumny `frequency_male` i `frequency_female` i określ popularność każdego z imion w danym każdym roku dzieląc liczbę razy, kiedy imię zostało nadane przez całkowita liczbę urodzeń dla danej płci.  
@@ -27,7 +27,7 @@ W którym roku zanotowano najmniejszą, a w którym największą różnicę w li
     - znormalizuj dane względem całkowitej liczby urodzin w danym roku
     - wyświetl dane popularności litery dla mężczyzn w postaci wykresu słupkowego zawierającego poszczególne lata i gdzie słupki grupowane są wg litery. Wyświetl, dla której litery wystąpił największy wzrost/spadek między rokiem 1900 a 2024
     - Dla 3 liter dla których zaobserwowano największą zmianę wyświetl przebieg trendu popularności w całym okresie  czasu (dla każdego roku)
-10.   Znajdź w rankingu top1000 imiona, które nadawane były zarówno dziewczynkom jak i chłopcom (wyznacz stosunek nadanych imion męskich  do całkowitej liczby danego imienia (w_m) oraz analogiczny wskaźnik dla imion żeńskich (w_f)). Wyznacz 2 imiona (jedno które z kiedyś było typowo męskie (wskaźnik w_m~1) a aktualnie jest imieniem żeńskim (wskaźnik w_k~1) i drugie które kiedyś było typowo żeńskim a aktualnie jest typowo męskim). Największa zmiana między rokiem X a rokiem Y może być zdefiniowana jako średnia z sumy `(w_m(X)+w_f(Y))/2`. Do analizy zmiany konotacji imienia wykorzystaj 2 przedziały: zagregowane dane do roku 1920 i od roku 2000. 
+10.   Znajdź w rankingu top1000 imiona, które nadawane były zarówno dziewczynkom jak i chłopcom (wyznacz stosunek nadanych imion męskich  do całkowitej liczby danego imienia (w_m) oraz analogiczny wskaźnik dla imion żeńskich (w_f)). Wyznacz 2 imiona (jedno które z kiedyś było typowo męskie (wskaźnik w_m~1) a aktualnie jest imieniem żeńskim (wskaźnik w_f~1) i drugie które kiedyś było typowo żeńskim a aktualnie jest typowo męskim). Największa zmiana między rokiem X a rokiem Y może być zdefiniowana jako średnia z sumy `(w_m(X)+w_f(Y))/2`. Do analizy zmiany konotacji imienia wykorzystaj 2 przedziały: zagregowane dane do roku 1920 i od roku 2000. 
      - wyświetl te imiona
      - wkreśl przebieg trendu konotacji dla tych imion obrazujący zmianę konotacji danego imienia na przestrzeni lat
 11.  Imiona w Polsce

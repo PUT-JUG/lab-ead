@@ -44,6 +44,7 @@ print(score_dataset(train_df_cleaned[cols_x], test_df_cleaned[cols_x], train_df_
 ```
 
 **UWAGA** 
+
 1. Funkcja `score_dataset` zwraca średnią z wartości bezwzględnej błędu dla zbioru testowego. 
 2. Do oceny skuteczności stosujemy zbiór testowy, który nie został użyty w procedurze uczenia i wyboru metody.
 3. Pamiętaj jednak, że jednoznaczna interpretacja tego czy różnica między oboma podejściami jest istotna statystycznie wymaga rozszerzonej analizy, zajmiemy się tym na Lab 07.
