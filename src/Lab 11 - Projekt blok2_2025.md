@@ -6,11 +6,13 @@
 ## 1. Cel projektu
 
 Celem projektu jest eksploracyjna i statystyczna analiza danych historycznych dotyczących:
+
 - zachorowalności na odrę,
 - poziomu wyszczepialności przeciwko odrze,
 - wybranych czynników społeczno-ekonomicznych,
 
 w celu:
+
 1. identyfikacji trendów czasowych i przestrzennych zachorowań,
 2. określenia czynników sprzyjających występowaniu ognisk epidemicznych,
 3. oceny związku między wyszczepialnością a odpornością populacyjną,
@@ -24,8 +26,7 @@ Projekt realizowany jest w duchu **eksploracyjnej analizy danych (EDA)** z wykor
 
 ### Odra i współczynnik reprodukcji
 
-<!-- Odra jest jedną z najbardziej zakaźnych chorób wirusowych.  
-Współczynnik reprodukcji podstawowej \( R_0 \) dla odry szacowany jest na poziomie **12–18**, co oznacza bardzo wysoki potencjał epidemiczny. -->
+
 Odra jest wysoce zakaźną chorobą wirusową. Mimo że w wielu krajach europejskich przez pewien czas uznawana była za wyeliminowaną, w ostatnim czasie obserwuje się jej nawroty, co stanowi istotne wyzwanie dla zdrowia publicznego.
 Współczynnik Reprodukcji ($\text{R}_0$): Określa on średnią liczbę wtórnych zakażeń, wywołanych przez jednego chorego w populacji w pełni podatnej na zakażenie (tj. przed wprowadzeniem szczepień lub innych interwencji). Odra ma jeden z najwyższych wskaźników $\text{R}_0$, szacowany na około 12-18. Oznacza to, że jedna osoba chora może zarazić od 12 do 18 innych osób, jeśli żadna z nich nie ma odporności.
 
@@ -35,9 +36,9 @@ Współczynnik Reprodukcji ($\text{R}_0$): Określa on średnią liczbę wtórny
 
 W teorii krytyczny odsetek zaszczepionych (PCV – *Population Critical Value*) wymagany do uzyskania odporności populacyjnej obliczany jest jako:
 
-\[
-\text{PCV} = 1 - \frac{1}{R_0}
-\]
+<p align="center">
+<img src="https://latex.codecogs.com/svg.latex?\text{PCV}%20=%201%20-%20\frac{1}{R_0}" alt="PCV formula" height="40"/>
+</p>
 
 Dla odry oznacza to poziom wyszczepialności rzędu **93–95%**.
 
@@ -52,7 +53,7 @@ Szczepionka przeciwko odrze (najczęściej w postaci skojarzonej MMR: odra, świ
 - Zgłoszone  oraz zapadalność (na 1 000 000 mieszkańców)
 - Jednostka: kraj–rok
 - Zakres czasowy: **1980–2024**
-- dane można pobrać ze [strony who](https://immunizationdata.who.int/global/wiise-detail-page/measles-reported-cases-and-incidence?GROUP=Countries&YEAR=) lub część informacji znajduje się w  [zasobach kursu](https://chmura.put.poznan.pl/s/7Nq8r9aceiEsdNd)
+- dane można pobrać ze [strony WHO](https://immunizationdata.who.int/global/wiise-detail-page/measles-reported-cases-and-incidence?GROUP=Countries&YEAR=) lub informacji znajdujących się w również [zasobach kursu](https://chmura.put.poznan.pl/s/7Nq8r9aceiEsdNd) pobranych z tego źródła.
 
 ⚠️ **Uwaga metodologiczna:**  
 Wartości `0` lub brak danych (`NaN`) mogą oznaczać brak raportowania, a nie rzeczywisty brak zachorowań.
@@ -81,14 +82,13 @@ Przykładowe dodatkowe wskaźniki:
 - Gęstość zaludnienia (`EN.POP.DNST`)
 
 
-Dopuszcza się wykorzystanie innych wskaźników lub zbiorów danych. Dla danych wbapi lista dostępnych wskaźników może być wyświetlona za pomocą komendy:
+Warto rozważyć wykorzystanie innych wskaźników lub zbiorów danych. Dla danych wbapi lista dostępnych wskaźników może być wyświetlona za pomocą komendy:
 ```python
 wb.series.info().
 ```
 
 ⚠️ **Uwaga:**  
 Wskaźnik `SH.IMM.MEAS` odnosi się do poziomu wyszczepienia w grupie wiekowej (kohorcie) 12–24 miesięcy. Poziom wyszczepienia całej populacji jest efektem kumulatywnym, który należy rozważać w dłuższym horyzoncie czasowym.
-
 
 ---
 
@@ -106,6 +106,10 @@ Przyjęta definicja musi być:
 - uzasadniona,
 - konsekwentnie stosowana w całej analizie.
 
+
+⚠️ **Uwaga:**
+Definicja ogniska epidemicznego może mieć istotny wpływ na wyniki analizy i wnioski z niej płynące. Z uwagi na ograniczenia w dostępnych danych w których liczba zachorowań lub zapadalność określone są dla całej populacji danego kraju, należy pamiętać, że rzeczywiste ogniska mogą występować lokalnie i nie być w pełni odzwierciedlone w danych krajowych, jadnak wzrost zachorowań w populacji krajowej może być wskaźnikiem występowania ognisk lokalnych. W przypadku wątpliwości należy to uwzględnić w interpretacji wyników. Należy pamiętać, że znając kraj, rok w którym odnotowano wzrost zachorowań można również odwołać się do informacji prasowych i innych źródeł które mogą pozwolić zidentyfikować i scharakteryzować ogniska lokalne/zasięg wzmożonej zachorowalności - wykorzystanie  tych dodatkowych źródeł nie jest w niniejszym projekcie bezwzględnie wymagane, jednak może pozwolić na bardziej precyzyjną ocenę czynników oraz interpretację faktów.
+
 ---
 
 ## 5. Zadania projektowe
@@ -114,7 +118,7 @@ Przyjęta definicja musi być:
 
 1. Przeprowadź analizę trendów zachorowań na odrę:
    - w czasie,
-     - możesz również sprawdzić czy wraz z postępującą globalizacją zmieniają się wzorce przebiegu choroby
+     - możesz np. sprawdzić czy wraz z postępującą globalizacją zmieniają się wzorce przebiegu choroby
      - czy wzrost zachorowalności ma charakter cykliczny czy też jest bardziej losowy
    - pomiędzy krajami i regionami 
      - możesz np. przeanalizować czy w danym okresie w danych regionach pojawia się więcej ognisk co może świadczyć o rozprzestrzenianiu się choroby czy też zjawiska te mają zasięg tylko lokalny.
@@ -131,7 +135,7 @@ Przyjęta definicja musi być:
 
 ### Część II – Analiza czynników wpływających
 
-1. Zbadaj zależności pomiędzy:
+1. Zbadaj i postaraj się zinterpretować zależności pomiędzy:
    - zachorowalnością,
    - wyszczepialnością,
    - wskaźnikami społeczno-ekonomicznymi.
@@ -151,7 +155,11 @@ Prócz prezentacji wyników statystycznych należy zadbać o czytelną wizualiza
 1. Zbuduj model predykcyjny ryzyka wystąpienia ogniska odry.
 2. Dane treningowe: **do roku 2018**.
 3. Predykcja: **2019–2024**.
-4. Zmienna docelowa musi być jednoznacznie zdefiniowana.
+4. Zmienna docelowa musi być jednoznacznie zdefiniowana np. jako:
+   - zmienna binarna (0/1) określająca czy w danym okresie wystąpiło ognisko,
+   - zmienna kategoryczna określająca poziom ryzyka (np. niski, średni, wysoki),
+   - zmienna ciągła określająca prawdopodobieństwo przekroczenia pewnego progu zachorowań
+   - zmienna ciągła określająca poziom zapadalności.
 5. Podziel dane na zbiór treningowy i testowy (uzasadnij strategię).
 6. Dopuszczalne jest wykorzystanie jako wejście predyktora również  informacji wskaźnikach społeczno-ekonomicznych pochodzących z lat dla których wyznaczana jest predykcja, pod warunkiem zagwarantowania braku wycieku informacji o poziomie zachorowań.
 
@@ -159,6 +167,7 @@ Prócz prezentacji wyników statystycznych należy zadbać o czytelną wizualiza
 - zaproponuj min. jedną metrykę jakości (np. AUC, F1, Accuracy),
 - oceń zgodność predykcji z danymi rzeczywistymi,
 - wskaż kraje o najwyższym i najniższym ryzyku.
+- przeanalizuj czynniki wpływające na ryzyko (np. analiza cech istotnych w modelu) i odnieś ją do wyników z Części II.
 
 ---
 
@@ -192,7 +201,9 @@ Prócz prezentacji wyników statystycznych należy zadbać o czytelną wizualiza
 ## 8. Forma oddania
 
 - raport w formie Notebooka Jupyter (format `.ipynb`) podzielony na sekcje odpowiadające zadaniom projektowym,
-- razem z raportem należy udostępnić kod źródłowy skryptów wywoływanych przez notebook oraz wszystkie dodatkowe wykorzystane,
+- razem z raportem należy udostępnić kod źródłowy skryptów wywoływanych przez notebook oraz wszystkie dodatkowe wykorzystane dane (jeśli nie pochodzą z publicznych źródeł (w tym przypadku wystarczy że w kodzie znajdą się odpowiednie zapytania do pobrania danych)
+- jeśli w kodzie dane łądowane są z plików lokalnych należy dołączyć te pliki i stosować ścieżki względne
+- całość (noteboook + kod + dane) należy spakować do archiwum `.zip` i przesłać na platformę e-kursy.
 
 
 ---
