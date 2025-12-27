@@ -63,6 +63,7 @@ Wartości `0` lub brak danych (`NaN`) mogą oznaczać brak raportowania, a nie r
 ### 3.2 Dane Banku Światowego (World Bank)
 
 Podstawowy wskaźnik:
+
 - `SH.IMM.MEAS` – odsetek dzieci (12–24 miesiące) zaszczepionych przeciwko odrze
 do pobrania tej informacji można wykorzystać następujące zapytanie w bibliotece `wbapi`:
 
@@ -77,6 +78,7 @@ wb_df.rename(columns={'economy': 'Country', 'time': 'Time', **indicators}, inpla
 ```
 
 Przykładowe dodatkowe wskaźniki:
+
 - PKB per capita (`NY.GDP.PCAP.CD`)
 - Liczba ludności (`SP.POP.TOTL`)
 - Gęstość zaludnienia (`EN.POP.DNST`)
