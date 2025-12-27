@@ -127,7 +127,7 @@ Definicja ogniska epidemicznego może mieć istotny wpływ na wyniki analizy i w
      - możesz np. przeanalizować czy w danym okresie w danych regionach pojawia się więcej ognisk co może świadczyć o rozprzestrzenianiu się choroby czy też zjawiska te mają zasięg tylko lokalny.
      - czy istnieją grupy krajów o podobnych wzorcach zachorowalności (do tego celu możesz użyć np. klasteryzacji)
 2. Zidentyfikuj okresy wzmożonej zachorowalności.
-3. Spróbój zdefiniować metryki, które pozwolą określić okresy o podwyższonej zachorowalności (np. progi zapadalności, wzrost r/r itp.) i na ich podstawie określ kraje o wysokim, niskim i zmiennym ryzyku zachorowań.
+3. Spróbuj zdefiniować metryki, które pozwolą określić okresy o podwyższonej zachorowalności (np. progi zapadalności, wzrost r/r itp.) i na ich podstawie określ kraje o wysokim, niskim i zmiennym ryzyku zachorowań.
 4. Wybierz **ok. 9 krajów** do analizy pogłębionej:
    - kraje o wysokim,
    - niskim,
@@ -146,11 +146,35 @@ Definicja ogniska epidemicznego może mieć istotny wpływ na wyniki analizy i w
 2. Zastosuj odpowiednie metody statystyczne:
    - korelacje,
    - modele regresyjne (dobór modelu musi być uzasadniony)  
-3. Określ empiryczny poziom wyszczepialności ograniczający ryzyko powstawania ognisk.
+3. Spróbuj empirycznie określić zakres lub poziom wyszczepialności, przy którym  obserwuje się istotne ograniczenie ryzyka powstawania ognisk epidemicznych
 4. Porównaj wynik z teoretycznym PCV.
 
 Sugeruje się ograniczenie analizy wyłącznie krajów wybranych w Części I, ew. postawione hipotezy mogą zostać zweryfikowane na szerszym zbiorze danych.
 Prócz prezentacji wyników statystycznych należy zadbać o czytelną wizualizację zależności oraz ich interpretację.
+
+⚠️ **Uwaga metodologiczna:**
+Analizowane czynniki nie muszą być bezpośrednio utożsamiane z pojedynczymi wskaźnikami pochodzącymi z danych Banku Światowego.
+
+W szczególności w przypadku wyszczepialności należy uwzględnić możliwe opóźnienie czasowe pomiędzy podaniem szczepionki a uzyskaniem odporności populacyjnej. Z tego względu uzasadnione może być stosowanie m.in.:
+- uśrednionych wartości wyszczepialności w oknie czasowym,
+- opóźnionych (lagowanych) zmiennych,
+- innych pochodnych metryk lepiej aproksymujących poziom odporności populacji.
+
+Wybór i konstrukcja takich zmiennych musi zostać jasno opisana i uzasadniona.
+
+
+W części II oczekuje się, że przeanalizowany zostanie wpływ min. 4 różnych czynników (lub ich kombinacji) w tym obowiązkowe jest przeprowadzenie oceny wpływu poziomu wyszczepialności na zachorowalność. Poniżej przedstawiono listę przykładowych hipotez, które mogą być podstawą analizy czynnikowej (nie jest to lista wyczerpująca, nie ma również konieczności weryfikacji wszystkich tych hipotez) - można je modyfikować lub zastępować innymi, pamiętaj że część hipotez wymaga zdefiniowania dodatkowych zmiennych lub metryk:
+
+1. H1: Istnieje istotna statystycznie, ujemna zależność pomiędzy poziomem wyszczepialności przeciwko odrze a zachorowalnością na odrę w danym kraju.
+2. H2: Poziom wyszczepialności z opóźnieniem czasowym (np. 1–5 lat) lepiej wyjaśnia zmienność zachorowalności niż wartość bieżąca.
+3. H3: Zależność pomiędzy wyszczepialnością a ryzykiem ognisk ma charakter nieliniowy i wykazuje efekt progowy.
+4. H4: Kraje o średnim poziomie wyszczepialności poniżej empirycznie wyznaczonego progu charakteryzują się istotnie wyższym prawdopodobieństwem wystąpienia ognisk epidemicznych.
+5. H5: Zależność pomiędzy wyszczepialnością a zachorowalnością jest modyfikowana przez czynniki społeczno-ekonomiczne (np. PKB per capita, gęstość zaludnienia).
+6. H6: Przy porównywalnym poziomie wyszczepialności, kraje o wyższej gęstości zaludnienia wykazują większą intensywność ognisk zachorowań.
+7. H7: Większe wahania poziomu wyszczepialności w czasie są związane z wyższym ryzykiem występowania ognisk odry, niezależnie od średniego poziomu wyszczepienia.
+8. H8: Miary odporności populacyjnej oparte na skumulowanej lub uśrednionej wyszczepialności lepiej wyjaśniają ryzyko wystąpienia ognisk niż pojedyncze roczne wskaźniki.
+9. H9: Modele wykorzystujące wyłącznie pojedyncze wskaźniki (np. wyszczepialność) mają istotnie niższą skuteczność predykcyjną niż modele wielowymiarowe.
+10. H10: Empirycznie wyznaczony próg wyszczepialności ograniczający ryzyko ognisk mieści się w przedziale wynikającym z teoretycznych wartości  dla odry.
 
 ---
 
@@ -177,7 +201,7 @@ Prócz prezentacji wyników statystycznych należy zadbać o czytelną wizualiza
 
 ## 6. Wymagania formalne
 
-- Wszystkie kluczowe wnioski muszą być poparte analizą statystyczną.
+- Wszystkie kluczowe wnioski części II muszą być poparte analizą statystyczną.
 - Wartości *p* należy interpretować krytycznie.
 - Wymagana jest czytelna wizualizacja danych.
 - Kod powinien być:
@@ -205,8 +229,8 @@ Prócz prezentacji wyników statystycznych należy zadbać o czytelną wizualiza
 ## 8. Forma oddania
 
 - raport w formie Notebooka Jupyter (format `.ipynb`) podzielony na sekcje odpowiadające zadaniom projektowym,
-- razem z raportem należy udostępnić kod źródłowy skryptów wywoływanych przez notebook oraz wszystkie dodatkowe wykorzystane dane (jeśli nie pochodzą z publicznych źródeł (w tym przypadku wystarczy, że w kodzie znajdą się odpowiednie zapytania do pobrania danych)
-- jeśli w kodzie dane łAdowane są z plików lokalnych należy dołączyć te pliki i stosować ścieżki względne
+- razem z raportem należy udostępnić kod źródłowy skryptów wywoływanych przez notebook oraz wszystkie dodatkowe wykorzystane dane (jeśli nie pochodzą z publicznych źródeł - w tym przypadku wystarczy, że w kodzie znajdą się odpowiednie zapytania do pobrania danych)
+- jeśli w kodzie dane ładowane są z plików lokalnych należy dołączyć te pliki i stosować ścieżki względne
 - całość (noteboook + kod + dane) należy spakować do archiwum `.zip` i przesłać na platformę e-kursy.
 
 
