@@ -104,13 +104,14 @@ Na potrzeby projektu należy **jawnie zdefiniować**:
   - zmienna binarna (0/1) oparta o przyjęte kryterium.
 
 Przyjęta definicja musi być:
+
 - jednoznaczna,
 - uzasadniona,
 - konsekwentnie stosowana w całej analizie.
 
 
 ⚠️ **Uwaga:**
-Definicja ogniska epidemicznego może mieć istotny wpływ na wyniki analizy i wnioski z niej płynące. Z uwagi na ograniczenia w dostępnych danych w których liczba zachorowań lub zapadalność określone są dla całej populacji danego kraju, należy pamiętać, że rzeczywiste ogniska mogą występować lokalnie i nie być w pełni odzwierciedlone w danych krajowych, jadnak wzrost zachorowań w populacji krajowej może być wskaźnikiem występowania ognisk lokalnych. W przypadku wątpliwości należy to uwzględnić w interpretacji wyników. Należy pamiętać, że znając kraj, rok w którym odnotowano wzrost zachorowań można również odwołać się do informacji prasowych i innych źródeł które mogą pozwolić zidentyfikować i scharakteryzować ogniska lokalne/zasięg wzmożonej zachorowalności - wykorzystanie  tych dodatkowych źródeł nie jest w niniejszym projekcie bezwzględnie wymagane, jednak może pozwolić na bardziej precyzyjną ocenę czynników oraz interpretację faktów.
+Definicja ogniska epidemicznego może mieć istotny wpływ na wyniki analizy i wnioski z niej płynące. Z uwagi na ograniczenia w dostępnych danych w których liczba zachorowań lub zapadalność określone są dla całej populacji danego kraju, należy pamiętać, że rzeczywiste ogniska mogą występować lokalnie i nie być w pełni odzwierciedlone w danych krajowych, jednak z dużym prawdopodobieństwem  można przyjąć, że wzrost zachorowań w populacji krajowej może być wskaźnikiem występowania ognisk lokalnych. W przypadku wątpliwości należy to uwzględnić w interpretacji wyników. Należy pamiętać, że znając kraj oraz rok, w którym odnotowano wzrost zachorowań można również odwołać się do informacji prasowych i innych źródeł, które mogą pozwolić zidentyfikować i scharakteryzować ogniska lokalne/zasięg wzmożonej zachorowalności - wykorzystanie  tych dodatkowych źródeł nie jest w niniejszym projekcie bezwzględnie wymagane, jednak może pozwolić na bardziej precyzyjną ocenę czynników oraz interpretację faktów.
 
 ---
 
@@ -126,12 +127,13 @@ Definicja ogniska epidemicznego może mieć istotny wpływ na wyniki analizy i w
      - możesz np. przeanalizować czy w danym okresie w danych regionach pojawia się więcej ognisk co może świadczyć o rozprzestrzenianiu się choroby czy też zjawiska te mają zasięg tylko lokalny.
      - czy istnieją grupy krajów o podobnych wzorcach zachorowalności (do tego celu możesz użyć np. klasteryzacji)
 2. Zidentyfikuj okresy wzmożonej zachorowalności.
-3. Wybierz **ok. 9 krajów** do analizy pogłębionej:
+3. Spróbój zdefiniować metryki, które pozwolą określić okresy o podwyższonej zachorowalności (np. progi zapadalności, wzrost r/r itp.) i na ich podstawie określ kraje o wysokim, niskim i zmiennym ryzyku zachorowań.
+4. Wybierz **ok. 9 krajów** do analizy pogłębionej:
    - kraje o wysokim,
    - niskim,
    - oraz zmiennym ryzyku zachorowań.
    - możesz też wybrać inny sposób wyboru krajów, ale musi być on uzasadniony.
-4. Przeanalizuj jakość danych (braki, zera, raportowanie).
+5. Przeanalizuj jakość danych (braki, zera, raportowanie).
 
 ---
 
