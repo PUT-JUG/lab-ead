@@ -203,8 +203,8 @@ Prócz prezentacji wyników statystycznych należy zadbać o czytelną wizualiza
 ## 8. Forma oddania
 
 - raport w formie Notebooka Jupyter (format `.ipynb`) podzielony na sekcje odpowiadające zadaniom projektowym,
-- razem z raportem należy udostępnić kod źródłowy skryptów wywoływanych przez notebook oraz wszystkie dodatkowe wykorzystane dane (jeśli nie pochodzą z publicznych źródeł (w tym przypadku wystarczy że w kodzie znajdą się odpowiednie zapytania do pobrania danych)
-- jeśli w kodzie dane łądowane są z plików lokalnych należy dołączyć te pliki i stosować ścieżki względne
+- razem z raportem należy udostępnić kod źródłowy skryptów wywoływanych przez notebook oraz wszystkie dodatkowe wykorzystane dane (jeśli nie pochodzą z publicznych źródeł (w tym przypadku wystarczy, że w kodzie znajdą się odpowiednie zapytania do pobrania danych)
+- jeśli w kodzie dane łAdowane są z plików lokalnych należy dołączyć te pliki i stosować ścieżki względne
 - całość (noteboook + kod + dane) należy spakować do archiwum `.zip` i przesłać na platformę e-kursy.
 
 
