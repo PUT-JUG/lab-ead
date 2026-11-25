@@ -25,7 +25,7 @@ W którym roku zanotowano najmniejszą, a w którym największą różnicę w li
     - dokonaj agregacji wszystkich urodzeń w pełnym zbiorze danych z podziałem na rok i płeć i ostatnią literę,
     - wyodrębnij dane dla lat 1910, 1960, 2015
     - znormalizuj dane względem całkowitej liczby urodzin w danym roku
-    - wyświetl dane popularności litery dla każdej płci w postaci wykresu słupkowego zawierającego poszczególne lata i gdzie słupki grupowane są wg litery. Zanotuj, dla której litery wystąpił największy wzrost/spadek między rokiem 1910 a 2015)
+    - wyświetl dane popularności litery dla każdej płci w postaci wykresu słupkowego zawierającego poszczególne lata i gdzie słupki grupowane są wg litery. Zanotuj, dla której litery wystąpił największy wzrost/spadek między rokiem 1910 a 2015
     - Dla 3 liter dla których zaobserwowano największą zmianę wyświetl przebieg trendu popularności w czasie
 10.  Znajdź imiona, które nadawane były zarówno dziewczynkom jak i chłopcom (zanotuj najpopularniejsze imię męskie i żeńskie)
 11. Spróbuj znaleźć najpopularniejsze imiona, które przez pewien czas były imionami żeńskimi/męskimi a następnie stały się imionami męskimi/żeńskimi.
